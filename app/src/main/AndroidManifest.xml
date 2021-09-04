@@ -13,6 +13,9 @@
             android:name=".Registro_screen"
             android:exported="true" />
         <activity
+            android:name=".Ajustes"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
