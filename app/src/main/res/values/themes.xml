@@ -15,7 +15,7 @@
     </style>
 
     <style name="BottomNavigation">
-        <item name="android:background">@color/prussian_blue</item>
+        <item name="android:background">@color/marinoIntendi</item>
         <item name="itemTextColor">@color/crema</item>
     </style>
 </resources>

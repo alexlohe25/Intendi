@@ -27,6 +27,7 @@
             android:maxWidth="200dp"
             android:maxHeight="200dp"
             android:padding="10dp"
+            android:onClick="menu"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
             app:strokeColor="#219EBC"
             app:strokeWidth="5dp"

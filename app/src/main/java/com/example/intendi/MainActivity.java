@@ -2,11 +2,12 @@ package com.example.intendi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.DataBindingUtil;
+//import androidx.databinding.BindingAdapter;
+//import androidx.databinding.DataBindingUtil;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
         TableLayout usersGrid = (TableLayout)findViewById(R.id.usersGrid);
         int users = 0;
 
@@ -54,5 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    public void registro(View v){
+        Intent miIntent = new Intent(MainActivity.this, Registro_screen.class);
+        startActivity(miIntent);
+    }
+    public void menu(View v){
+        Intent miIntent = new Intent(MainActivity.this, BottomNavigation.class);
+        startActivity(miIntent);
     }
 }
