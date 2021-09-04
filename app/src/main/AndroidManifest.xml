@@ -16,6 +16,9 @@
             android:name=".Ajustes"
             android:exported="true" />
         <activity
+            android:name=".BottomNavigation"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
