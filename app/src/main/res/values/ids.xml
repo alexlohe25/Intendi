@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="titleMenuJuegos" type="id" />
+    <item name="titleMenuJuegos2" type="id" />
+    <item name="gridBotones" type="id" />
+    <item name="cardWhack" type="id" />
+    <item name="cardMemorama" type="id" />
+    <item name="cardSenda" type="id" />
+    <item name="cardPiano" type="id" />
+    <item name="cardLaberintendi" type="id" />
+    <item name="cardRandom" type="id" />
+</resources>

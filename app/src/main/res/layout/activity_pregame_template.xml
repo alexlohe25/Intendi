@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        app:layout_constraintVertical_bias="0.88" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -36,8 +36,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/Delphi" />
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/delphi" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/returnButton"

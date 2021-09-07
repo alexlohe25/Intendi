@@ -4,5 +4,7 @@
         <item>@font/nunito</item>
         <item>@font/nunito_extralight</item>
         <item>@font/vt323</item>
+        <item>@font/nunito_semibold</item>
+        <item>@font/rancho</item>
     </array>
 </resources>
