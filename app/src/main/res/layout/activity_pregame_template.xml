@@ -20,12 +20,12 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.544" />
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,34 +33,23 @@
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.011"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/Delphi" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bubble" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/Delphi" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="#FF4040"
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
@@ -68,31 +57,44 @@
         app:srcCompat="@drawable/equis"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
-    <TextView
-        android:id="@+id/bubbleText"
-        android:layout_width="230dp"
-        android:layout_height="117dp"
-        android:fontFamily="@font/vt323"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel pellentesque erat"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.665" />
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="350dip"
+        android:layout_height="450dip"
+        android:background="@drawable/bubble"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="162dp"
-        android:layout_height="118dp"
-        app:layout_constraintBottom_toTopOf="@+id/bubbleText"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:srcCompat="@drawable/gameimage" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|top"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="250dip"
+                android:layout_height="250dip"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/gameimage" />
+
+            <TextView
+                android:id="@+id/bubbleText"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dip"
+                android:fontFamily="@font/vt323"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel pellentesque erat"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 
     <ImageView
         android:id="@+id/imageView6"
