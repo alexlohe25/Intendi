@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_ajustes.xml" value="0.4" />
-        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/games_selector.xml" value="0.2703125" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/graph_selector.xml" value="0.18333333333333332" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/ic_games.xml" value="0.2703125" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/ic_graph.xml" value="0.15260416666666668" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15260416666666668" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/ic_settings.xml" value="0.2703125" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/selector.xml" value="0.2703125" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/drawable/settings_selector.xml" value="0.18333333333333332" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/activity_menu_juegos.xml" value="0.27546296296296297" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/fragment_ajustes.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/fragment_menu_juegos.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/fragment_resultados.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/menu_button.xml" value="0.25416666666666665" />
+        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/menu/bottom_navigation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_ajustes.xml" value="0.1621376811594203" />
+        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_pregame_template.xml" value="0.264" />
       </map>
     </option>
   </component>
