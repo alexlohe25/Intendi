@@ -13,6 +13,12 @@
             android:name=".Registro_screen"
             android:exported="true" />
         <activity
+            android:name=".PregameTemplate"
+            android:exported="true" />
+        <activity
+            android:name=".Ajustes"
+            android:exported="true" />
+        <activity
             android:name=".BottomNavigation"
             android:exported="true" />
         <activity
