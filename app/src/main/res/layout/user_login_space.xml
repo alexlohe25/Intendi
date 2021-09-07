@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:src="@mipmap/delphi"
+            android:src="@drawable/delphi"
             android:id="@+id/userAvatar"
             android:layout_width="150dp"
             android:layout_height="150dp"
