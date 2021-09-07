@@ -76,20 +76,8 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_margin="2dp"
                                 android:src="@drawable/whack_ball" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/nunito_semibold"
-                                android:text="Whack-A-Ball"
-                                android:textAlignment="center"
-                                android:textColor="#023047"
-                                android:textSize="12dp" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -116,20 +104,8 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_margin="2dp"
                                 android:src="@drawable/memorama" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/nunito_semibold"
-                                android:text="Memorama"
-                                android:textAlignment="center"
-                                android:textColor="#023047"
-                                android:textSize="12dp" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -156,20 +132,8 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_margin="2dp"
                                 android:src="@drawable/senda_numerica" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/nunito_semibold"
-                                android:text="Sena numérica"
-                                android:textAlignment="center"
-                                android:textColor="#023047"
-                                android:textSize="12dp" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -196,20 +160,8 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_margin="2dp"
                                 android:src="@drawable/piano" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/nunito_semibold"
-                                android:text="Piano"
-                                android:textAlignment="center"
-                                android:textColor="#023047"
-                                android:textSize="12dp" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -236,20 +188,8 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_margin="2dp"
                                 android:src="@drawable/laberintendi" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/nunito_semibold"
-                                android:text="Laberintendi"
-                                android:textAlignment="center"
-                                android:textColor="#023047"
-                                android:textSize="12dp" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
