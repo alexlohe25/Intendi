@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="615dp"
+        android:layout_height="715dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -195,10 +195,12 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </HorizontalScrollView>
+
             <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/userResults"
                 android:layout_width="match_parent"
-                android:layout_height="440dp"
-                android:id="@+id/userResults" />
+                android:layout_height="450dp"
+                android:layout_marginTop="50dp"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
