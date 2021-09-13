@@ -7,11 +7,21 @@ import androidx.fragment.app.FragmentTransaction;
 //import androidx.databinding.DataBindingUtil;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String FILENAME = "user_data.xml";
+    private Properties userData;
 
     UserLoginFragment userLogInFragment = new UserLoginFragment();
     AddUserFragment addUserFragment = new AddUserFragment();
@@ -19,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userData = new Properties();
+        //loadResults();
+
         setContentView(R.layout.activity_main);
         loadFragment(userLogInFragment);
         //BindingAdapter binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -38,18 +51,38 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        //int count = getSupportFragmentManager().getBackStackEntryCount();
-
         if (addUserFragment.isAdded()) {
             getSupportFragmentManager().popBackStack();
             loadFragment(userLogInFragment);
-            //additional code
         } else {
             super.onBackPressed();
+        }
+    }
+    /*
+    private void loadResults(){
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            userData.loadFromXML(fis);
+            fis.close();
+        }
+        catch (FileNotFoundException fnfe){
+            //results.setProperty("Negro","0");
+            saveResults();
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }
+    private void saveResults(){
+        try{
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            userData.storeToXML(fos, null);
+            fos.close();
 
         }
-
-    }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }*/
 
 }
