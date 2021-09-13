@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -196,11 +196,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!--<com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/userResults"
-                android:layout_width="match_parent"
-                android:layout_height="450dp"
-                android:layout_marginTop="50dp"/>-->
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/idChart"
                 android:layout_width="match_parent"
@@ -212,6 +207,22 @@
                 android:elevation="10dp">
             </com.github.mikephil.charting.charts.LineChart>
 
+            <TextView
+                android:id="@+id/tendenciaResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="¿Cómo voy?"
+                android:textAlignment="center"
+                android:textColor="#023047"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.401"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.051" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
