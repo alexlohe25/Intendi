@@ -2,21 +2,22 @@ package com.example.intendi;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.HorizontalBarChart;
+import androidx.fragment.app.Fragment;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,9 @@ public class ResultadosFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    HorizontalBarChart miChart;
+    //HorizontalBarChart miChart;
+    LineChart miChart;
+    TextView resultDetail;
     public ResultadosFragment() {
         // Required empty public constructor
     }
@@ -73,35 +76,57 @@ public class ResultadosFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_resultados, container, false);
+        ArrayList<String> misValoresX = new ArrayList<>();
+        misValoresX.add("01/09/21"); //empieza en i = 0
+        misValoresX.add("02/09/21");
+        misValoresX.add("03/09/21");
+        misValoresX.add("04/09/21"); // i = 3
+        ArrayList<Entry> misValoresY = new ArrayList<>();
+        //misValoresY.add(new Entry(0f,10));
+        misValoresY.add(new Entry(0.5f,20)); //la posicion en x es i + 0.5 para el diseño
+        misValoresY.add(new Entry(1.5f,15));
+        misValoresY.add(new Entry(2.5f,18));
+        misValoresY.add(new Entry(3.5f,25));
+        LineDataSet set1 = new LineDataSet(misValoresY, "Score del juego");
+        set1.setDrawCircles(true); //para que los puntos esten llenos y bonitos
+        set1.setDrawCircleHole(false);
+        set1.setLineWidth(10f);
+        set1.setCircleRadius(12f);
+        set1.setValueTextSize(12f);
+        set1.setCircleColor(Color.parseColor("#023047"));
+        set1.setColor(Color.parseColor("#023047"));
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>(); // metes el set de valores en Y en otro array
+        dataSets.add(set1);
+        LineData data = new LineData(dataSets); // incias la data del grafico con el arreglo que llenaste un paso antes
 
-        miChart = (HorizontalBarChart) view.findViewById(R.id.userResults);
+        miChart = (LineChart) view.findViewById(R.id.idChart);
         Description chartDesc = new Description();
         chartDesc.setText("Puntaje en Whack-A-Ball");
         miChart.setDescription(chartDesc);
-        //miChart.setExtraOffsets(5,10,5,5);
-
-        ArrayList<String> misValoresX = new ArrayList<>();
-        //misValoresX.add("01/09/21");
-        //misValoresX.add("02/09/21");
-        //misValoresX.add("03/09/21");
-        ArrayList<BarEntry> misValoresY = new ArrayList<>();
-        misValoresY.add(new BarEntry(0.25f,10));
-        misValoresY.add(new BarEntry(1.25f,20));
-        misValoresY.add(new BarEntry(2.25f,15));
-        BarDataSet dataBar = new BarDataSet(misValoresY, "Score");
-        dataBar.setColor(Color.parseColor("#2A9D8F"));
-        BarData data = new BarData((dataBar));
-        data.setBarWidth(0.6f);
-        miChart.getXAxis().setAvoidFirstLastClipping(false);
-        miChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(misValoresX));
-        miChart.getXAxis().setCenterAxisLabels(true);
-        miChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        miChart.animateXY(750,750);
-        miChart.setFitBars(true);
-        miChart.setPinchZoom(false);
+        miChart.getAxisLeft().setDrawGridLines(false);
+        miChart.getXAxis().setDrawGridLines(false);
+        miChart.setPinchZoom(false);//para que no se mueva la grafica (drag ni zoom)
         miChart.setScaleEnabled(false);
-        miChart.setData(data);
-        miChart.invalidate();
+        miChart.setTouchEnabled(true);
+        miChart.animateY(500);//animar la entrada
+        XAxis xAxis = miChart.getXAxis();
+        xAxis.setAxisMinimum(0);//seteas el rango en X que debe ser de 0 a listaValoresX().size
+        xAxis.setAxisMaximum(4);
+        xAxis.setGranularity(1f); //granuralidad de el eje X
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(10f);
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setValueFormatter(new ValueFormatter() { //vaciar los datos del arreglo de valores en X al label del eje X
+            @Override //si, un override
+            public String getAxisLabel(float value, AxisBase axis){
+                if(value >= 0 && value <= misValoresX.size() - 1)
+                    return misValoresX.get((int) value);
+                return "";
+            }
+        });
+        miChart.getAxisRight().setEnabled(false); // que el label del eje Y se vea solo en la izquierda
+        miChart.setData(data); //setea la data que guardaste de valores en Y al grafico
+        miChart.invalidate(); //actualiza el grafico
         return view;
     }
 }

@@ -196,11 +196,22 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <com.github.mikephil.charting.charts.HorizontalBarChart
+            <!--<com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/userResults"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="50dp"/>-->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/idChart"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@color/crema"
+                android:elevation="10dp">
+            </com.github.mikephil.charting.charts.LineChart>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
