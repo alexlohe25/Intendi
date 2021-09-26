@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Intendi" >
         <activity
+            android:name=".MemoryGame"
+            android:exported="true" />
+        <activity
             android:name=".PregameTemplate"
             android:exported="true" />
         <activity
@@ -24,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -8,12 +8,13 @@
     tools:context=".PregameTemplate">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/playButton"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:backgroundTint="#FFB703"
         android:fontFamily="@font/vt323"
         android:gravity="center|top"
+        android:onClick="startGame"
         android:text="Jugar"
         android:textAlignment="center"
         android:textAllCaps="false"
