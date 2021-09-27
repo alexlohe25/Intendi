@@ -144,9 +144,9 @@ public class ResultadosFragment extends Fragment {
             resultDetail.setText("Aún no has jugado a "+ game);
         }else{
             if(misValoresY.get(YArraySize - 1).getY() >= misValoresY.get(YArraySize - 2).getY()){
-                resultDetail.setText("Excelente trabajo sigue así");
+                resultDetail.setText("¡Juegas increíble al Intendi!");
             }else{
-                resultDetail.setText("Me sorprende que seas tan inveshil");
+                resultDetail.setText("¡No te desanimes! La próxima vez será mejor ");
             }
         }
         set1.setDrawCircles(true); //para que los puntos esten llenos y bonitos
