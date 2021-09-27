@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/card_rombo"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/card_square"
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>
