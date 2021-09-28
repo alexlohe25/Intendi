@@ -4,28 +4,39 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>{
+public class SendaBoardAdapter extends RecyclerView.Adapter<SendaBoardAdapter.ViewHolder> {
 
-    private int numPieces;
-    public static int marginSize() { return 10; }
+    private SendaManager sendaManager;
+    public static int marginSize() { return 20; }
+    private CardClickListener cardClickListener;
 
-    public MemoryBoardAdapter(Context context, int numPieces) {
-        this.numPieces = numPieces;
+    interface CardClickListener{
+        public default void onCardClicked(int position){
+
+        }
+    }
+
+    public SendaBoardAdapter(Context context, SendaManager sendaManager, CardClickListener cardListener) {
+        this.sendaManager = sendaManager;
+        this.cardClickListener = cardListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int cardWidth = parent.getWidth() / 2 - (2 * marginSize());
-        int cardHeight = parent.getHeight() / 4 - (2 * marginSize());
+        int cardWidth = parent.getWidth() / sendaManager.getBoardLen() - (2 * marginSize());
+        int cardHeight = parent.getHeight() / sendaManager.getBoardLen() - (2 * marginSize());
         int cardSideLength = Math.min(cardWidth, cardHeight);
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.memory_card, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.senda_card, parent, false);
 
         ViewGroup.LayoutParams layoutParams = v.findViewById(R.id.cardView).getLayoutParams();
         layoutParams.width = cardSideLength;
@@ -44,22 +55,29 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
     }
 
     @Override
-    public int getItemCount() {
-        return numPieces;
+    public int getItemCount()  {
+        return this.sendaManager.getBoardSize();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageButton imageButton = itemView.findViewById(R.id.imageButton);
+        private TextView textNumber = itemView.findViewById(R.id.textNumber);
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
 
         public void bind(int position) {
-            imageButton.setOnClickListener(new View.OnClickListener() {
+            int[] pattern = sendaManager.getBoardNumbers();
+            if(pattern[position] != -1) textNumber.setText(String.valueOf(pattern[position] + 1));
+            else{
+                textNumber.setText("");
+            }
+
+            textNumber.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     System.out.println("Click on pos: " + position);
+                    cardClickListener.onCardClicked(position);
                 }
             });
         }

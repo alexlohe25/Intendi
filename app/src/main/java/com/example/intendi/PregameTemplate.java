@@ -58,6 +58,9 @@ public class PregameTemplate extends AppCompatActivity {
         if(gameType.equals("memo")){
             Intent gameIntent = new Intent(this, MemoryGame.class);
             startActivity(gameIntent);
+        }else if(gameType.equals("nums")){
+            Intent gameIntent = new Intent(this, SendaGame.class);
+            startActivity(gameIntent);
         }
     }
 }
