@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class WhackaGameManager {
     public static String[] allColors = {"Rojo","Verde","Azul","Amarillo","Rosa"};
+    public static String[] allHex = {"#ff0000","#11e303","#001eff","#ffe100","#e28dec"};
     public static int[] allBalls = {
             R.drawable.red_ball,R.drawable.green_ball,
             R.drawable.blue_ball,R.drawable.yellow_ball,
@@ -39,6 +40,9 @@ public class WhackaGameManager {
             incrementScore();
         }
 
+    }
+    public String getRandomHex(){
+        return allHex[getRandomIndex()];
     }
 
     public int getBallAmountLeft() {
