@@ -1,6 +1,7 @@
 package com.example.intendi;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,7 +18,9 @@ public class WhackaGameActivity extends AppCompatActivity {
     public TextView colorText;
     public TextView timerText;
     public TextView scoreText;
-    public long initTime = 30;
+    public long initTime = 30000;
+    public long bonus = 1500;
+    public long interval = 100;
     static CountDownTimer timer;
     public static int NUMBER_OF_DOLPHINS = 7;
     public WhackaGameManager GameManager;
@@ -37,8 +40,11 @@ public class WhackaGameActivity extends AppCompatActivity {
         colorText = findViewById(R.id.ColorText);
         scoreText = findViewById(R.id.scoreLbl);
         scoreText.setText("0");
+        changeTextColor();
         timerText = findViewById(R.id.timeLbl);
-        timerText.setText("0");
+        timerText.setText("00 : 00");
+
+
 
         clickableViews[0] = (ConstraintLayout)findViewById(R.id.D1);
         clickableViews[1] = (ConstraintLayout)findViewById(R.id.D2);
@@ -56,7 +62,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         myDolphins[5] = dlp6;
         myDolphins[6] = dlp7;
 
-        timer = new CountDownTimer(initTime*1000, 1000) {
+        timer = new CountDownTimer(initTime, interval) {
             @Override
             public void onTick(long l) {
                 long seconds = (l/1000) % 60;
@@ -71,19 +77,25 @@ public class WhackaGameActivity extends AppCompatActivity {
                 {
                     sS = "0" + Long.toString(seconds);
                 }
-                initTime--;
+                initTime-=interval;
                 timerText.setText(mS + " : " + sS);
 
             }
 
             @Override
             public void onFinish() {
-                timerText.setText("0");
+
+                timerText.setText("00 : 00");
+                finishDolphins();
             }
         }.start();
 
         initDolphins();
         Update();
+    }
+
+    private void changeTextColor(){
+        colorText.setTextColor(Color.parseColor(GameManager.getRandomHex()));
     }
 
 
@@ -104,6 +116,17 @@ public class WhackaGameActivity extends AppCompatActivity {
         }
         return amount;
     };
+
+    private void finishDolphins(){
+        for(int i = 0; i<clickableViews.length;i++){
+            int finalI = i;
+            clickableViews[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                }
+            });
+        }
+    }
 
     private void initDolphins(){
         for(int i = 0; i<myDolphins.length;i++){
@@ -131,8 +154,8 @@ public class WhackaGameActivity extends AppCompatActivity {
                         Update();
                     }
                     timer.cancel();
-                    initTime+=1;
-                    timer = new CountDownTimer(initTime*1000, 1000) {
+                    initTime+=bonus;
+                    timer = new CountDownTimer(initTime, interval) {
                         @Override
                         public void onTick(long l) {
                             long seconds = (l/1000) % 60;
@@ -147,13 +170,15 @@ public class WhackaGameActivity extends AppCompatActivity {
                             {
                                 sS = "0" + Long.toString(seconds);
                             }
-                            initTime--;
+                            initTime-=interval;
                             timerText.setText(mS + " : " + sS);
                         }
 
                         @Override
                         public void onFinish() {
-                            timerText.setText("0");
+
+                            timerText.setText("00 : 00");
+                            finishDolphins();
                         }
                     }.start();
                 }
@@ -168,7 +193,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         GameManager.setBallAmountLeft(getAmountWithColor(initColor));
         GameManager.setCurrentColor(initColor);
         colorText.setText(GameManager.getCurrentColor());
-
+        changeTextColor();
     }
 
 }
