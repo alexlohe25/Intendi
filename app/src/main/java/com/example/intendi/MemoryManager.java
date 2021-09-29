@@ -71,7 +71,7 @@ public class MemoryManager {
         if ((cards.get(pos1).contentIndex == cards.get(pos2).contentIndex) && pos1 != pos2){
             cards.get(pos1).isMatched = true;
             cards.get(pos2).isMatched = true;
-            numPairsFound ++;
+            numPairsFound += 10;
             return true;
         }
         return false;

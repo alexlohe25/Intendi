@@ -70,7 +70,6 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageButton imageButton = itemView.findViewById(R.id.imageButton);
-        //MediaPlayer sound = null;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,45 +112,5 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
                 }
             });
         }
-        /*private void playSound(int sound){
-            switch (sound){
-                case R.raw.car:
-                    soundPool.play(sound1, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.bicycle:
-                    soundPool.play(sound2, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.bird:
-                    soundPool.play(sound3, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.duck:
-                    soundPool.play(sound4, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.guitar:
-                    soundPool.play(sound5, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.lion:
-                    soundPool.play(sound6, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.piano:
-                    soundPool.play(sound7, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.pig:
-                    soundPool.play(sound8, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.plane:
-                    soundPool.play(sound9, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.snake:
-                    soundPool.play(sound10, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.train:
-                    soundPool.play(sound11, 1, 1, 0, 0, 1);
-                    break;
-                case R.raw.trumpet:
-                    soundPool.play(sound12, 1, 1, 0, 0, 1);
-                    break;
-            }
-        }*/
     }
 }
