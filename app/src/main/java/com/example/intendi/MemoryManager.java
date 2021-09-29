@@ -1,14 +1,22 @@
 package com.example.intendi;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class MemoryManager {
-    List<MemoryCard> cards;
+    List<MemoryCard> cards = new ArrayList<>();;
     List<Integer> card_icons = new ArrayList<>();
+    List<Integer> card_sounds = new ArrayList<>();
     int numPairsFound = 0;
     private int indexOfSingleSelectedCard = -1;
+    protected MediaPlayer mp = null;
+
     MemoryManager(){
         card_icons.add(R.drawable.autopixel);
         card_icons.add(R.drawable.bike_pixe);
@@ -22,17 +30,27 @@ public class MemoryManager {
         card_icons.add(R.drawable.snake_pixel);
         card_icons.add(R.drawable.tren_pixel);
         card_icons.add(R.drawable.trumpet_pixel);
-        card_icons.add(R.drawable.autopixel);
 
-        Collections.shuffle(card_icons);
-        List<Integer> chosen_cards = card_icons.subList(0,4 );
-        List<Integer> randomizedImages = (chosen_cards);
-        randomizedImages.addAll(chosen_cards);
-        Collections.shuffle(randomizedImages);
-        cards = new ArrayList<>();
-        for(int i = 0; i < randomizedImages.size(); i++)
-            cards.add(new MemoryCard(randomizedImages.get(i)));
-
+        card_sounds.add(R.raw.car);
+        card_sounds.add(R.raw.bicycle);
+        card_sounds.add(R.raw.bird);
+        card_sounds.add(R.raw.duck);
+        card_sounds.add(R.raw.guitar);
+        card_sounds.add(R.raw.lion);
+        card_sounds.add(R.raw.piano);
+        card_sounds.add(R.raw.pig);
+        card_sounds.add(R.raw.plane);
+        card_sounds.add(R.raw.snake);
+        card_sounds.add(R.raw.train);
+        card_sounds.add(R.raw.trumpet);
+        List<Integer> iconIndexes = Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11);
+        Collections.shuffle(iconIndexes);
+        for(int i = 0; i < 4; i++){
+            int sortedIndex = iconIndexes.get(i);
+            cards.add(new MemoryCard(card_icons.get(sortedIndex), sortedIndex , false));
+            cards.add(new MemoryCard(card_sounds.get(sortedIndex), sortedIndex , true));
+        }
+        Collections.shuffle(cards);
     }
 
     public boolean flipCard(int position) {
@@ -50,11 +68,10 @@ public class MemoryManager {
     }
 
     private boolean checkForMatch(int pos1, int pos2) {
-        if (cards.get(pos1).identifier == cards.get(pos2).identifier){
+        if ((cards.get(pos1).contentIndex == cards.get(pos2).contentIndex) && pos1 != pos2){
             cards.get(pos1).isMatched = true;
             cards.get(pos2).isMatched = true;
             numPairsFound ++;
-            System.out.println("Pares encontrados: " + numPairsFound);
             return true;
         }
         return false;
@@ -65,5 +82,15 @@ public class MemoryManager {
             if(!card.isMatched)
                 card.isFaceUp = false;
         }
+    }
+
+
+    public MediaPlayer setSound(MemoryGame memoryGame, int position) {
+        if(this.mp != null){
+            this.mp.stop();
+            this.mp.release();
+            this.mp = null;
+        }
+        return this.mp = MediaPlayer.create(memoryGame.getApplicationContext(),cards.get(position).identifier);
     }
 }

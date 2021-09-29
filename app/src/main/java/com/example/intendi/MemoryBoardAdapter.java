@@ -1,8 +1,13 @@
 package com.example.intendi;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +19,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>{
-
+    Context activityContext;
     private int numPieces;
     private CardClickListener cardClickListener;
-
-
     public static int marginSize() { return 10; }
 
     List<MemoryCard> cardImages;
@@ -29,6 +33,7 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
         this.numPieces = numPieces;
         this.cardImages = randomizedImages;
         this.cardClickListener = cardClickListener;
+        activityContext = context;
     }
     public interface CardClickListener{
         void onCardClicked(int position);
@@ -65,6 +70,7 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageButton imageButton = itemView.findViewById(R.id.imageButton);
+        //MediaPlayer sound = null;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,10 +79,21 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
         public void bind(int position) {
             MemoryCard curCard = cardImages.get(position);
 
-            if(curCard.isFaceUp)
-                imageButton.setImageResource(curCard.identifier);
+            if(curCard.isFaceUp) {
+                if (curCard.isSound) {
+                    imageButton.setImageResource(R.drawable.ic_baseline_headphones_24);
+                } else {
+                    imageButton.setImageResource(curCard.identifier);
+                }
+            }
             else
                 imageButton.setImageResource(R.drawable.card_square);
+
+            if(curCard.isMatched)
+                if (curCard.isSound)
+                    imageButton.setImageResource(R.drawable.ic_baseline_headphones_24);
+                else
+                    imageButton.setImageResource(curCard.identifier);
 
             ColorStateList colorStateList;
             if (curCard.isMatched){
@@ -92,10 +109,49 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Click on pos: " + position);
                     cardClickListener.onCardClicked(position);
                 }
             });
         }
+        /*private void playSound(int sound){
+            switch (sound){
+                case R.raw.car:
+                    soundPool.play(sound1, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.bicycle:
+                    soundPool.play(sound2, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.bird:
+                    soundPool.play(sound3, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.duck:
+                    soundPool.play(sound4, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.guitar:
+                    soundPool.play(sound5, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.lion:
+                    soundPool.play(sound6, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.piano:
+                    soundPool.play(sound7, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.pig:
+                    soundPool.play(sound8, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.plane:
+                    soundPool.play(sound9, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.snake:
+                    soundPool.play(sound10, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.train:
+                    soundPool.play(sound11, 1, 1, 0, 0, 1);
+                    break;
+                case R.raw.trumpet:
+                    soundPool.play(sound12, 1, 1, 0, 0, 1);
+                    break;
+            }
+        }*/
     }
 }
