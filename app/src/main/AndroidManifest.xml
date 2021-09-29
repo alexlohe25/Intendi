@@ -19,6 +19,9 @@
             android:name=".MemoryGame"
             android:exported="true" />
         <activity
+            android:name=".WhackaGameActivity"
+            android:exported="true" />
+        <activity
             android:name=".PregameTemplate"
             android:exported="true" />
         <activity

@@ -36,7 +36,7 @@ public class WhackaGameManager {
             }
             D.setBall(allBalls[newIndex],allColors[newIndex]);
             ballAmountLeft--;
-            score+=100;
+            incrementScore();
         }
 
     }
@@ -50,12 +50,12 @@ public class WhackaGameManager {
     }
 
     public int getRandomIndex(){
-        return rand.nextInt(4);
+        return rand.nextInt(5);
 
     }
 
     public void incrementScore(){
-        this.score += 100;
+        this.score += 10;
     }
 
     public String getCurrentColor() {
