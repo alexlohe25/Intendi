@@ -21,10 +21,10 @@ public class WhackaGameActivity extends AppCompatActivity {
     public long initTime = 30000;
     public long bonus = 1500;
     public long interval = 100;
+    public long timeCurrent;
     static CountDownTimer timer;
     public static int NUMBER_OF_DOLPHINS = 7;
     public WhackaGameManager GameManager;
-    //View D1,D2,D3,D4,D5,D6,D7;
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
 
     @Override
@@ -33,7 +33,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_whacka_game);
 
         GameManager = new WhackaGameManager();
-
+        timeCurrent = 0;
         myDolphins = new clickableDolphin[NUMBER_OF_DOLPHINS];
         clickableViews= new View[NUMBER_OF_DOLPHINS];
 
@@ -77,9 +77,18 @@ public class WhackaGameActivity extends AppCompatActivity {
                 {
                     sS = "0" + Long.toString(seconds);
                 }
+                timeCurrent+=interval;
                 initTime-=interval;
                 timerText.setText(mS + " : " + sS);
-
+                if(timeCurrent > 20000){
+                    if(timeCurrent < 35000){
+                        bonus = 1000;
+                    }else if(timeCurrent < 45000){
+                        bonus = 500;
+                    }else{
+                        bonus = 200;
+                    }
+                }
             }
 
             @Override
@@ -148,39 +157,51 @@ public class WhackaGameActivity extends AppCompatActivity {
             clickableViews[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(GameManager.getCurrentColor().equals(myDolphins[finalI].getColor())){
+                        timer.cancel();
+                        initTime+=bonus;
+                        timer = new CountDownTimer(initTime, interval) {
+                            @Override
+                            public void onTick(long l) {
+                                long seconds = (l/1000) % 60;
+                                long minutes = (l/1000) / 60;
+                                String mS =  Long.toString(minutes);
+                                String sS = Long.toString(seconds);
+
+                                if (minutes<10){
+                                    mS = "0" + Long.toString(minutes);
+                                }
+                                if (seconds < 10)
+                                {
+                                    sS = "0" + Long.toString(seconds);
+                                }
+                                timeCurrent+=interval;
+                                initTime-=interval;
+                                timerText.setText(mS + " : " + sS);
+                                if(timeCurrent > 20000){
+                                    if(timeCurrent < 35000){
+                                        bonus = 1000;
+                                    }else if(timeCurrent < 45000){
+                                        bonus = 500;
+                                    }else{
+                                        bonus = 200;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFinish() {
+
+                                timerText.setText("00 : 00");
+                                finishDolphins();
+                            }
+                        }.start();
+                    }
                     GameManager.checkBall(myDolphins[finalI]);
                     scoreText.setText(Integer.toString(GameManager.getScore()));
                     if(GameManager.getBallAmountLeft() == 0 ){
                         Update();
                     }
-                    timer.cancel();
-                    initTime+=bonus;
-                    timer = new CountDownTimer(initTime, interval) {
-                        @Override
-                        public void onTick(long l) {
-                            long seconds = (l/1000) % 60;
-                            long minutes = (l/1000) / 60;
-                            String mS =  Long.toString(minutes);
-                            String sS = Long.toString(seconds);
-
-                            if (minutes<10){
-                                mS = "0" + Long.toString(minutes);
-                            }
-                            if (seconds < 10)
-                            {
-                                sS = "0" + Long.toString(seconds);
-                            }
-                            initTime-=interval;
-                            timerText.setText(mS + " : " + sS);
-                        }
-
-                        @Override
-                        public void onFinish() {
-
-                            timerText.setText("00 : 00");
-                            finishDolphins();
-                        }
-                    }.start();
                 }
             });
         }
