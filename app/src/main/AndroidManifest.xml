@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Intendi" >
         <activity
+            android:name=".WhackaGameActivity"
+            android:exported="true" />
+        <activity
             android:name=".PregameTemplate"
             android:exported="true" />
         <activity
