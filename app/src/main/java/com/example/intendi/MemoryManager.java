@@ -1,13 +1,11 @@
 package com.example.intendi;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class MemoryManager {
     List<MemoryCard> cards = new ArrayList<>();;
@@ -43,6 +41,10 @@ public class MemoryManager {
         card_sounds.add(R.raw.snake);
         card_sounds.add(R.raw.train);
         card_sounds.add(R.raw.trumpet);
+        shuffleCards();
+    }
+    public void shuffleCards(){
+        cards.clear();
         List<Integer> iconIndexes = Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11);
         Collections.shuffle(iconIndexes);
         for(int i = 0; i < 4; i++){
@@ -69,10 +71,12 @@ public class MemoryManager {
 
     private boolean checkForMatch(int pos1, int pos2) {
         if ((cards.get(pos1).contentIndex == cards.get(pos2).contentIndex) && pos1 != pos2){
-            cards.get(pos1).isMatched = true;
-            cards.get(pos2).isMatched = true;
-            numPairsFound += 10;
-            return true;
+            if(cards.get(pos1).isMatched == false && cards.get(pos2).isMatched == false){
+                cards.get(pos1).isMatched = true;
+                cards.get(pos2).isMatched = true;
+                numPairsFound += 10;
+                return true;
+            }
         }
         return false;
     }
@@ -83,7 +87,10 @@ public class MemoryManager {
                 card.isFaceUp = false;
         }
     }
-
+    public void resetCards(){
+        cards.clear();
+        shuffleCards();
+    }
 
     public MediaPlayer setSound(MemoryGame memoryGame, int position) {
         if(this.mp != null){
