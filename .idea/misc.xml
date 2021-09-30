@@ -4,15 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/drawable/ic_vectorwave2.xml" value="0.3828125" />
-        <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.20520833333333333" />
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/activity_registro_screen.xml" value="0.33" />
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/fragment_ajustes.xml" value="0.18034447821681865" />
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/fragment_menu_juegos.xml" value="0.33" />
-        <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/fragment_resultados.xml" value="0.22" />
+        <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/fragment_resultados.xml" value="0.23595505617977527" />
         <entry key="..\:/Alex/AndroidStudioProjects/Intendi/app/src/main/res/layout/user_login_space.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/activity_pregame_template.xml" value="0.264" />
-        <entry key="..\:/Projects_mobile/Intendi/app/src/main/res/layout/fragment_menu_juegos.xml" value="0.264" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/drawable/ic_vectorwave1.xml" value="0.3265625" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/drawable/ic_vectorwave2.xml" value="0.3265625" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/layout/activity_ajustes.xml" value="0.36666666666666664" />
@@ -27,6 +24,9 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/layout/intendi_basic_header.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/layout/layout.xml" value="0.36231884057971014" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Intendi/app/src/main/res/layout/user_login_space.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_interactive_piano.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_piano_game.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/juanp/Downloads/Deberes/Semestre 5/Integracion de seguridad/Modulo3/Intendi/Intendi/app/src/main/res/layout/activity_pregame_template.xml" value="0.22916666666666666" />
       </map>
     </option>
   </component>
