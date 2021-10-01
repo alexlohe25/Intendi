@@ -26,12 +26,13 @@ public class WhackaGameActivity extends AppCompatActivity {
     public static int NUMBER_OF_DOLPHINS = 7;
     public WhackaGameManager GameManager;
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
+    public View go_screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whacka_game);
-
+        go_screen = findViewById(R.id.GO_super_screen);
         GameManager = new WhackaGameManager();
         timeCurrent = 0;
         myDolphins = new clickableDolphin[NUMBER_OF_DOLPHINS];
@@ -96,6 +97,7 @@ public class WhackaGameActivity extends AppCompatActivity {
 
                 timerText.setText("00 : 00");
                 finishDolphins();
+                go_screen.setVisibility(View.VISIBLE);
             }
         }.start();
 
@@ -194,6 +196,8 @@ public class WhackaGameActivity extends AppCompatActivity {
 
                                 timerText.setText("00 : 00");
                                 finishDolphins();
+                                go_screen.setVisibility(View.VISIBLE);
+
                             }
                         }.start();
                     }

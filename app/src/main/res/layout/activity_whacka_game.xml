@@ -238,58 +238,8 @@
         app:layout_constraintTop_toTopOf="@+id/imageView6"
         app:layout_constraintVertical_bias="0.519" />
 
-    <ImageView
-        android:id="@+id/GO_background"
-        android:layout_width="411dp"
-        android:layout_height="736dp"
-        android:alpha="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/screen_background_dark"
-        tools:visibility="gone" />
-
-    <TextView
-        android:id="@+id/GO_txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:fontFamily="@font/vt323"
-        android:gravity="center"
-        android:rotationY="25"
-        android:text="Game"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/crema"
-        android:textSize="75sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/GO_txt2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
-
-    <TextView
-        android:id="@+id/GO_txt2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:fontFamily="@font/vt323"
-        android:gravity="center"
-        android:rotationY="-25"
-        android:text="Over"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/crema"
-        android:textSize="75sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/GO_txt1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
+    <include
+        layout="@layout/game_over_overlay"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
