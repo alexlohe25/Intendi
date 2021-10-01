@@ -15,8 +15,6 @@ public class PianoGame extends AppCompatActivity {
 
     TextView scoreLbl, pianoNote;
 
-    Button returnBotton;
-
     private MediaPlayer doSound;
     private MediaPlayer reSound;
     private MediaPlayer miSound;
@@ -50,8 +48,6 @@ public class PianoGame extends AppCompatActivity {
 
         scoreLbl = findViewById(R.id.scoreLbl);
         pianoNote = findViewById(R.id.pianoNote);
-
-        returnBotton = findViewById(R.id.returnButton);
 
         doSound = MediaPlayer.create(this, R.raw.don);
         reSound = MediaPlayer.create(this, R.raw.re);
