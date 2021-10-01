@@ -8,7 +8,7 @@
     tools:context=".PregameTemplate">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/playButton"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:backgroundTint="#FFB703"
@@ -19,6 +19,7 @@
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:onClick="startGame"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
