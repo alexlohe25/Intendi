@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#466777"
-    tools:context=".MainActivity">
+    tools:context=".PianoGame">
 
     <RelativeLayout
         android:id="@+id/top_layout"
@@ -110,8 +110,8 @@
                             android:layout_marginRight="5dip"
                             android:layout_marginBottom="12dip"
                             android:fontFamily="@font/vt323"
-                            android:text="Nota"
                             android:gravity="center"
+                            android:text="Nota"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp">
