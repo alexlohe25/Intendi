@@ -8,11 +8,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 public class MemoryGame extends AppCompatActivity {
 
-    RecyclerView memoBoard;
+    GridRecyclerView memoBoard;
     TextView timeLbl;
     TextView scoreLbl;
     int totalScore = 0, gridScore = 0;
@@ -20,6 +22,7 @@ public class MemoryGame extends AppCompatActivity {
     MemoryBoardAdapter boardAdapter;
     CountDownTimer timer;
     long initTime = 120000, interval = 100;
+    LayoutAnimationController layoutAnimationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +61,14 @@ public class MemoryGame extends AppCompatActivity {
                 updateGameWithFlip(position);
             }
         });
-        memoBoard.setLayoutManager(new GridLayoutManager(this, 2));
         memoBoard.setAdapter(boardAdapter);
         memoBoard.setHasFixedSize(true);
-        memoBoard.getAdapter().notifyDataSetChanged();
+        layoutAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.recyclerview_grid_layout_animation);
+        memoBoard.setLayoutAnimation(layoutAnimationController);
+        memoBoard.setLayoutManager(new GridLayoutManager(this, 2));
+        memoBoard.startLayoutAnimation();
+
+        //memoBoard.getAdapter().notifyDataSetChanged();
 
     }
     public void generaCartas(){
@@ -73,13 +80,13 @@ public class MemoryGame extends AppCompatActivity {
                 updateGameWithFlip(position);
             }
         });
-
         memoBoard.setAdapter(boardAdapter);
         memoBoard.setVisibility(View.VISIBLE);
+        layoutAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.recyclerview_grid_layout_animation);
+        memoBoard.setLayoutAnimation(layoutAnimationController);
         memoryGame = newMemoCards;
         memoBoard.getAdapter().notifyDataSetChanged();
     }
-
 
     private void updateGameWithFlip(int position){
         memoryGame.flipCard(position);
@@ -95,6 +102,4 @@ public class MemoryGame extends AppCompatActivity {
         }
         boardAdapter.notifyDataSetChanged();
     }
-
-
 }
