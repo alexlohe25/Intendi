@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Intendi">
         <activity
+            android:name=".LaberintendiGame"
+            android:exported="true" />
+        <activity
             android:name=".SendaGame"
             android:exported="true" />
         <activity

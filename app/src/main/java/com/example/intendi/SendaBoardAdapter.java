@@ -67,8 +67,8 @@ public class SendaBoardAdapter extends RecyclerView.Adapter<SendaBoardAdapter.Vi
         }
 
         public void bind(int position) {
-            int[] pattern = sendaManager.getBoardNumbers();
-            if(pattern[position] != -1) textNumber.setText(String.valueOf(pattern[position] + 1));
+            int[] board = sendaManager.getBoardNumbers();
+            if(board[position] != -1) textNumber.setText(String.valueOf(board[position] + 1));
             else{
                 textNumber.setText("");
             }
@@ -76,7 +76,6 @@ public class SendaBoardAdapter extends RecyclerView.Adapter<SendaBoardAdapter.Vi
             textNumber.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Click on pos: " + position);
                     cardClickListener.onCardClicked(position);
                 }
             });

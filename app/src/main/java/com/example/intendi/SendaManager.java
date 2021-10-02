@@ -11,6 +11,7 @@ public class SendaManager {
     private int boardSize;
     private int round;
     private int score;
+    private int lifes;
 
     private int indexCompared;
     private Random rand;
@@ -23,15 +24,15 @@ public class SendaManager {
 
     public SendaManager(){
         this.boardSize = 9;
-        this.boardNumbers = new int[100];
+        this.boardNumbers = new int[50];
         this.rand = new Random();
         this.indexCompared = 0;
         this.pattern = new ArrayList<Integer>();
-
-        randomizePattern();
-
+        this.lifes = 3;
         this.round = 1;
         this.score = 0;
+
+        randomizePattern();
     }
 
     public int[] getBoardNumbers(){
@@ -45,21 +46,28 @@ public class SendaManager {
     }
 
     public void expandBoard(){
-        this.boardSize = (int) pow(this.getBoardLen()*+1, 2);
+        this.boardSize = (int) pow(this.getBoardLen()+1, 2);
     }
 
     // 1 -> correct, 0 -> nextRound, -1 -> error, 2 changeGrid
     public int compareCurrentCell(int cellId){
         if(cellId != this.pattern.get(indexCompared)){ //Error
-            return -1;
+            this.lifes--;
+            if(this.lifes == 0){
+                this.indexCompared = 0;
+                return -2; //Game over
+            }else{
+                this.indexCompared = 0;
+                return -1; //Player loses 1 life and repeats round
+            }
         }else{
             this.indexCompared++;
             if(indexCompared > this.round + 1){ //Check if round is completed
                 this.round++;
                 this.indexCompared = 0;
                 randomizePattern();
-                if(round > (this.boardSize*70/100)){ //Check if board needs to be expanded, 70% cells are being used
-                    expandBoard();
+                if(this.round+2 > ((this.boardSize*50)/100)){ //Check if board needs to be expanded, 70% cells are being used
+                    this.score += 100;
                     return 2;
                 }else{ //Next round, no need to expand board
                     this.score += 100;
@@ -89,7 +97,7 @@ public class SendaManager {
         }
 
         Collections.shuffle(pattern);
-        for (int i=0; i < this.round+3; i++) {
+        for (int i=0; i < this.round+2; i++) {
             this.boardNumbers[pattern.get(i)] =  i;
         }
     }
@@ -97,4 +105,5 @@ public class SendaManager {
     public int getBoardLen(){
         return (int) Math.sqrt(this.boardSize);
     }
+    public int getLifes() { return this.lifes; }
 }

@@ -60,10 +60,37 @@ public class SendaGame extends AppCompatActivity {
             @Override
             public void onCardClicked(int position) {
                 int status = sendaManager.compareCurrentCell(position);
-                if(status == -1){
+                if(status == -2){ //Game over
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnError(0, card, text);
+                    updateLifes(sendaManager.getLifes());
+
+                    System.out.println("Game over");
+
+                } else if(status == -1){ //Error, player continue on same round
+                    CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
+                    TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
+                    turnError(0, card, text);
+
+                    updateLifes(sendaManager.getLifes());
+
+                    final Handler handlerHide = new Handler(Looper.getMainLooper());
+                    handlerHide.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            turnOffAll();
+                        }
+                    }, 700);
+
+                    final Handler handlerShow = new Handler(Looper.getMainLooper());
+                    handlerShow.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            showPath();
+                        }
+                    }, 1000);
+
                 }else if(status == 0){
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
@@ -87,21 +114,57 @@ public class SendaGame extends AppCompatActivity {
                             showPath();
                         }
                     }, 1000);
-
-                    /*final Handler handlerShow = new Handler(Looper.getMainLooper());
-                    handlerShow.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            showPath();
-                        }
-                    }, sendaManager.getRound()+3 * 1000);*/
-
                 }else if(status == 1){
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnOn(0, card, text);
                 }else if(status == 2){
-                    System.out.println("Expand board");
+                    CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
+                    TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
+                    turnOn(0, card, text);
+
+                    scoreLbl.setText(String.valueOf(sendaManager.getScore()));
+
+                    final Handler handlerHide = new Handler(Looper.getMainLooper());
+                    handlerHide.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            turnOffAll();
+                        }
+                    }, 500);
+
+                    final Handler handlerHideGrid = new Handler(Looper.getMainLooper());
+                    handlerHideGrid.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendaManager.expandBoard();
+                            sendaBoard.setVisibility(View.INVISIBLE);
+                            ((GridLayoutManager) sendaBoard.getLayoutManager()).setSpanCount(sendaManager.getBoardLen());
+                            //sendaBoard.setLayoutManager(new GridLayoutManager(getApplicationContext(), sendaManager.getBoardLen()));
+                        }
+                    }, 1000);
+
+                    final Handler handlerShowGrid = new Handler(Looper.getMainLooper());
+                    handlerShowGrid.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendaBoard.setVisibility(View.VISIBLE);
+                            sendaBoard.getAdapter().notifyDataSetChanged();
+                            layoutAnimationController = AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.recyclerview_grid_layout_animation);
+                            sendaBoard.setLayoutAnimation(layoutAnimationController);
+                        }
+                    }, 1300);
+
+                    final Handler handlerShow = new Handler(Looper.getMainLooper());
+                    handlerShow.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateNumsBoard();
+                            showPath();
+                        }
+                    }, 3000);
+
+
                 }
             }
         }));
@@ -139,7 +202,7 @@ public class SendaGame extends AppCompatActivity {
         animatorColor.setDuration(400);
         animatorColor.setStartDelay(delay);
 
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(text, "alpha", 0f, 1, 1);
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(text, "alpha", text.getAlpha(), 1);
         fadeIn.setDuration(400);
         fadeIn.setStartDelay(delay);
         fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -159,7 +222,7 @@ public class SendaGame extends AppCompatActivity {
         animatorColor.setDuration(400);
         animatorColor.setStartDelay(delay);
 
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(text, "alpha", 0f, 1, 1);
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(text, "alpha", text.getAlpha(), 1);
         fadeIn.setDuration(400);
         fadeIn.setStartDelay(delay);
         fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -178,7 +241,7 @@ public class SendaGame extends AppCompatActivity {
                 0xFFC4C4C4);
         animatorColor.setDuration(400);
 
-        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(text, "alpha", 1f, 0, 0);
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(text, "alpha", text.getAlpha(), 0);
         fadeOut.setDuration(400);
         fadeOut.setInterpolator(new DecelerateInterpolator());
 
@@ -204,29 +267,22 @@ public class SendaGame extends AppCompatActivity {
     public void showPath(){
         disableClicks();
         ArrayList<Integer> pattern =  sendaManager.getPattern();
+        int del = 0;
         for(int i=0; i < sendaManager.getRound()+2; i++){
             CardView card =  sendaBoard.getLayoutManager().getChildAt(pattern.get(i)).findViewById(R.id.cardView);
             TextView text =  sendaBoard.getLayoutManager().getChildAt(pattern.get(i)).findViewById(R.id.textNumber);
-            turnOn(1000 * i, card, text);
+            del = 1000 * i;
+            turnOn(del, card, text);
         }
 
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                hidePath();
+                enableClicks();
+                turnOffAll();
             }
-        }, sendaManager.getRound()+3 * 1400);
-    }
-
-    public void hidePath(){
-        enableClicks();
-        ArrayList<Integer> pattern =  sendaManager.getPattern();
-        for(int i=0; i < sendaManager.getRound()+2; i++){
-            CardView card =  sendaBoard.getLayoutManager().getChildAt(pattern.get(i)).findViewById(R.id.cardView);
-            TextView text =  sendaBoard.getLayoutManager().getChildAt(pattern.get(i)).findViewById(R.id.textNumber);
-            turnOff(card, text);
-        }
+        }, del+1000);
     }
 
     public void turnOffAll(){
@@ -245,6 +301,16 @@ public class SendaGame extends AppCompatActivity {
             else{
                 textNumber.setText("");
             }
+        }
+    }
+
+    public void updateLifes(int lifes){
+        if(lifes == 2){
+            heartThree.setImageResource(R.drawable.heart_gray);
+        }else if(lifes == 1){
+            heartTwo.setImageResource(R.drawable.heart_gray);
+        }else{
+            heartOne.setImageResource(R.drawable.heart_gray);
         }
     }
 

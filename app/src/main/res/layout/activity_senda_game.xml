@@ -140,8 +140,8 @@
             android:id="@+id/sendaBoard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:overScrollMode="never" />
     </RelativeLayout>
 
 

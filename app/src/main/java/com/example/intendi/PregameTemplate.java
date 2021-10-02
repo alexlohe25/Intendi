@@ -61,6 +61,9 @@ public class PregameTemplate extends AppCompatActivity {
         }else if(gameType.equals("nums")){
             Intent gameIntent = new Intent(this, SendaGame.class);
             startActivity(gameIntent);
+        }else if(gameType.equals("laber")){
+            Intent gameIntent = new Intent(this, LaberintendiGame.class);
+            startActivity(gameIntent);
         }
     }
 }
