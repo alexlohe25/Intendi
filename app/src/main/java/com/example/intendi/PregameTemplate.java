@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -63,6 +64,9 @@ public class PregameTemplate extends AppCompatActivity {
             startActivity(gameIntent);
         }else if(gameType.equals("laber")){
             Intent gameIntent = new Intent(this, LaberintendiGame.class);
+            startActivity(gameIntent);
+        }else if(gameType.equals("whack")){
+            Intent gameIntent = new Intent(this, WhackaGameActivity.class);
             startActivity(gameIntent);
         }
     }

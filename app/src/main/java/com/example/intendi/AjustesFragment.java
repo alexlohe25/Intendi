@@ -50,7 +50,7 @@ public class AjustesFragment extends Fragment {
 
          View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
 
-         logOutButton= view.findViewById(R.id.button);
+         logOutButton= view.findViewById(R.id.playButton);
          logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
