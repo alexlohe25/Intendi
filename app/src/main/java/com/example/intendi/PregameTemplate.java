@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ public class PregameTemplate extends AppCompatActivity {
     ImageView imageLogo;
     TextView textBubble;
     FloatingActionButton go_back;
+    Button playButton;
+    String gameType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +29,13 @@ public class PregameTemplate extends AppCompatActivity {
         imageBubble = findViewById(R.id.imageBubble);
         imageLogo = findViewById(R.id.imageLogo);
         textBubble = findViewById(R.id.textBubble);
+        playButton = findViewById(R.id.playButton);
 
         Intent myIntent = getIntent();
         String imageBubbleDir = myIntent.getStringExtra("imageBubble");
         String imageLogoDir = myIntent.getStringExtra("imageLogo");
         String textBubbleDir = myIntent.getStringExtra("textBubble");
+        gameType = myIntent.getStringExtra("game");
 
         int idImageBubble = this.getResources().getIdentifier(imageBubbleDir, "drawable", this.getPackageName());
         int idLogo = this.getResources().getIdentifier(imageLogoDir, "drawable", this.getPackageName());
@@ -47,6 +52,18 @@ public class PregameTemplate extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    public void startGame(View v){
+        if(gameType.equals("memo")){
+            Intent gameIntent = new Intent(this, MemoryGame.class);
+            startActivity(gameIntent);
+        }else if(gameType.equals("nums")){
+            Intent gameIntent = new Intent(this, SendaGame.class);
+            startActivity(gameIntent);
+        }else if(gameType.equals("laber")){
+            Intent gameIntent = new Intent(this, LaberintendiGame.class);
+            startActivity(gameIntent);
+        }
     }
 }

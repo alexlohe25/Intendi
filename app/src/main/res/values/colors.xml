@@ -13,4 +13,11 @@
     <color name = "verdeIntendi">#E9C464</color>
     <color name = "naranjaIntendi">#FB8500</color>
     <color name="crema">#FDFBF7</color>
+    <color name="naranjaSenda">#FF7C03</color>
+
+    <color name="red_eat">#D94245</color>
+    <color name="yellow_right">#FFB754</color>
+    <color name="blue_left">#3997B4</color>
+    <color name="move_green">#3DC38E</color>
+
 </resources>
