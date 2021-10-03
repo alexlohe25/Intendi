@@ -38,6 +38,7 @@ public class SendaGame extends AppCompatActivity {
     TextView scoreLbl;
     LayoutAnimationController layoutAnimationController;
     SendaManager sendaManager;
+    View go_screen;
 
     FloatingActionButton go_back;
 
@@ -45,6 +46,7 @@ public class SendaGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senda_game);
+        go_screen = findViewById(R.id.GO_super_screen);
 
         sendaManager = new SendaManager();
 
@@ -66,9 +68,10 @@ public class SendaGame extends AppCompatActivity {
                     turnError(0, card, text);
                     updateLifes(sendaManager.getLifes());
 
-                    System.out.println("Game over");
+                    go_screen.setVisibility(View.VISIBLE);
 
                 } else if(status == -1){ //Error, player continue on same round
+                    disableClicks();
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnError(0, card, text);

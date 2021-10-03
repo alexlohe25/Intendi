@@ -201,6 +201,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardAnswers"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -361,11 +362,11 @@
                     android:src="@drawable/eat" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
-
-
     </LinearLayout>
 
 
+    <include
+        layout="@layout/game_over_overlay"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
