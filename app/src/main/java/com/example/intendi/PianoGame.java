@@ -222,6 +222,7 @@ public class PianoGame extends AppCompatActivity {
     }
 
     public void onTap(View v){
+        System.out.println("Compare");
         Button tapButton = (Button)v;
         colorAndPlay(0, tapButton);
 
@@ -251,11 +252,13 @@ public class PianoGame extends AppCompatActivity {
             answer = pianoManager.compare(11);
         }
 
+        System.out.println("Check");
+
         if(answer == -1){
-            scoreLbl.setText(pianoManager.getScore());
+            scoreLbl.setText(String.valueOf(pianoManager.getScore()));
         }else if(answer == 1){
             pianoManager.changeScore();
-            scoreLbl.setText(pianoManager.getScore());
+            scoreLbl.setText(String.valueOf(pianoManager.getScore()));
             pianoManager.changeRound();
 
             final Handler handler = new Handler(Looper.getMainLooper());
