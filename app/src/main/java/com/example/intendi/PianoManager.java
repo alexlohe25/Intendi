@@ -12,13 +12,15 @@ public class PianoManager {
 
     public PianoManager() {
 
-        instructions[0] = randomizer.nextInt(12);
-
         this.score = 0;
         this.round = 1;
         this.comparison = 0;
         this.instructions = new int[100];
         this.randomizer = new Random();
+
+        instructions[0] = randomizer.nextInt(12);
+        instructions[2] = randomizer.nextInt(12);
+        instructions[3] = randomizer.nextInt(12);
     }
 
     public int getScore() {
@@ -40,13 +42,13 @@ public class PianoManager {
     public void changeRound() {
         this.round++;
         this.comparison = 0;
-        instructions[this.round - 1] = randomizer.nextInt(12);
+        instructions[this.round + 1] = randomizer.nextInt(12);
     }
 
     public int compare(int answer) {
         if(answer == this.instructions[this.comparison]) {
             comparison++;
-            if(this.comparison == this.round) return 1;
+            if(this.comparison == this.round + 2) return 1;
             else return 0;
         }else return -1;
     }

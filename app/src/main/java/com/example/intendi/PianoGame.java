@@ -63,8 +63,6 @@ public class PianoGame extends AppCompatActivity {
         pianoNote = findViewById(R.id.pianoNote);
         isPlaying = false;
 
-        notesArray = new Button[12];
-
         doSound = MediaPlayer.create(this, R.raw.don);
         reSound = MediaPlayer.create(this, R.raw.re);
         miSound = MediaPlayer.create(this, R.raw.mi);
@@ -78,6 +76,7 @@ public class PianoGame extends AppCompatActivity {
         solSharpSound = MediaPlayer.create(this, R.raw.solb);
         laSharpSound = MediaPlayer.create(this, R.raw.lab);
 
+        notesArray = new Button[12];
         notesArray[0] = doKey;
         notesArray[1] = reKey;
         notesArray[2] = miKey;
@@ -273,7 +272,7 @@ public class PianoGame extends AppCompatActivity {
         changeKeyState(false);
 
         int[] instruction = pianoManager.getInstructions();
-        for(int i = 0; i < pianoManager.getRound(); i++){
+        for(int i = 0; i < pianoManager.getRound() + 2; i++){
             colorAndPlay(1000 * i, notesArray[instruction[i]]);
         }
 
@@ -283,7 +282,7 @@ public class PianoGame extends AppCompatActivity {
             public void run() {
                 changeKeyState(true);
             }
-        }, pianoManager.getRound()+1 * 1000);
+        }, pianoManager.getRound() + 3 * 1000);
     }
 
     public void gameStart() {
