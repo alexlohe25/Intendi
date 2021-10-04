@@ -112,7 +112,7 @@
                             android:layout_marginBottom="12dip"
                             android:fontFamily="@font/vt323"
                             android:gravity="center"
-                            android:text="Nota"
+                            android:text="Hola"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp">
