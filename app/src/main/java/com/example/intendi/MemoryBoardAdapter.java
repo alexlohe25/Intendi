@@ -1,23 +1,43 @@
 package com.example.intendi;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>{
+import java.util.Arrays;
+import java.util.List;
 
+public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>{
+    Context activityContext;
     private int numPieces;
+    private CardClickListener cardClickListener;
     public static int marginSize() { return 10; }
 
-    public MemoryBoardAdapter(Context context, int numPieces) {
+    List<MemoryCard> cardImages;
+    public MemoryBoardAdapter(Context context, int numPieces, List<MemoryCard> randomizedImages, CardClickListener cardClickListener) {
         this.numPieces = numPieces;
+        this.cardImages = randomizedImages;
+        this.cardClickListener = cardClickListener;
+        activityContext = context;
     }
-
+    public interface CardClickListener{
+        void onCardClicked(int position);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,10 +76,39 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
         }
 
         public void bind(int position) {
+            MemoryCard curCard = cardImages.get(position);
+
+            if(curCard.isFaceUp) {
+                if (curCard.isSound) {
+                    imageButton.setImageResource(R.drawable.ic_baseline_headphones_24);
+                } else {
+                    imageButton.setImageResource(curCard.identifier);
+                }
+            }
+            else
+                imageButton.setImageResource(R.drawable.card_square);
+
+            if(curCard.isMatched)
+                if (curCard.isSound)
+                    imageButton.setImageResource(R.drawable.ic_baseline_headphones_24);
+                else
+                    imageButton.setImageResource(curCard.identifier);
+
+            ColorStateList colorStateList;
+            if (curCard.isMatched){
+                imageButton.setAlpha(.4f);
+                colorStateList = ContextCompat.getColorStateList(imageButton.getContext(), R.color.amarilloIntendi);
+            }
+            else{
+                imageButton.setAlpha(1.0f);
+                colorStateList = null;
+            }
+            ViewCompat.setBackgroundTintList(imageButton, colorStateList);
+
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Click on pos: " + position);
+                    cardClickListener.onCardClicked(position);
                 }
             });
         }
