@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 public class PianoGame extends AppCompatActivity {
 
     Button doKey, reKey, miKey, faKey, solKey, laKey, siKey;
@@ -227,6 +229,14 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
+                if(player.isPlaying()){
+                    player.stop();
+                    try {
+                        player.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 player.start();
             }
         });

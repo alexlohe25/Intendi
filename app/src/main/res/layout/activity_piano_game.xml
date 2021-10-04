@@ -153,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -163,7 +163,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -173,7 +173,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -183,7 +183,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -193,7 +193,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -203,7 +203,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -213,7 +213,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -239,7 +239,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.4"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -249,7 +249,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.4"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
@@ -268,7 +268,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -279,7 +279,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -290,7 +290,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="#000000"
+                    android:backgroundTint="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
