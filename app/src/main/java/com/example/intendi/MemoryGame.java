@@ -68,7 +68,6 @@ public class MemoryGame extends AppCompatActivity {
         memoBoard.setLayoutManager(new GridLayoutManager(this, 2));
         memoBoard.startLayoutAnimation();
 
-        //memoBoard.getAdapter().notifyDataSetChanged();
 
     }
     public void generaCartas(){
