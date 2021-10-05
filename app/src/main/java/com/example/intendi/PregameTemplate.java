@@ -68,6 +68,10 @@ public class PregameTemplate extends AppCompatActivity {
         }else if(gameType.equals("whack")){
             Intent gameIntent = new Intent(this, WhackaGameActivity.class);
             startActivity(gameIntent);
+        }else if(gameType.equals("piano")){
+            Intent gameIntent = new Intent(this, PianoGame.class);
+            startActivity(gameIntent);
         }
+
     }
 }

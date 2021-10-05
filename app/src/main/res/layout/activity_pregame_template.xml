@@ -20,6 +20,7 @@
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:onClick="startGame"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
