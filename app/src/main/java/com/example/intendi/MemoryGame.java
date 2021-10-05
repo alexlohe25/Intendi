@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -21,8 +22,10 @@ public class MemoryGame extends AppCompatActivity {
     MemoryManager memoryGame = new MemoryManager();
     MemoryBoardAdapter boardAdapter;
     CountDownTimer timer;
-    long initTime = 120000, interval = 100;
+    MediaPlayer cardSound;
+    long initTime = 180000, interval = 100;
     LayoutAnimationController layoutAnimationController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,7 @@ public class MemoryGame extends AppCompatActivity {
         memoBoard = findViewById(R.id.memoBoard);
         timeLbl = findViewById(R.id.timeLbl);
         scoreLbl = findViewById(R.id.scoreLbl);
-
+        cardSound = MediaPlayer.create(this, R.raw.bird);
         timer = new CountDownTimer(initTime,interval) {
             @Override
             public void onTick(long l) {
@@ -88,16 +91,24 @@ public class MemoryGame extends AppCompatActivity {
     }
 
     private void updateGameWithFlip(int position){
-        memoryGame.flipCard(position);
-        if (memoryGame.cards.get(position).isSound && !memoryGame.cards.get(position).isMatched){
-            final MediaPlayer cardSound = memoryGame.setSound(this, position);
-            cardSound.start();
+        if (!memoryGame.cards.get(position).isMatched && !cardSound.isPlaying()) {
+            memoryGame.flipCard(position);
+            if (memoryGame.cards.get(position).isSound && memoryGame.cards.get(position).isFaceUp) {
+                cardSound = memoryGame.setSound(this, position);
+                cardSound.start();
+            }
         }
         gridScore = memoryGame.numPairsFound;
         scoreLbl.setText(Integer.toString(totalScore + gridScore));
         if (gridScore == 40){
             totalScore += gridScore;
-            generaCartas();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    generaCartas();
+                }
+            }, 500);
         }
         boardAdapter.notifyDataSetChanged();
     }
