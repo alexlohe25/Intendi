@@ -52,11 +52,15 @@ public class LaberintendiGame extends AppCompatActivity {
     CardView cardDelete;
 
     FloatingActionButton go_back;
+    View go_screen;
+    CardView cardAnswers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laberintendi_game);
+        go_screen = findViewById(R.id.GO_super_screen);
+        cardAnswers = findViewById(R.id.cardAnswers);
 
         cardMove = findViewById(R.id.cardViewMove);
         cardLeft = findViewById(R.id.cardViewLeft);
@@ -412,27 +416,26 @@ public class LaberintendiGame extends AppCompatActivity {
                 int position = changes.get(i).get(0);
                 int animateState = changes.get(i).get(1);
                 ImageView imageAnim =  laberBoard.getLayoutManager().getChildAt(position).findViewById(R.id.imageCard);
-                animateLaberCellChange(i*1000, imageAnim, animateState);
+                animateLaberCellChange(i*850, imageAnim, animateState);
             }else{ //Valid movement, modify two cells
                 int position1 = changes.get(i).get(0);
                 int animateState1 = changes.get(i).get(1);
                 ImageView imageAnim1 =  laberBoard.getLayoutManager().getChildAt(position1).findViewById(R.id.imageCard);
-                animateLaberCellChange(i*1000, imageAnim1, animateState1);
+                animateLaberCellChange(i*850, imageAnim1, animateState1);
 
                 int position2 = changes.get(i).get(2);
                 int animateState2 = changes.get(i).get(3);
                 ImageView imageAnim2 =  laberBoard.getLayoutManager().getChildAt(position2).findViewById(R.id.imageCard);
-                animateLaberCellChange(i*1000, imageAnim2, animateState2);
+                animateLaberCellChange(i*850, imageAnim2, animateState2);
             }
         }
 
-        int scoreEnergyDelay = changes.size()*1000 + 200;
+        int scoreEnergyDelay = changes.size()*850 + 200;
         final Handler handlerRound = new Handler(Looper.getMainLooper());
         handlerRound.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if(response == 0){ //Correct answer
-                    System.out.println(laberManager.getEnergy());
                     updateEnergy(laberManager.getEnergy());
                     scoreLbl.setText(String.valueOf(laberManager.getScore()));
                 }
@@ -443,12 +446,21 @@ public class LaberintendiGame extends AppCompatActivity {
         handlerHideGrid.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(response == 0){
-                    laberManager.randomizePattern();
-                }
+                //Delete answers and update
                 laberManager.deleteAllAnswers();
                 ansBoard.getAdapter().notifyDataSetChanged();
-                laberBoard.setVisibility(View.INVISIBLE);
+
+                if(response == 0){
+                    laberManager.randomizePattern();
+                    laberBoard.setVisibility(View.INVISIBLE);
+                }else if(laberManager.getEnergy()>0){
+                    laberManager.deleteAllAnswers();
+                    ansBoard.getAdapter().notifyDataSetChanged();
+                    laberBoard.setVisibility(View.INVISIBLE);
+                }else{
+                    go_screen.setVisibility(View.VISIBLE);
+                    cardAnswers.setVisibility(View.INVISIBLE);
+                }
             }
         }, scoreEnergyDelay + 200);
 
@@ -456,11 +468,13 @@ public class LaberintendiGame extends AppCompatActivity {
         handlerShowGrid.postDelayed(new Runnable() {
             @Override
             public void run() {
-                laberBoard.setVisibility(View.VISIBLE);
-                laberBoard.getAdapter().notifyDataSetChanged();
-                layoutAnimationController = AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.recyclerview_grid_layout_animation);
-                laberBoard.setLayoutAnimation(layoutAnimationController);
-                enableClicks();
+                if(laberManager.getEnergy()>0){
+                    laberBoard.setVisibility(View.VISIBLE);
+                    laberBoard.getAdapter().notifyDataSetChanged();
+                    layoutAnimationController = AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.recyclerview_grid_layout_animation);
+                    laberBoard.setLayoutAnimation(layoutAnimationController);
+                    enableClicks();
+                }
             }
         }, scoreEnergyDelay + 500);
 
