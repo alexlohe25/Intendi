@@ -121,6 +121,9 @@ public class PianoGame extends AppCompatActivity {
     }
 
     private void colorAndPlay(int delay, Button button) {
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+
         ObjectAnimator animator;
         final MediaPlayer player;
         if (button == doKey){
@@ -130,7 +133,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     doKey.getBackgroundTintList().getDefaultColor(),
                     0xFFF94144);
-            pianoNote.setText("Do");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Do");
+                }
+            }, delay);
         } else if (button == reKey) {
             player = reSound;
             animator = ObjectAnimator.ofObject(reKey,
@@ -138,7 +146,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     reKey.getBackgroundTintList().getDefaultColor(),
                     0xFFF8961E);
-            pianoNote.setText("Re");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Re");
+                }
+            }, delay);
         }else if (button == miKey) {
             player = miSound;
             animator = ObjectAnimator.ofObject(miKey,
@@ -146,7 +159,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     miKey.getBackgroundTintList().getDefaultColor(),
                     0xFFF9C74F);
-            pianoNote.setText("Mi");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Mi");
+                }
+            }, delay);
         }else if (button == faKey) {
             player = faSound;
             animator = ObjectAnimator.ofObject(faKey,
@@ -154,7 +172,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     faKey.getBackgroundTintList().getDefaultColor(),
                     0xFF90BE6D);
-            pianoNote.setText("Fa");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Fa");
+                }
+            }, delay);
         }else if (button == solKey) {
             player = solSound;
             animator = ObjectAnimator.ofObject(solKey,
@@ -162,7 +185,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     solKey.getBackgroundTintList().getDefaultColor(),
                     0xFF43AA8B);
-            pianoNote.setText("Sol");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Sol");
+                }
+            }, delay);
         }else if (button == laKey) {
             player = laSound;
             animator = ObjectAnimator.ofObject(laKey,
@@ -170,7 +198,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     laKey.getBackgroundTintList().getDefaultColor(),
                     0xFF577590);
-            pianoNote.setText("La");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("La");
+                }
+            }, delay);
         }else if (button == siKey){
             player = siSound;
             animator = ObjectAnimator.ofObject(siKey,
@@ -178,7 +211,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     siKey.getBackgroundTintList().getDefaultColor(),
                     0xFF603982);
-            pianoNote.setText("Si");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Si");
+                }
+            }, delay);
         }else if (button == doSh){
             player = doSharpSound;
             animator = ObjectAnimator.ofObject(doSh,
@@ -186,7 +224,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     doSh.getBackgroundTintList().getDefaultColor(),
                     0xFFf78f91);
-            pianoNote.setText("Do#");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Do#");
+                }
+            }, delay);
         }else if (button == reSh){
             player = reSharpSound;
             animator = ObjectAnimator.ofObject(reSh,
@@ -194,7 +237,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     reSh.getBackgroundTintList().getDefaultColor(),
                     0xFFf7db97);
-            pianoNote.setText("Re#");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Re#");
+                }
+            }, delay);
         }else if (button == faSh){
             player = faSharpSound;
             animator = ObjectAnimator.ofObject(faSh,
@@ -202,7 +250,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     faSh.getBackgroundTintList().getDefaultColor(),
                     0xFFaabd9d);
-            pianoNote.setText("Fa#");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Fa#");
+                }
+            }, delay);
         }else if (button == solSh){
             player = solSharpSound;
             animator = ObjectAnimator.ofObject(solSh,
@@ -210,7 +263,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     solSh.getBackgroundTintList().getDefaultColor(),
                     0xFF7c8791);
-            pianoNote.setText("Sol#");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("Sol#");
+                }
+            }, delay);
         }else{
             player = laSharpSound;
             animator = ObjectAnimator.ofObject(laSh,
@@ -218,7 +276,12 @@ public class PianoGame extends AppCompatActivity {
                     new ArgbEvaluator(),
                     laSh.getBackgroundTintList().getDefaultColor(),
                     0xFF806d91);
-            pianoNote.setText("La#");
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pianoNote.setText("La#");
+                }
+            }, delay);
         }
 
         animator.setDuration(400);
