@@ -102,7 +102,7 @@
                             android:text="Whack-A-Ball"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -143,7 +143,7 @@
                             android:text="Memorama"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -184,7 +184,7 @@
                             android:text="Senda numérica"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -225,7 +225,7 @@
                             android:text="Piano"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -266,7 +266,7 @@
                             android:text="Laberintendi"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -307,7 +307,7 @@
                             android:text="Random"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="22dp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
