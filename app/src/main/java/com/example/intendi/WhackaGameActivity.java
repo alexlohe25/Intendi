@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,12 +29,21 @@ public class WhackaGameActivity extends AppCompatActivity {
     public WhackaGameManager GameManager;
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
     public View go_screen;
+    public Button goBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whacka_game);
         go_screen = findViewById(R.id.GO_super_screen);
+        goBackButton = go_screen.findViewById(R.id.goMenuButton);
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         GameManager = new WhackaGameManager();
         timeCurrent = 0;
         myDolphins = new clickableDolphin[NUMBER_OF_DOLPHINS];
