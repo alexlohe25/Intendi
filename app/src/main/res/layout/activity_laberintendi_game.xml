@@ -122,6 +122,7 @@
         app:layout_constraintVertical_bias="0.023"
         app:maxImageSize="35dp"
         app:srcCompat="@drawable/equis"
+        android:onClick="showClosePopUp"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <RelativeLayout
@@ -367,6 +368,10 @@
 
     <include
         layout="@layout/game_over_overlay"
+        />
+
+    <include
+        layout="@layout/close_game_pop_up"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,9 +38,13 @@ public class SendaGame extends AppCompatActivity {
     TextView scoreLbl;
     LayoutAnimationController layoutAnimationController;
     SendaManager sendaManager;
-    View go_screen;
 
+
+    View go_screen;
     FloatingActionButton go_back;
+    CardView cardOkPopUp;
+    CardView cardCancelPopUp;
+    View close_screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,10 +183,26 @@ public class SendaGame extends AppCompatActivity {
         sendaBoard.setLayoutManager(new GridLayoutManager(this, sendaManager.getBoardLen()));
 
         go_back = findViewById(R.id.closeButton);
-        go_back.setOnClickListener(new View.OnClickListener() {
+        go_screen = findViewById(R.id.GO_super_screen);
+        close_screen = findViewById(R.id.close_screen);
+
+        cardOkPopUp = findViewById(R.id.cardViewOk);
+        cardCancelPopUp = findViewById(R.id.cardViewCancel);
+
+        //Actions of pop up
+        cardOkPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                System.out.println("Salir de juego");
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                enableClicks();
             }
         });
 
@@ -193,6 +213,12 @@ public class SendaGame extends AppCompatActivity {
                 showPath();
             }
         }, 2000);
+    }
+
+    public void showClosePopUp(View v){
+        close_screen.setVisibility(View.VISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        disableClicks();
     }
 
     private void turnOn(int delay, CardView card, TextView text){

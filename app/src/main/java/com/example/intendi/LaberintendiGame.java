@@ -51,8 +51,12 @@ public class LaberintendiGame extends AppCompatActivity {
     CardView cardPlay;
     CardView cardDelete;
 
+    CardView cardOkPopUp;
+    CardView cardCancelPopUp;
+
     FloatingActionButton go_back;
     View go_screen;
+    View close_screen;
     CardView cardAnswers;
 
     @Override
@@ -60,6 +64,13 @@ public class LaberintendiGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laberintendi_game);
         go_screen = findViewById(R.id.GO_super_screen);
+        close_screen = findViewById(R.id.close_screen);
+        go_back = findViewById(R.id.closeButton);
+
+        cardOkPopUp = findViewById(R.id.cardViewOk);
+        cardCancelPopUp = findViewById(R.id.cardViewCancel);
+
+
         cardAnswers = findViewById(R.id.cardAnswers);
 
         cardMove = findViewById(R.id.cardViewMove);
@@ -93,6 +104,31 @@ public class LaberintendiGame extends AppCompatActivity {
         ansBoard.setAdapter(new AnswersBoardAdapter(this, laberManager));
         ansBoard.setHasFixedSize(true);
         ansBoard.setLayoutManager(new GridLayoutManager(this, 5));
+
+        //Actions of pop up
+        cardOkPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                cardAnswers.setVisibility(View.VISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+    }
+
+    public void showClosePopUp(View v){
+        close_screen.setVisibility(View.VISIBLE);
+        cardAnswers.setVisibility(View.INVISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        disableClicks();
     }
 
     public void clickMove(View v){

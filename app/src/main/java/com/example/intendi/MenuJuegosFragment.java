@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Random;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MenuJuegosFragment#newInstance} factory method to
@@ -22,6 +24,17 @@ public class MenuJuegosFragment extends Fragment {
     CardView cardNums;
     CardView cardLaber;
     CardView cardPiano;
+    CardView cardRandom;
+
+    String game[] = new String[]{"whack", "memo", "nums", "laber", "piano"};
+    String imageBub[] = new String[]{"inst_whack", "inst_memorama", "inst_nums", "inst_laberintendi", "inst_piano"};
+    String imageLog[] = new String[]{"whack_ball", "memorama", "senda_numerica", "laberintendi", "piano"};
+    String textBub[] = new String[]{
+            "Toca los delfines con la pelota del color que te diga Intendi",
+            "Toca 2 cartas para encontrar las parejas de objetos y sonidos",
+            "Toca los recuadros que fueron iluminados según el orden que indican los números",
+            "Acomoda las instrucciones para comer todos los peces y llegar al recuadro indicado",
+            "Presiona las teclas del piano en la secuencia correcta"};
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,15 +87,16 @@ public class MenuJuegosFragment extends Fragment {
         cardNums = view.findViewById(R.id.cardSenda);
         cardLaber = view.findViewById(R.id.cardLaberintendi);
         cardPiano = view.findViewById(R.id.cardPiano);
+        cardRandom = view.findViewById(R.id.cardRandom);
 
         cardWhack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
-                myIntent.putExtra("game", "whack");
-                myIntent.putExtra("imageBubble","inst_whack");
-                myIntent.putExtra("imageLogo","whack_ball");
-                myIntent.putExtra("textBubble","Toca los delfines con la pelota del color que te diga Intendi");
+                myIntent.putExtra("game", game[0]);
+                myIntent.putExtra("imageBubble",imageBub[0]);
+                myIntent.putExtra("imageLogo",imageLog[0]);
+                myIntent.putExtra("textBubble",textBub[0]);
                 startActivity(myIntent);
             }
         });
@@ -91,10 +105,10 @@ public class MenuJuegosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
-                myIntent.putExtra("game", "memo");
-                myIntent.putExtra("imageBubble","inst_memorama");
-                myIntent.putExtra("imageLogo","memorama");
-                myIntent.putExtra("textBubble","Toca 2 cartas para encontrar las parejas de objetos y sonidos");
+                myIntent.putExtra("game", game[1]);
+                myIntent.putExtra("imageBubble",imageBub[1]);
+                myIntent.putExtra("imageLogo",imageLog[1]);
+                myIntent.putExtra("textBubble",textBub[1]);
                 startActivity(myIntent);
             }
         });
@@ -103,10 +117,10 @@ public class MenuJuegosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
-                myIntent.putExtra("game", "nums");
-                myIntent.putExtra("imageBubble","inst_nums");
-                myIntent.putExtra("imageLogo","senda_numerica");
-                myIntent.putExtra("textBubble","Toca los recuadros que fueron iluminados según el orden que indican los números");
+                myIntent.putExtra("game", game[2]);
+                myIntent.putExtra("imageBubble",imageBub[2]);
+                myIntent.putExtra("imageLogo",imageLog[2]);
+                myIntent.putExtra("textBubble",textBub[2]);
                 startActivity(myIntent);
             }
         });
@@ -115,10 +129,10 @@ public class MenuJuegosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
-                myIntent.putExtra("game", "laber");
-                myIntent.putExtra("imageBubble","inst_laberintendi");
-                myIntent.putExtra("imageLogo","laberintendi");
-                myIntent.putExtra("textBubble","Acomoda las instrucciones para comer todos los peces y llegar al recuadro indicado");
+                myIntent.putExtra("game", game[3]);
+                myIntent.putExtra("imageBubble",imageBub[3]);
+                myIntent.putExtra("imageLogo",imageLog[3]);
+                myIntent.putExtra("textBubble",textBub[3]);
                 startActivity(myIntent);
             }
         });
@@ -127,13 +141,29 @@ public class MenuJuegosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
-                myIntent.putExtra("game", "piano");
-                myIntent.putExtra("imageBubble","inst_piano");
-                myIntent.putExtra("imageLogo","piano");
-                myIntent.putExtra("textBubble","Presiona las teclas del piano en la secuencia correcta");
+                myIntent.putExtra("game", game[4]);
+                myIntent.putExtra("imageBubble",imageBub[4]);
+                myIntent.putExtra("imageLogo",imageLog[4]);
+                myIntent.putExtra("textBubble",textBub[4]);
                 startActivity(myIntent);
             }
         });
+
+        cardRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Random rand = new Random(); //instance of random class
+                int num_random = rand.nextInt(5);
+                Intent myIntent = new Intent(getActivity(), PregameTemplate.class);
+
+                myIntent.putExtra("game", game[num_random]);
+                myIntent.putExtra("imageBubble",imageBub[num_random]);
+                myIntent.putExtra("imageLogo",imageLog[num_random]);
+                myIntent.putExtra("textBubble",textBub[num_random]);
+                startActivity(myIntent);
+            }
+        });
+
         return view;
     }
 }
