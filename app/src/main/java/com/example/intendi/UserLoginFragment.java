@@ -1,6 +1,7 @@
 package com.example.intendi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -17,11 +18,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
 public class UserLoginFragment extends Fragment {
-
+    DBHandler dbHandler;
     TableLayout usersGrid;
     LayoutInflater inflater;
     View  layout;
@@ -29,11 +32,13 @@ public class UserLoginFragment extends Fragment {
     TableRow.LayoutParams vp;
     TextView name;
     ImageView profilePic;
-
+    ArrayList<User> users;
     public UserLoginFragment() {
         // Required empty public constructor
     }
-
+    public void setDbHandler(DBHandler handler){
+        dbHandler = handler;
+    }
 
     public static UserLoginFragment newInstance() {
         UserLoginFragment fragment = new UserLoginFragment();
@@ -55,39 +60,55 @@ public class UserLoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //dbHandler = dbHandler.getInstance(getActivity());
         if (getArguments() != null) {
         }
     }
     public void fillUsers(LayoutInflater inflater){
+        users = new ArrayList<>();
+        users = dbHandler.getAllUsers();
+        int numberOfUsers = users.size();
+        if( numberOfUsers > 0){
+            int userCount = 0;
+            int numberLines = numberOfUsers / 2;
+            if (numberOfUsers % 2 == 1) numberLines++;
+            int usersToShow = numberOfUsers, viewsPerLine;
+            for (int i=0;i<numberLines;i++){
+                TableRow line = (TableRow)usersGrid.getChildAt(i);
+                if (usersToShow % 2 == 0){
+                    viewsPerLine = 2;
+                    usersToShow -= 2;
+                }else{
+                    viewsPerLine = 1;
+                    usersToShow --;
+                }
+                for(int j=0;j<viewsPerLine;j++)
+                {
+                    userCard = inflater.inflate(R.layout.user_login_space, null);
+                    vp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    vp.weight = 1;
 
-        User newU = new User("Sahid", R.drawable.dogge);
-        User newU1 = new User("Alex", R.drawable.delphi);
-        User newU2 = new User("David", R.drawable.iguanee);
-        User newU3 = new User("Pablo", R.drawable.sharky);
-        User[] users = {newU,newU1,newU2,newU3};
+                    name = (TextView) userCard.findViewById(R.id.username);
+                    name.setText(users.get(userCount).getUsername());
+                    profilePic = (ImageView) userCard.findViewById(R.id.userAvatar);
+                    profilePic.setImageDrawable(ContextCompat.getDrawable(requireContext(), users.get(userCount).getImageSource()));
 
-        int userCount = 0;
-        for (int i=0;i<2;i++){
-            TableRow line = (TableRow)usersGrid.getChildAt(i);
-            for(int j=0;j<2;j++)
-            {
-
-
-                userCard = inflater.inflate(R.layout.user_login_space, null);;
-                vp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                vp.weight = 1;
-
-                name = (TextView) userCard.findViewById(R.id.username);
-                name.setText(users[userCount].getUsername());
-                profilePic = (ImageView) userCard.findViewById(R.id.userAvatar);
-                profilePic.setImageDrawable(ContextCompat.getDrawable(requireContext(), users[userCount].getImageSource()));
-
-                userCard.setLayoutParams(vp);
-                line.addView(userCard,j);
-                userCount+=1;
+                    userCard.setLayoutParams(vp);
+                    line.addView(userCard,j);
+                    userCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view){
+                            Intent myIntent = new Intent(getActivity(), BottomNavigation.class);
+                            //System.out.println(name);
+                            //Bundle bundle = new Bundle();
+                            //bundle.putString();
+                            startActivity(myIntent);
+                        }
+                    });
+                    userCount+=1;
+                }
             }
         }
     }
-
 
 }
