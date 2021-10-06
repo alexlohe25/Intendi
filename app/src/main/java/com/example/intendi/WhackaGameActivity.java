@@ -18,6 +18,7 @@ public class WhackaGameActivity extends AppCompatActivity {
     public TextView colorText;
     public TextView timerText;
     public TextView scoreText;
+    public TextView finalScoreText;
     public long initTime = 30000;
     public long bonus = 1500;
     public long interval = 100;
@@ -38,10 +39,10 @@ public class WhackaGameActivity extends AppCompatActivity {
         myDolphins = new clickableDolphin[NUMBER_OF_DOLPHINS];
         clickableViews= new View[NUMBER_OF_DOLPHINS];
 
+        finalScoreText = go_screen.findViewById(R.id.FinalScoreTxt);
         colorText = findViewById(R.id.ColorText);
         scoreText = findViewById(R.id.scoreLbl);
         scoreText.setText("0");
-        changeTextColor();
         timerText = findViewById(R.id.timeLbl);
         timerText.setText("00 : 00");
 
@@ -94,7 +95,7 @@ public class WhackaGameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                finalScoreText.setText(Integer.toString(GameManager.getScore()));
                 timerText.setText("00 : 00");
                 finishDolphins();
                 go_screen.setVisibility(View.VISIBLE);
@@ -103,10 +104,23 @@ public class WhackaGameActivity extends AppCompatActivity {
 
         initDolphins();
         Update();
+        changeTextColor();
     }
 
     private void changeTextColor(){
-        colorText.setTextColor(Color.parseColor(GameManager.getRandomHex()));
+        String newHex = GameManager.getRandomHex();;
+        for(int i = 0; i<myDolphins.length;i++){
+            if(myDolphins[i].getColor() != GameManager.getCurrentColor()){
+                for(int j = 0; j<WhackaGameManager.allColors.length; j++){
+                    if((myDolphins[i].getColor() == WhackaGameManager.allColors[j])){
+                        newHex = WhackaGameManager.allHex[j];
+                        colorText.setTextColor(Color.parseColor(newHex));
+                        return;
+                    }
+                }
+            }
+        }
+        colorText.setTextColor(Color.parseColor(newHex));
     }
 
 
@@ -193,7 +207,7 @@ public class WhackaGameActivity extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
-
+                                finalScoreText.setText(Integer.toString(GameManager.getScore()));
                                 timerText.setText("00 : 00");
                                 finishDolphins();
                                 go_screen.setVisibility(View.VISIBLE);

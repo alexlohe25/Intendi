@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/GO_super_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,29 +14,11 @@
         android:alpha="0.85"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@android:drawable/screen_background_dark" />
-
-    <TextView
-        android:id="@+id/GO_txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:fontFamily="@font/vt323"
-        android:gravity="center"
-        android:rotationY="25"
-        android:text="Game"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/crema"
-        android:textSize="75sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/GO_txt2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/GO_txt2"
@@ -49,11 +32,82 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/crema"
-        android:textSize="75sp"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/GO_txt1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
+        app:layout_constraintVertical_bias="0.363" />
+
+    <TextView
+        android:id="@+id/GO_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:fontFamily="@font/vt323"
+        android:gravity="center"
+        android:rotationY="25"
+        android:text="Game"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/crema"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/GO_txt2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363" />
+
+    <TextView
+        android:id="@+id/FinalScoreSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vt323"
+        android:text="Final Score:"
+        android:textColor="@color/crema"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GO_txt1"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
+        android:id="@+id/FinalScoreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vt323"
+        android:text="0"
+        android:textColor="@color/crema"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FinalScoreSign"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/goMenuButton"
+        android:layout_width="170dp"
+        android:layout_height="94dp"
+        android:background="@drawable/button_back"
+        android:fontFamily="@font/vt323"
+        android:lineSpacingExtra="0dp"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:text="Volver al menú"
+        android:textAlignment="center"
+        android:textColor="@color/crema"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FinalScoreTxt"
+        app:layout_constraintVertical_bias="0.206"
+        tools:ignore="TextContrastCheck,TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

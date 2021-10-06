@@ -73,7 +73,7 @@ public class UserLoginFragment extends Fragment {
             {
 
 
-                userCard = inflater.inflate(R.layout.user_login_space, null);;
+                userCard = inflater.inflate(R.layout.user_login_space, null);
                 vp = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 vp.weight = 1;
 
