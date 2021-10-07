@@ -7,10 +7,11 @@
     android:visibility="invisible">
 
     <ImageView
-        android:id="@+id/GO_background2"
+        android:id="@+id/pause_background"
         android:layout_width="411dp"
         android:layout_height="736dp"
         android:alpha="0.85"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +23,7 @@
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:background="@drawable/pop_up_back"
+        android:clickable="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

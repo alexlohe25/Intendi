@@ -9,40 +9,51 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Timer;
 
 public class WhackaGameActivity extends AppCompatActivity {
-    public clickableDolphin[] myDolphins;
-    public View[] clickableViews;
-    public TextView colorText;
-    public TextView timerText;
-    public TextView scoreText;
-    public TextView finalScoreText;
-    public long initTime = 30000;
-    public long bonus = 1500;
-    public long interval = 100;
-    public long timeCurrent;
+    clickableDolphin[] myDolphins;
+    View[] clickableViews;
+    TextView colorText;
+    TextView timerText;
+    TextView scoreText;
+    TextView finalScoreText;
+    long initTime = 30000;
+    long bonus = 1500;
+    long interval = 100;
+    long timeCurrent;
     static CountDownTimer timer;
+
     public static int NUMBER_OF_DOLPHINS = 7;
-    public WhackaGameManager GameManager;
+    WhackaGameManager GameManager;
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
-    public View go_screen;
-    public Button goBackButton;
+
+    FloatingActionButton go_back;
+    CardView cardOkPopUp;
+    CardView cardCancelPopUp;
+    View go_screen;
+    View close_screen;
+    View pause_background;
+    Button goBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whacka_game);
         go_screen = findViewById(R.id.GO_super_screen);
-        goBackButton = go_screen.findViewById(R.id.goMenuButton);
-        goBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        close_screen = findViewById(R.id.close_screen);
+        cardOkPopUp = findViewById(R.id.cardViewOk);
+        cardCancelPopUp = findViewById(R.id.cardViewCancel);
+        goBackButton = findViewById(R.id.goMenuButton);
+        pause_background = findViewById(R.id.pause_background);
+        go_back = findViewById(R.id.closeButton);
+
+
 
         GameManager = new WhackaGameManager();
         timeCurrent = 0;
@@ -55,8 +66,6 @@ public class WhackaGameActivity extends AppCompatActivity {
         scoreText.setText("0");
         timerText = findViewById(R.id.timeLbl);
         timerText.setText("00 : 00");
-
-
 
         clickableViews[0] = (ConstraintLayout)findViewById(R.id.D1);
         clickableViews[1] = (ConstraintLayout)findViewById(R.id.D2);
@@ -111,6 +120,37 @@ public class WhackaGameActivity extends AppCompatActivity {
                 go_screen.setVisibility(View.VISIBLE);
             }
         }.start();
+
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        pause_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+            }
+        });
+
+        cardOkPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                //enableClicks();
+            }
+        });
 
         initDolphins();
         Update();
@@ -245,5 +285,10 @@ public class WhackaGameActivity extends AppCompatActivity {
         changeTextColor();
     }
 
+    public void showClosePopUp(View v){
+        close_screen.setVisibility(View.VISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        //disableClicks();
+    }
 }
 
