@@ -95,13 +95,12 @@ public class UserLoginFragment extends Fragment {
 
                     userCard.setLayoutParams(vp);
                     line.addView(userCard,j);
+                    final int currentUser = userCount;
                     userCard.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view){
                             Intent myIntent = new Intent(getActivity(), BottomNavigation.class);
-                            //System.out.println(name);
-                            //Bundle bundle = new Bundle();
-                            //bundle.putString();
+                            myIntent.putExtra("User", users.get(currentUser));
                             startActivity(myIntent);
                         }
                     });

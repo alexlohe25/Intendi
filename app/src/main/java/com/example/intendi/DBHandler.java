@@ -84,7 +84,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<User> getAllUsers(){
         ArrayList users = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
-        //String query = "DELETE FROM " + TABLE_USERS;
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
@@ -96,6 +95,50 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         db.close();
         return users;
+    }
+    public void printAllUsersInfo(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
+            } while (cursor.moveToNext());
+        }
+        db.close();
+    }
+    public User getCurrentUser(int curUserId){
+        User curUser = new User(0,"0", R.drawable.delphi, "00/00/00");
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS
+                + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            curUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(3), cursor.getString(2));
+            return curUser;
+        }
+        db.close();
+        return curUser;
+    }
+    public void printCurrentUser(int curUserId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS
+                + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
+        }
+        db.close();
+    }
+    public void updateCurrentUser(User curUser){
+        String uid = Integer.toString(curUser.getUser_id());
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_UNAME, curUser.getUsername());
+        values.put(COLUMN_UDATEBIRTH, curUser.getDateBirth());
+        values.put(COLUMN_UAVATAR, curUser.getImageSource());
+        db.update(TABLE_USERS, values, COLUMN_UID + " = ?", new String[]{uid});
+        db.close();
     }
     public void deleteAllUsers(){
         SQLiteDatabase db = this.getWritableDatabase();

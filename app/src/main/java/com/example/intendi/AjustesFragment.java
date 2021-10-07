@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class AjustesFragment extends Fragment {
 
-    Button logOutButton;
-
+    Button logOutButton, updateButton;
+    User currentUser;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -21,10 +23,15 @@ public class AjustesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView username;
+    ImageView userAvatar;
+    DBHandler dbHandler;
     public AjustesFragment() {
         // Required empty public constructor
     }
-
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
     public static AjustesFragment newInstance(String param1, String param2) {
         AjustesFragment fragment = new AjustesFragment();
         Bundle args = new Bundle();
@@ -47,20 +54,36 @@ public class AjustesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+         dbHandler = dbHandler.getInstance(getActivity().getApplicationContext());
          View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
-
+         username = view.findViewById(R.id.usernameAjustes);
+         userAvatar = view.findViewById(R.id.avatarAjustes);
+         userAvatar.setTag(R.drawable.delphi);
+         updateButton = view.findViewById(R.id.updateButton);
          logOutButton= view.findViewById(R.id.playButton);
+         username.setText(currentUser.getUsername());
+         userAvatar.setImageResource(currentUser.getImageSource());
+         updateButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 updateUser();
+             }
+         });
          logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     logOut();
                 }
             });
-
          return view;
     }
-
+    public void updateUser(){
+        currentUser.setUsername(username.getText().toString());
+        currentUser.setImageSource((Integer)userAvatar.getTag());
+        dbHandler.updateCurrentUser(currentUser);
+        username.setText(currentUser.getUsername());
+        userAvatar.setImageResource(currentUser.getImageSource());
+    }
     public void logOut(){
         Intent miIntent = new Intent( getActivity(), MainActivity.class);
         startActivity(miIntent);

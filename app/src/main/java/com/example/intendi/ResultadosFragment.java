@@ -44,19 +44,17 @@ public class ResultadosFragment extends Fragment {
     LineChart miChart;
     CardView cardWhack, cardMem, cardNums, cardLaber, cardPiano;
     TextView resultDetail;
+    User currentUser;
+    DBHandler dbHandler;
+
     public ResultadosFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultadosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public static ResultadosFragment newInstance(String param1, String param2) {
         ResultadosFragment fragment = new ResultadosFragment();
         Bundle args = new Bundle();
@@ -78,6 +76,7 @@ public class ResultadosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dbHandler = dbHandler.getInstance(getActivity().getApplicationContext());
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_resultados, container, false);
         cardWhack = view.findViewById(R.id.cardWhack);
@@ -146,7 +145,7 @@ public class ResultadosFragment extends Fragment {
             if(misValoresY.get(YArraySize - 1).getY() >= misValoresY.get(YArraySize - 2).getY()){
                 resultDetail.setText("¡Juegas increíble al Intendi!");
             }else{
-                resultDetail.setText("¡No te desanimes! La próxima vez será mejor ");
+                resultDetail.setText("¡No te desanimes "+ currentUser.getUsername() +"! La próxima vez será mejor ");
             }
         }
         set1.setDrawCircles(true); //para que los puntos esten llenos y bonitos

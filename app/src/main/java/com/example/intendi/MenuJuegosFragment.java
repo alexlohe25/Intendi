@@ -22,7 +22,8 @@ public class MenuJuegosFragment extends Fragment {
     CardView cardNums;
     CardView cardLaber;
     CardView cardPiano;
-
+    User currentUser;
+    DBHandler dbHandler;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,15 +37,10 @@ public class MenuJuegosFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuJuegosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public static MenuJuegosFragment newInstance(String param1, String param2) {
         MenuJuegosFragment fragment = new MenuJuegosFragment();
         Bundle args = new Bundle();
@@ -66,6 +62,7 @@ public class MenuJuegosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dbHandler = dbHandler.getInstance(getActivity().getApplicationContext());
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu_juegos, container, false);
 
