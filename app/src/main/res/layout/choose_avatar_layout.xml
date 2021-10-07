@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible">
+
+    <ImageView
+        android:id="@+id/faded_background"
+        android:layout_width="411dp"
+        android:layout_height="736dp"
+        android:alpha="0.85"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/screen_background_dark"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:background="@drawable/pop_up_back"
+        android:clickable="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/vt323"
+            android:gravity="center"
+            android:text="Escoge un avatar"
+            android:textColor="@color/black"
+            android:textSize="50dp" />
+
+
+        <ScrollView
+            android:id="@+id/usersScroll"
+            android:layout_width="240dp"
+            android:layout_height="221dp"
+            android:layout_gravity="center"
+            android:clipToPadding="false"
+            android:contentDescription="@string/usuarios"
+            android:fillViewport="false"
+            android:scrollbarStyle="insideInset">
+
+            <TableLayout
+                android:id="@+id/usersGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/Intendi"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_gravity="center"
+                        android:background="#137EB8"
+                        android:clickable="true"
+                        android:cropToPadding="false"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:onClick="menu"
+                        android:padding="10dp"
+                        android:src="@drawable/delphi"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                        app:strokeColor="#219EBC"
+                        app:strokeWidth="5dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/Sharky"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_gravity="center"
+                        android:background="#137EB8"
+                        android:clickable="true"
+                        android:cropToPadding="false"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:onClick="menu"
+                        android:padding="10dp"
+                        android:src="@drawable/sharky"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                        app:strokeColor="#219EBC"
+                        app:strokeWidth="5dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/Iguanee"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_gravity="center"
+                        android:background="#137EB8"
+                        android:clickable="true"
+                        android:cropToPadding="false"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:onClick="menu"
+                        android:padding="10dp"
+                        android:src="@drawable/iguanee"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                        app:strokeColor="#219EBC"
+                        app:strokeWidth="5dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/Dogge"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_gravity="center"
+                        android:background="#137EB8"
+                        android:clickable="true"
+                        android:cropToPadding="false"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:onClick="menu"
+                        android:padding="10dp"
+                        android:src="@drawable/dogge"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                        app:strokeColor="#219EBC"
+                        app:strokeWidth="5dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/Barky"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:background="#137EB8"
+                        android:clickable="true"
+                        android:cropToPadding="false"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:onClick="menu"
+                        android:padding="10dp"
+                        android:src="@drawable/barky"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                        app:strokeColor="#219EBC"
+                        app:strokeWidth="5dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </TableRow>
+
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
