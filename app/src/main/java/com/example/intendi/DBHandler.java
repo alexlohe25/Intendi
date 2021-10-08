@@ -72,21 +72,50 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public void addResult(int idUser, String game, int score, String date){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_RESULTS +
-                " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
-                + " AND " + COLUMN_RGAME + " = '" + game + "'";
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.getCount() == 2){
-            cursor.moveToFirst();
-            int idToDelete = cursor.getInt(0);
-            db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
-        }
+        int maxScore, idToDelete;
         ContentValues values = new ContentValues();
         values.put(COLUMN_RUSER, idUser);
         values.put(COLUMN_RGAME, game);
         values.put(COLUMN_RSCORE, score);
         values.put(COLUMN_RDATE, date);
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_RESULTS +
+                " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
+                + " AND " + COLUMN_RGAME + " = '" + game + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        //un resultado previo
+        if(cursor.getCount() == 1){
+            //me muevo al primer registro
+            cursor.moveToFirst();
+            //obtengo el score del registro
+            maxScore = cursor.getInt(3);
+            if (maxScore <= score){
+                //borro el registro con el anterior record
+                idToDelete = cursor.getInt(0);
+                db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
+                //al estar vacio inserto el nuevo resultado
+                db.insert(TABLE_RESULTS, null, values);
+            }
+            //dos resultados previos
+        }else if (cursor.getCount() == 2) {
+            //me muevo al ultimo registro
+            cursor.moveToLast();
+            idToDelete = cursor.getInt(0);
+            //borro ese registro que es el ultimo (mas reciente)
+            db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
+            //me muevo al primer registro
+            cursor.moveToFirst();
+            //obtengo el score del registro
+            maxScore = cursor.getInt(3);
+            if (maxScore <= score) {
+                //borro el registro con el anterior record
+                idToDelete = cursor.getInt(0);
+                db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
+                //al estar vacio inserto el nuevo resultado
+                db.insert(TABLE_RESULTS, null, values);
+            }
+        }
+        //en cualquiera de los casos se hace este insert que contaria como el más reciente
         db.insert(TABLE_RESULTS, null, values);
         db.close();
     }

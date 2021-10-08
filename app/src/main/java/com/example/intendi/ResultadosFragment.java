@@ -149,7 +149,7 @@ public class ResultadosFragment extends Fragment {
         }else if (resultsFromGame.size() == 1){
             int result1Score = resultsFromGame.get(0).getScore();
             String result1Date = resultsFromGame.get(0).getDateOfGame();
-            result1.setText("Puntaje: "+ result1Score + "\n Fecha: "+ result1Date);
+            result1.setText("Mi récord: "+ result1Score + "\n Fecha: "+ result1Date);
             result2.setText("");
             resultDetail.setText("Te falta 1 juego de " + game + " para ver tu avance");
         }else{
@@ -157,11 +157,12 @@ public class ResultadosFragment extends Fragment {
             String result1Date = resultsFromGame.get(0).getDateOfGame();
             int result2Score = resultsFromGame.get(1).getScore();
             String result2Date = resultsFromGame.get(1).getDateOfGame();
-            result1.setText("Puntaje: "+ result1Score + "\n Fecha: "+ result1Date);
-            result2.setText("Puntaje: "+ result2Score + "\n Fecha: "+ result2Date);
-            String tendencia = "¡Juegas increíble al " + game + " :)!";
+            result1.setText("Mi récord: "+ result1Score + "\n Fecha: "+ result1Date);
+            result2.setText("Puntaje más reciente: "+ result2Score + "\n Fecha: "+ result2Date);
+
+            String tendencia = "¡Otro récord en " + game + " :D!";
             if(result2Score < result1Score)
-                tendencia = "¡No te desanimes "+ currentUser.getUsername() + "! La próxima vez será mejor ";
+                tendencia = "¡Buen intento "+ currentUser.getUsername() + " :)!";
             resultDetail.setText(tendencia);
         }
         /*ArrayList<String> misValoresX = obtenValoresEnX();
