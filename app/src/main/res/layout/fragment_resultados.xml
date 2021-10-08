@@ -196,7 +196,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <com.github.mikephil.charting.charts.LineChart
+           <!-- <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/idChart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
@@ -205,8 +205,56 @@
                 android:layout_marginRight="2dp"
                 android:background="@color/crema"
                 android:elevation="10dp">
-            </com.github.mikephil.charting.charts.LineChart>
-
+            </com.github.mikephil.charting.charts.LineChart>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/delphi" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/firstResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="Primer resultado"
+                    android:textAlignment="center"
+                    android:textColor="#023047"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.401"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.051" />
+                <TextView
+                    android:id="@+id/secondResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="Segundo resultado"
+                    android:textAlignment="center"
+                    android:textColor="#023047"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.401"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.051" />
+            </LinearLayout>
+        </LinearLayout>
             <TextView
                 android:id="@+id/tendenciaResults"
                 android:layout_width="match_parent"

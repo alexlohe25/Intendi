@@ -80,6 +80,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble","inst_whack");
                 myIntent.putExtra("imageLogo","whack_ball");
                 myIntent.putExtra("textBubble","Toca los delfines con la pelota del color que te diga Intendi");
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });
@@ -92,6 +93,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble","inst_memorama");
                 myIntent.putExtra("imageLogo","memorama");
                 myIntent.putExtra("textBubble","Toca 2 cartas para encontrar las parejas de objetos y sonidos");
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });
@@ -104,6 +106,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble","inst_nums");
                 myIntent.putExtra("imageLogo","senda_numerica");
                 myIntent.putExtra("textBubble","Toca los recuadros que fueron iluminados según el orden que indican los números");
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });
@@ -116,6 +119,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble","inst_laberintendi");
                 myIntent.putExtra("imageLogo","laberintendi");
                 myIntent.putExtra("textBubble","Acomoda las instrucciones para comer todos los peces y llegar al recuadro indicado");
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });
@@ -128,6 +132,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble","inst_piano");
                 myIntent.putExtra("imageLogo","piano");
                 myIntent.putExtra("textBubble","Presiona las teclas del piano en la secuencia correcta");
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });

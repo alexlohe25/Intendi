@@ -42,17 +42,17 @@ public class DBHandler extends SQLiteOpenHelper {
         String CREATE_USERS_TABLE = "CREATE TABLE " +
                 TABLE_USERS + "(" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_UNAME + " TEXT, " +
-                COLUMN_UDATEBIRTH + " STRING, " +
+                COLUMN_UNAME + " VARCHAR, " +
+                COLUMN_UDATEBIRTH + " VARCHAR, " +
                 COLUMN_UAVATAR + " INTEGER)";
 
         String CREATE_RESULTS_TABLE = "CREATE TABLE " +
                 TABLE_RESULTS + "(" +
                 COLUMN_RID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_RUSER + " INTEGER, " +
-                COLUMN_RGAME + " TEXT, " +
+                COLUMN_RGAME + " VARCHAR, " +
                 COLUMN_RSCORE + " INTEGER, " +
-                COLUMN_RDATE + " STRING)";
+                COLUMN_RDATE + " VARCHAR)";
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_RESULTS_TABLE);
     }
@@ -71,10 +71,19 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, values);
         db.close();
     }
-    public void addResult(String user, String game, int score, String date){
+    public void addResult(int idUser, String game, int score, String date){
         SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_RESULTS +
+                " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
+                + " AND " + COLUMN_RGAME + " = '" + game + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.getCount() == 2){
+            cursor.moveToFirst();
+            int idToDelete = cursor.getInt(0);
+            db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
+        }
         ContentValues values = new ContentValues();
-        values.put(COLUMN_RUSER, user);
+        values.put(COLUMN_RUSER, idUser);
         values.put(COLUMN_RGAME, game);
         values.put(COLUMN_RSCORE, score);
         values.put(COLUMN_RDATE, date);
@@ -96,16 +105,21 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return users;
     }
-    public void printAllUsersInfo(){
+    public ArrayList<Result> getResultsFromGame(int idUser, String game){
+        ArrayList resultsFromGame = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS;
+        String query = "SELECT * FROM " + TABLE_RESULTS +
+                " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
+                + " AND " + COLUMN_RGAME + " = '" + game + "'";
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
-            do {
-                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
-            } while (cursor.moveToNext());
+            do{
+                Result cursorResult = new Result(cursor.getInt(3), cursor.getString(4));
+                resultsFromGame.add(cursorResult);
+            }while(cursor.moveToNext());
         }
         db.close();
+        return resultsFromGame;
     }
     public User getCurrentUser(int curUserId){
         User curUser = new User(0,"0", R.drawable.delphi, "00/00/00");
@@ -127,6 +141,30 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
+        }
+        db.close();
+    }
+    public void printAllUsersInfo(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
+            } while (cursor.moveToNext());
+        }
+        db.close();
+    }
+    public void printGameResults(int userId, String game){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_RESULTS +
+                " WHERE " + COLUMN_RUSER + "= " + Integer.toString(userId)
+                + " AND " + COLUMN_RGAME + " = '" + game + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3) + " " + cursor.getString(4));
+            } while (cursor.moveToNext());
         }
         db.close();
     }

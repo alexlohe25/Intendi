@@ -43,10 +43,10 @@ public class ResultadosFragment extends Fragment {
     Typeface tf;
     LineChart miChart;
     CardView cardWhack, cardMem, cardNums, cardLaber, cardPiano;
-    TextView resultDetail;
+    TextView resultDetail, result1, result2;
     User currentUser;
     DBHandler dbHandler;
-
+    String currentGame;
     public ResultadosFragment() {
         // Required empty public constructor
     }
@@ -85,15 +85,18 @@ public class ResultadosFragment extends Fragment {
         cardLaber = view.findViewById(R.id.cardLaberintendi);
         cardPiano = view.findViewById(R.id.cardPiano);
         resultDetail = (TextView) view.findViewById(R.id.tendenciaResults);
-        miChart = (LineChart) view.findViewById(R.id.idChart);
+        result1 = (TextView) view.findViewById(R.id.firstResult);
+        result2 = (TextView) view.findViewById(R.id.secondResult);
+       // miChart = (LineChart) view.findViewById(R.id.idChart);
         tf = ResourcesCompat.getFont(getActivity(), R.font.nunito_semibold);
         generaChart("Whack-A-Ball", view);
-
+        currentGame = "Whack-A-Ball";
         cardWhack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(miChart.getDescription().getText() != "Puntaje en Whack-A-Ball"){
+                if(currentGame != "Puntaje en Whack-A-Ball"){
                     generaChart("Whack-A-Ball", view);
+                    currentGame = "Whack-A-Ball";
                 }
 
             }
@@ -101,32 +104,36 @@ public class ResultadosFragment extends Fragment {
         cardMem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(miChart.getDescription().getText() != "Puntaje en Memorama"){
+                if(currentGame != "Puntaje en Memorama"){
                     generaChart("Memorama", view);
+                    currentGame = "Memorama";
                 }
             }
         });
         cardNums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(miChart.getDescription().getText() != "Puntaje en Senda numérica"){
+                if(currentGame != "Puntaje en Senda numérica"){
                     generaChart("Senda numérica", view);
+                    currentGame = "Senda numérica";
                 }
             }
         });
         cardLaber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(miChart.getDescription().getText() != "Puntaje en Laberintendi"){
+                if(currentGame != "Puntaje en Laberintendi"){
                     generaChart("Laberintendi", view);
+                    currentGame = "Laberintendi";
                 }
             }
         });
         cardPiano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(miChart.getDescription().getText() != "Puntaje en Piano"){
+                if(currentGame != "Puntaje en Piano"){
                     generaChart("Piano", view);
+                    currentGame = "Piano";
                 }
             }
         });
@@ -134,7 +141,30 @@ public class ResultadosFragment extends Fragment {
         return view;
     }
     public void generaChart(String game, View view){
-        ArrayList<String> misValoresX = obtenValoresEnX();
+        ArrayList<Result> resultsFromGame = dbHandler.getResultsFromGame(currentUser.getUser_id(),game);
+        if (resultsFromGame.size() == 0){
+            result1.setText("");
+            result2.setText("");
+            resultDetail.setText("Parece que aún no has jugado " + game);
+        }else if (resultsFromGame.size() == 1){
+            int result1Score = resultsFromGame.get(0).getScore();
+            String result1Date = resultsFromGame.get(0).getDateOfGame();
+            result1.setText("Puntaje: "+ result1Score + "\n Fecha: "+ result1Date);
+            result2.setText("");
+            resultDetail.setText("Te falta 1 juego de " + game + " para ver tu avance");
+        }else{
+            int result1Score = resultsFromGame.get(0).getScore();
+            String result1Date = resultsFromGame.get(0).getDateOfGame();
+            int result2Score = resultsFromGame.get(1).getScore();
+            String result2Date = resultsFromGame.get(1).getDateOfGame();
+            result1.setText("Puntaje: "+ result1Score + "\n Fecha: "+ result1Date);
+            result2.setText("Puntaje: "+ result2Score + "\n Fecha: "+ result2Date);
+            String tendencia = "¡Juegas increíble al " + game + " :)!";
+            if(result2Score < result1Score)
+                tendencia = "¡No te desanimes "+ currentUser.getUsername() + "! La próxima vez será mejor ";
+            resultDetail.setText(tendencia);
+        }
+        /*ArrayList<String> misValoresX = obtenValoresEnX();
         ArrayList<Entry> misValoresY = obtenValoresEnY();
         int YArraySize = misValoresY.size();
 
@@ -218,6 +248,6 @@ public class ResultadosFragment extends Fragment {
         misValoresY.add(new Entry(3.5f,17));
         misValoresY.add(new Entry(4.5f,21));
         misValoresY.add(new Entry(5.5f,19));
-        return misValoresY;
+        return misValoresY;*/
     }
 }

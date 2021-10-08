@@ -131,5 +131,8 @@
             android:layout_centerInParent="true"
             android:overScrollMode="never" />
     </RelativeLayout>
+    <include
+        layout="@layout/game_over_overlay"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

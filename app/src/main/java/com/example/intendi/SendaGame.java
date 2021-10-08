@@ -27,7 +27,10 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class SendaGame extends AppCompatActivity {
 
@@ -39,12 +42,15 @@ public class SendaGame extends AppCompatActivity {
     LayoutAnimationController layoutAnimationController;
     SendaManager sendaManager;
     View go_screen;
-
+    User currentUser;
+    DBHandler dbHandler;
     FloatingActionButton go_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHandler = dbHandler.getInstance(getApplicationContext());
+        currentUser = (User)getIntent().getSerializableExtra("User");
         setContentView(R.layout.activity_senda_game);
         go_screen = findViewById(R.id.GO_super_screen);
 
@@ -67,7 +73,10 @@ public class SendaGame extends AppCompatActivity {
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnError(0, card, text);
                     updateLifes(sendaManager.getLifes());
-
+                    java.util.Date today = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    String gameDate = df.format(today);
+                    dbHandler.addResult(currentUser.getUser_id(), "Senda numérica", sendaManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
 
                 } else if(status == -1){ //Error, player continue on same round

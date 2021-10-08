@@ -21,7 +21,7 @@ public class PregameTemplate extends AppCompatActivity {
     FloatingActionButton go_back;
     Button playButton;
     String gameType;
-
+    User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,7 @@ public class PregameTemplate extends AppCompatActivity {
         String imageLogoDir = myIntent.getStringExtra("imageLogo");
         String textBubbleDir = myIntent.getStringExtra("textBubble");
         gameType = myIntent.getStringExtra("game");
+        currentUser = (User)myIntent.getSerializableExtra("User");
 
         int idImageBubble = this.getResources().getIdentifier(imageBubbleDir, "drawable", this.getPackageName());
         int idLogo = this.getResources().getIdentifier(imageLogoDir, "drawable", this.getPackageName());
@@ -58,18 +59,23 @@ public class PregameTemplate extends AppCompatActivity {
     public void startGame(View v){
         if(gameType.equals("memo")){
             Intent gameIntent = new Intent(this, MemoryGame.class);
+            gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }else if(gameType.equals("nums")){
             Intent gameIntent = new Intent(this, SendaGame.class);
+            gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }else if(gameType.equals("laber")){
             Intent gameIntent = new Intent(this, LaberintendiGame.class);
+            gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }else if(gameType.equals("whack")){
             Intent gameIntent = new Intent(this, WhackaGameActivity.class);
+            gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }else if(gameType.equals("piano")){
             Intent gameIntent = new Intent(this, PianoGame.class);
+            gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }
 
