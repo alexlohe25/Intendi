@@ -8,19 +8,21 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="715dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="605dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/shore_background"
+                android:scaleType="fitXY"
+                android:layout_height="match_parent"/>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/titleResultados"
                 android:layout_width="match_parent"
@@ -41,8 +43,8 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +58,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardWhack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="10dp"
@@ -70,12 +72,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:layout_gravity="center_horizontal"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
                                 android:layout_margin="2dp"
                                 android:src="@drawable/whack_ball" />
 
@@ -84,8 +88,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardMemorama"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="10dp"
@@ -98,11 +102,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="2dp"
                                 android:src="@drawable/memorama" />
@@ -112,8 +118,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardSenda"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="10dp"
@@ -126,11 +132,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="2dp"
                                 android:src="@drawable/senda_numerica" />
@@ -140,8 +148,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardPiano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="10dp"
@@ -154,11 +162,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="2dp"
                                 android:src="@drawable/piano" />
@@ -168,8 +178,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardLaberintendi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="10dp"
@@ -182,11 +192,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="2dp"
                                 android:src="@drawable/laberintendi" />
@@ -196,81 +208,98 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-           <!-- <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/idChart"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="@color/crema"
-                android:elevation="10dp">
-            </com.github.mikephil.charting.charts.LineChart>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="0dp"
-                android:src="@drawable/delphi" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/firstResult"
-                    android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="280dp"
+                    android:layout_height="400dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/pop_result"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/vt323"
+                        android:text="Mejor puntaje"
+                        android:textAlignment="center"
+                        android:textColor="#023047"
+                        android:textSize="42sp" />
+
+                    <LinearLayout
+                        android:id="@+id/topScoreLinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/firstResult"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/vt323"
+                            android:text="400"
+                            android:textAlignment="center"
+                            android:textColor="#023047"
+                            android:textSize="70sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Último puntaje"
+                        android:textAlignment="center"
+                        android:textColor="#023047"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/secondResult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="100"
+                        android:textAlignment="center"
+                        android:textColor="#023047"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:id="@+id/tendenciaResults"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="¡Un nuevo record en Whack-A-Ball!"
+                        android:textAlignment="center"
+                        android:textColor="#023047"
+                        android:textSize="30sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="Primer resultado"
-                    android:textAlignment="center"
-                    android:textColor="#023047"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.401"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.051" />
-                <TextView
-                    android:id="@+id/secondResult"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="Segundo resultado"
-                    android:textAlignment="center"
-                    android:textColor="#023047"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.401"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.051" />
-            </LinearLayout>
+                    android:layout_alignParentBottom="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/delphi" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="105dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/yellow_ball" />
+
+            </RelativeLayout>
+
         </LinearLayout>
-            <TextView
-                android:id="@+id/tendenciaResults"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/nunito_semibold"
-                android:text="¿Cómo voy?"
-                android:textAlignment="center"
-                android:textColor="#023047"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.401"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.051" />
-        </LinearLayout>
-    </ScrollView>
+
+        </RelativeLayout>
+
 </FrameLayout>
