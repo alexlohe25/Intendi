@@ -13,8 +13,13 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
-public class MemoryGame extends AppCompatActivity {
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
+public class MemoryGame extends AppCompatActivity {
+    DBHandler dbHandler;
     GridRecyclerView memoBoard;
     TextView timeLbl;
     TextView scoreLbl;
@@ -25,11 +30,15 @@ public class MemoryGame extends AppCompatActivity {
     MediaPlayer cardSound;
     long initTime = 180000, interval = 100;
     LayoutAnimationController layoutAnimationController;
-
+    User currentUser;
+    public View go_screen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentUser = (User)getIntent().getSerializableExtra("User");
+        dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_memory_game);
+        go_screen = findViewById(R.id.GO_super_screen);
         memoBoard = findViewById(R.id.memoBoard);
         timeLbl = findViewById(R.id.timeLbl);
         scoreLbl = findViewById(R.id.scoreLbl);
@@ -55,6 +64,15 @@ public class MemoryGame extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timeLbl.setText("00 : 00");
+                if(memoryGame.numPairsFound < 40){
+                    totalScore += memoryGame.numPairsFound;
+                }
+                java.util.Date today = Calendar.getInstance().getTime();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                String gameDate = df.format(today);
+                dbHandler.addResult(currentUser.getUser_id(), "Memorama", totalScore, gameDate);
+                go_screen.setVisibility(View.VISIBLE);
+                //dbHandler.printGameResults(currentUser.getUser_id(), "Memorama");
             }
         }.start();
 
@@ -70,8 +88,11 @@ public class MemoryGame extends AppCompatActivity {
         memoBoard.setLayoutAnimation(layoutAnimationController);
         memoBoard.setLayoutManager(new GridLayoutManager(this, 2));
         memoBoard.startLayoutAnimation();
-
-
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        cardSound.release();
     }
     public void generaCartas(){
         memoBoard.setVisibility(View.INVISIBLE);

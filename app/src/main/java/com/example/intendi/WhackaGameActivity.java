@@ -14,6 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 
 public class WhackaGameActivity extends AppCompatActivity {
@@ -41,9 +44,14 @@ public class WhackaGameActivity extends AppCompatActivity {
     View pause_background;
     Button goBackButton;
 
+    public View go_screen;
+    User currentUser;
+    DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentUser = (User)getIntent().getSerializableExtra("User");
+        dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_whacka_game);
         go_screen = findViewById(R.id.GO_super_screen);
         close_screen = findViewById(R.id.close_screen);
@@ -117,6 +125,10 @@ public class WhackaGameActivity extends AppCompatActivity {
                 finalScoreText.setText(Integer.toString(GameManager.getScore()));
                 timerText.setText("00 : 00");
                 finishDolphins();
+                java.util.Date today = Calendar.getInstance().getTime();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                String gameDate = df.format(today);
+                dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
                 go_screen.setVisibility(View.VISIBLE);
             }
         }.start();
@@ -260,8 +272,11 @@ public class WhackaGameActivity extends AppCompatActivity {
                                 finalScoreText.setText(Integer.toString(GameManager.getScore()));
                                 timerText.setText("00 : 00");
                                 finishDolphins();
+                                java.util.Date today = Calendar.getInstance().getTime();
+                                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                                String gameDate = df.format(today);
+                                dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
                                 go_screen.setVisibility(View.VISIBLE);
-
                             }
                         }.start();
                     }
