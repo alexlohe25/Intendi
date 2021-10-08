@@ -52,7 +52,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_RUSER + " INTEGER, " +
                 COLUMN_RGAME + " VARCHAR, " +
                 COLUMN_RSCORE + " INTEGER, " +
-                COLUMN_RDATE + " VARCHAR)";
+                COLUMN_RDATE + " VARCHAR," +
+                "FOREIGN KEY ("+ COLUMN_RUSER + ") REFERENCES " +
+                TABLE_USERS + "("+ COLUMN_UID + "))";
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_RESULTS_TABLE);
     }
@@ -121,7 +123,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     public ArrayList<User> getAllUsers(){
         ArrayList users = new ArrayList();
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
@@ -136,7 +138,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     public ArrayList<Result> getResultsFromGame(int idUser, String game){
         ArrayList resultsFromGame = new ArrayList();
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_RESULTS +
                 " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
                 + " AND " + COLUMN_RGAME + " = '" + game + "'";
@@ -152,7 +154,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     public User getCurrentUser(int curUserId){
         User curUser = new User(0,"0", R.drawable.delphi, "00/00/00");
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS
                 + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
         Cursor cursor = db.rawQuery(query, null);
@@ -164,7 +166,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return curUser;
     }
     public void printCurrentUser(int curUserId){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS
                 + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
         Cursor cursor = db.rawQuery(query, null);
@@ -174,7 +176,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public void printAllUsersInfo(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
@@ -185,7 +187,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public void printGameResults(int userId, String game){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_RESULTS +
                 " WHERE " + COLUMN_RUSER + "= " + Integer.toString(userId)
                 + " AND " + COLUMN_RGAME + " = '" + game + "'";
@@ -205,6 +207,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_UDATEBIRTH, curUser.getDateBirth());
         values.put(COLUMN_UAVATAR, curUser.getImageSource());
         db.update(TABLE_USERS, values, COLUMN_UID + " = ?", new String[]{uid});
+        db.close();
+    }
+    public void deleteUser(int user_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+ TABLE_RESULTS + " WHERE " + COLUMN_RUSER + " = " + Integer.toString(user_id));
+        db.execSQL("DELETE FROM "+ TABLE_USERS+ " WHERE " + COLUMN_UID + " = " + Integer.toString(user_id));
         db.close();
     }
     public void deleteAllUsers(){
