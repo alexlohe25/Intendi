@@ -102,6 +102,7 @@ public class UserLoginFragment extends Fragment {
                             Intent myIntent = new Intent(getActivity(), BottomNavigation.class);
                             myIntent.putExtra("User", users.get(currentUser));
                             startActivity(myIntent);
+                            getActivity().finish();
                         }
                     });
                     userCount+=1;

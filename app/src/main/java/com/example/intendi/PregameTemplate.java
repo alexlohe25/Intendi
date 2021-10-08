@@ -78,6 +78,7 @@ public class PregameTemplate extends AppCompatActivity {
             gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
         }
+        finish();
 
     }
 }

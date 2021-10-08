@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void menu(View v){
         Intent miIntent = new Intent(this, BottomNavigation.class);
         startActivity(miIntent);
+
     }
 
     @Override

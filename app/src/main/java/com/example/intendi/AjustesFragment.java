@@ -87,5 +87,6 @@ public class AjustesFragment extends Fragment {
     public void logOut(){
         Intent miIntent = new Intent( getActivity(), MainActivity.class);
         startActivity(miIntent);
+        getActivity().finish();
     }
 }
