@@ -80,39 +80,43 @@ public class AddUserFragment extends Fragment {
             @Override
             public void onClick(View view){
                 boolean isDateValid = isDateValid(dia.getText().toString(), mes.getText().toString(), anio.getText().toString());
-                if (isDateValid){
-                    User newUser = new User(0,"0", R.drawable.delphi, "00/00/00");
-                    boolean flagIsAdded = true;
-                    if (dbHandler.getUsersCount() < 6) {
+                int lengthName = name.getText().toString().length();
+                if (lengthName > 0){
+                    if (isDateValid){
+                        User newUser = new User(0,"0", R.drawable.delphi, "00/00/00");
+                        boolean flagIsAdded = true;
+                        if (dbHandler.getUsersCount() < 6) {
                             String dateOfBirth = dia.getText() + "/" + mes.getText() + "/" + mes.getText();
                             newUser = dbHandler.addUser(name.getText().toString(), dateOfBirth, imageSrc);
                             msgAdd.setText("¡" + name.getText().toString()+" se une al juego!");
 
-                    }else {
-                        msgAdd.setText("Sólo puede haber 6 jugadores en este dispositivo");
-                        flagIsAdded = false;
-                    }
-                    final User userToSend = newUser;
-                    final boolean flagToMenu = flagIsAdded;
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent miIntent;
-                            if (flagToMenu){
-                                miIntent = new Intent(getActivity(), BottomNavigation.class);
-                                miIntent.putExtra("User", userToSend);
-                                startActivity(miIntent);
-                                getActivity().finish();
-                            }else {
-                                miIntent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(miIntent);
-                                getActivity().finish();
-                            }
+                        }else {
+                            msgAdd.setText("Sólo puede haber 6 jugadores en este dispositivo");
+                            flagIsAdded = false;
                         }
-                    }, 2000);
+                        final User userToSend = newUser;
+                        final boolean flagToMenu = flagIsAdded;
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent miIntent;
+                                if (flagToMenu){
+                                    miIntent = new Intent(getActivity(), BottomNavigation.class);
+                                    miIntent.putExtra("User", userToSend);
+                                    startActivity(miIntent);
+                                    getActivity().finish();
+                                }else {
+                                    miIntent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(miIntent);
+                                    getActivity().finish();
+                                }
+                            }
+                        }, 1500);
+                    }else
+                        msgAdd.setText("Introduce una fecha válida");
                 }else
-                    msgAdd.setText("Introduce una fecha válida");
+                    msgAdd.setText("Introduce un nombre de usuario");
             }
         });
         changeAvatarButton.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +201,14 @@ public class AddUserFragment extends Fragment {
             return false;
         Map<Integer, Integer> mesyFin = new TreeMap<>();
         mesyFin.put(1,31);
-        mesyFin.put(2,28);
+
+        if ((yearGiven % 100 == 0) && (yearGiven % 400 == 0))
+            mesyFin.put(2,29);
+        else if(yearGiven % 4 == 0)
+            mesyFin.put(2,29);
+        else
+            mesyFin.put(2,28);
+
         mesyFin.put(3,31);
         mesyFin.put(4,30);
         mesyFin.put(5,31);

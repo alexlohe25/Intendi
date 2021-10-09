@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class AjustesFragment extends Fragment {
     ImageView delphi, sharky, iguanee, dogge, barky;
     Button logOutButton, updateButton;
     User currentUser;
+    int originalSrc;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -27,7 +29,7 @@ public class AjustesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView username;
+    TextView username, msgUpdate;
     ImageView userAvatar;
     DBHandler dbHandler;
     public AjustesFragment() {
@@ -62,6 +64,7 @@ public class AjustesFragment extends Fragment {
          View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
          username = view.findViewById(R.id.usernameAjustes);
          userAvatar = view.findViewById(R.id.avatarAjustes);
+         msgUpdate = view.findViewById(R.id.msgUpdate);
 
          updateButton = view.findViewById(R.id.updateButton);
          logOutButton= view.findViewById(R.id.playButton);
@@ -78,12 +81,9 @@ public class AjustesFragment extends Fragment {
 
          username.setText(currentUser.getUsername());
          userAvatar.setImageResource(currentUser.getImageSource());
-         updateButton.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 updateUser();
-             }
-         });
+
+        originalSrc = currentUser.getImageSource();
+        msgUpdate.setText("");
          logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -142,13 +142,39 @@ public class AjustesFragment extends Fragment {
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
-
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUser();
+            }
+        });
          return view;
     }
     public void updateUser(){
-        currentUser.setUsername(username.getText().toString());
-        dbHandler.updateCurrentUser(currentUser);
-        username.setText(currentUser.getUsername());
+        if(username.getText().toString().length() > 0){
+            String newName = username.getText().toString();
+            System.out.println(currentUser.getUsername()+ " " + newName);
+            System.out.println(currentUser.getImageSource() + " " + originalSrc);
+            boolean areInputsEqual = (originalSrc == currentUser.getImageSource()) && (newName.equals(currentUser.getUsername()));
+            System.out.println(areInputsEqual);
+            if (!areInputsEqual){
+                currentUser.setUsername(newName);
+                dbHandler.updateCurrentUser(currentUser);
+                username.setText(currentUser.getUsername());
+                originalSrc = currentUser.getImageSource();
+                msgUpdate.setText("¡Usuario actualizado!");
+            }else
+                msgUpdate.setText("No hubo nuevos cambios del usuario");
+
+        }else
+            msgUpdate.setText("Introduce un nombre de usuario");
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                msgUpdate.setText("");
+            }
+        }, 2000);
         //userAvatar.setImageResource(currentUser.getImageSource());
     }
     public void logOut(){
