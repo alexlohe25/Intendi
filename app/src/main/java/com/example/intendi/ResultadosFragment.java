@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -41,9 +42,9 @@ public class ResultadosFragment extends Fragment {
     private String mParam2;
 
     Typeface tf;
-    LineChart miChart;
     CardView cardWhack, cardMem, cardNums, cardLaber, cardPiano;
-    TextView resultDetail, result1, result2;
+    TextView resultDetail, result1, result2, result1DateLabel, result2DateLabel;
+    ImageView objectIntendi;
     User currentUser;
     DBHandler dbHandler;
     String currentGame;
@@ -85,18 +86,29 @@ public class ResultadosFragment extends Fragment {
         cardLaber = view.findViewById(R.id.cardLaberintendi);
         cardPiano = view.findViewById(R.id.cardPiano);
         resultDetail = (TextView) view.findViewById(R.id.tendenciaResults);
+        result1DateLabel = (TextView) view.findViewById(R.id.topScoreDate);
         result1 = (TextView) view.findViewById(R.id.firstResult);
+        result2DateLabel = (TextView) view.findViewById(R.id.lastScoreDate);
         result2 = (TextView) view.findViewById(R.id.secondResult);
+
+        objectIntendi = view.findViewById(R.id.objectIntendi);
+
        // miChart = (LineChart) view.findViewById(R.id.idChart);
         tf = ResourcesCompat.getFont(getActivity(), R.font.nunito_semibold);
         //generaChart("Whack-A-Ball", view);
         currentGame = "Whack-A-Ball";
+
+        //Iniciar con Whack
+        generaChart("Whack-A-Ball", view);
+        currentGame = "Whack-A-Ball";
+
         cardWhack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(currentGame != "Puntaje en Whack-A-Ball"){
                     generaChart("Whack-A-Ball", view);
                     currentGame = "Whack-A-Ball";
+                    objectIntendi.setImageResource(R.drawable.yellow_ball);
                 }
 
             }
@@ -107,6 +119,7 @@ public class ResultadosFragment extends Fragment {
                 if(currentGame != "Puntaje en Memorama"){
                     generaChart("Memorama", view);
                     currentGame = "Memorama";
+                    objectIntendi.setImageResource(R.drawable.mem_card);
                 }
             }
         });
@@ -116,6 +129,7 @@ public class ResultadosFragment extends Fragment {
                 if(currentGame != "Puntaje en Senda numérica"){
                     generaChart("Senda numérica", view);
                     currentGame = "Senda numérica";
+                    objectIntendi.setImageResource(R.drawable.num_card);
                 }
             }
         });
@@ -125,6 +139,7 @@ public class ResultadosFragment extends Fragment {
                 if(currentGame != "Puntaje en Laberintendi"){
                     generaChart("Laberintendi", view);
                     currentGame = "Laberintendi";
+                    objectIntendi.setImageResource(R.drawable.lab_card);
                 }
             }
         });
@@ -134,6 +149,7 @@ public class ResultadosFragment extends Fragment {
                 if(currentGame != "Puntaje en Piano"){
                     generaChart("Piano", view);
                     currentGame = "Piano";
+                    objectIntendi.setImageResource(R.drawable.piano_card);
                 }
             }
         });
@@ -149,7 +165,8 @@ public class ResultadosFragment extends Fragment {
         }else if (resultsFromGame.size() == 1){
             int result1Score = resultsFromGame.get(0).getScore();
             String result1Date = resultsFromGame.get(0).getDateOfGame();
-            result1.setText("Mi récord: "+ result1Score + "\n Fecha: "+ result1Date);
+            result1DateLabel.setText("Mejor puntaje "+ result1Date);
+            result1.setText(String.valueOf(result1Score));
             result2.setText("");
             resultDetail.setText("Te falta 1 juego de " + game + " para ver tu avance");
         }else{
@@ -157,12 +174,14 @@ public class ResultadosFragment extends Fragment {
             String result1Date = resultsFromGame.get(0).getDateOfGame();
             int result2Score = resultsFromGame.get(1).getScore();
             String result2Date = resultsFromGame.get(1).getDateOfGame();
-            result1.setText("Mi récord: "+ result1Score + "\n Fecha: "+ result1Date);
-            result2.setText("Puntaje más reciente: "+ result2Score + "\n Fecha: "+ result2Date);
+            result1.setText(String.valueOf(result1Score));
+            result1DateLabel.setText("Mejor puntaje "+ result1Date);
+            result2.setText(String.valueOf(result2Score));
+            result2DateLabel.setText("Último puntaje "+ result2Date);
 
-            String tendencia = "¡Otro récord en " + game + " :D!";
+            String tendencia = "¡Otro récord en " + game + "!";
             if(result2Score < result1Score)
-                tendencia = "¡Buen intento "+ currentUser.getUsername() + " :)!";
+                tendencia = "¡Buen intento "+ currentUser.getUsername() + "!";
             resultDetail.setText(tendencia);
         }
     }

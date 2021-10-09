@@ -22,6 +22,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,9 +48,17 @@ public class SendaGame extends AppCompatActivity {
     User currentUser;
     DBHandler dbHandler;
     FloatingActionButton go_back;
+    FloatingActionButton help;
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
     View close_screen;
+    View pause_background;
+
+    Button goMenuButton;
+    View help_screen;
+    TextView helpText;
+    View help_background;
+    Button okHelpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,13 @@ public class SendaGame extends AppCompatActivity {
         currentUser = (User)getIntent().getSerializableExtra("User");
         setContentView(R.layout.activity_senda_game);
         go_screen = findViewById(R.id.GO_super_screen);
+        goMenuButton = findViewById(R.id.goMenuButton);
+
+        help_screen = findViewById(R.id.help_screen);
+        help = findViewById(R.id.helpButton);
+        helpText = findViewById(R.id.help_text);
+        help_background = findViewById(R.id.help_background);
+        okHelpButton = findViewById(R.id.okHelpButton);
 
         sendaManager = new SendaManager();
 
@@ -83,6 +99,8 @@ public class SendaGame extends AppCompatActivity {
                     String gameDate = df.format(today);
                     dbHandler.addResult(currentUser.getUser_id(), "Senda numérica", sendaManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
+                    help.setVisibility(View.INVISIBLE);
+                    go_back.setVisibility(View.INVISIBLE);
 
                 } else if(status == -1){ //Error, player continue on same round
                     disableClicks();
@@ -198,6 +216,7 @@ public class SendaGame extends AppCompatActivity {
 
         cardOkPopUp = findViewById(R.id.cardViewOk);
         cardCancelPopUp = findViewById(R.id.cardViewCancel);
+        pause_background = findViewById(R.id.pause_background);
 
         //Actions of pop up
         cardOkPopUp.setOnClickListener(new View.OnClickListener() {
@@ -207,12 +226,52 @@ public class SendaGame extends AppCompatActivity {
             }
         });
 
+        pause_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
+        helpText.setText("Observa el patrón de tarjetas iluminadas y da click en aquellas que fueron coloreadas según el orden que te fue mostrado");
+
+        help_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
+        okHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
         cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
                 enableClicks();
+            }
+        });
+
+        goMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -228,6 +287,15 @@ public class SendaGame extends AppCompatActivity {
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
         v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        disableClicks();
+    }
+
+    public void showHelpPopUp(View v){
+        help_screen.setVisibility(View.VISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        go_back.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
