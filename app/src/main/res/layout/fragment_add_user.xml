@@ -83,38 +83,76 @@
             app:layout_constraintVertical_bias="0.075"
             android:theme="@style/EditTextTheme"/>
 
+        <TextView
+            android:id="@+id/dateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/cake_2"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="Fecha de nacimiento"
+            android:textColor="#757575"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.174"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/miNombre"
+            app:layout_constraintVertical_bias="0.103" />
 
         <EditText
-            android:id="@+id/miFechaNac"
-            android:layout_width="333dp"
-            android:layout_height="57dp"
-            android:drawableStart="@drawable/cake_2"
+            android:id="@+id/miDiaNac"
+            android:layout_width="80dp"
+            android:layout_height="53dp"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/nunito"
-            android:hint="Fecha de nacimiento"
+            android:hint="Día"
             android:inputType="date"
             android:shadowColor="#7A7A7A"
             android:textColor="#000000"
             android:textColorHighlight="#7A7A7A"
             android:textColorHint="#7A7A7A"
+            android:theme="@style/EditTextTheme"
+            app:hintTextColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/miMesNac"
+            app:layout_constraintHorizontal_bias="0.458"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
+            app:layout_constraintVertical_bias="0.085"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/miAnioNac"
+            android:layout_width="80dp"
+            android:layout_height="53dp"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:fontFamily="@font/nunito"
+            android:hint="Año"
+            android:inputType="date"
+            android:shadowColor="#7A7A7A"
+            android:textColor="#000000"
+            android:textColorHighlight="#7A7A7A"
+            android:textColorHint="#7A7A7A"
+            android:theme="@style/EditTextTheme"
             app:hintTextColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/miNombre"
-            app:layout_constraintVertical_bias="0.23"
-            tools:ignore="TextContrastCheck"
-            android:theme="@style/EditTextTheme"/>
+            app:layout_constraintHorizontal_bias="0.546"
+            app:layout_constraintStart_toEndOf="@+id/miMesNac"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
+            app:layout_constraintVertical_bias="0.09"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/playButton"
-            android:stateListAnimator="@null"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:backgroundTint="#FFB703"
             android:fontFamily="@font/nunito"
+            android:stateListAnimator="@null"
             android:text="Crear perfil"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFF"
@@ -125,9 +163,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/miFechaNac"
-            app:layout_constraintVertical_bias="0.406"
+            app:layout_constraintTop_toBottomOf="@+id/miMesNac"
+            app:layout_constraintVertical_bias="0.243"
             app:rippleColor="#FFB703"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/miMesNac"
+            android:layout_width="80dp"
+            android:layout_height="53dp"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:fontFamily="@font/nunito"
+            android:hint="Mes"
+            android:inputType="date"
+            android:shadowColor="#7A7A7A"
+            android:textColor="#000000"
+            android:textColorHighlight="#7A7A7A"
+            android:textColorHint="#7A7A7A"
+            android:theme="@style/EditTextTheme"
+            app:hintTextColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
+            app:layout_constraintVertical_bias="0.094"
             tools:ignore="TextContrastCheck" />
 
         <TextView
@@ -151,7 +212,7 @@
             android:id="@+id/avatarMenu"
             layout="@layout/choose_avatar_layout"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-27dp" />
+            tools:layout_editor_absoluteY="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

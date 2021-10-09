@@ -156,4 +156,5 @@ public class AjustesFragment extends Fragment {
         startActivity(miIntent);
         getActivity().finish();
     }
+
 }
