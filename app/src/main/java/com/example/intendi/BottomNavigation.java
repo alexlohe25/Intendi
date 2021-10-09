@@ -12,18 +12,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class BottomNavigation extends AppCompatActivity {
+    User currentUser;
 
     MenuJuegosFragment menuJuegosFragment = new MenuJuegosFragment();
     ResultadosFragment resultadosFragment = new ResultadosFragment();
     AjustesFragment ajustesFragment = new AjustesFragment();
+    DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_bottom_navigation);
-
+        currentUser = (User)getIntent().getSerializableExtra("User");
+        currentUser = dbHandler.getCurrentUser(currentUser.getUser_id());
+        menuJuegosFragment.setCurrentUser(currentUser);
+        resultadosFragment.setCurrentUser(currentUser);
+        ajustesFragment.setCurrentUser(currentUser);
         loadFragment(menuJuegosFragment);
-
         BottomNavigationView  navigation = findViewById(R.id.bottom_navigation);
         navigation.setItemIconTintList(null);
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILENAME = "user_data.xml";
     private Properties userData;
-
+    DBHandler dbHandler;
     UserLoginFragment userLogInFragment = new UserLoginFragment();
     AddUserFragment addUserFragment = new AddUserFragment();
 
@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         userData = new Properties();
         //loadResults();
-
+        dbHandler = dbHandler.getInstance(getApplicationContext());
+        userLogInFragment.setDbHandler(dbHandler);
+        addUserFragment.setDbHandler(dbHandler);
         setContentView(R.layout.activity_main);
         loadFragment(userLogInFragment);
         //BindingAdapter binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void menu(View v){
         Intent miIntent = new Intent(this, BottomNavigation.class);
         startActivity(miIntent);
+
     }
 
     @Override

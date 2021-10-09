@@ -11,6 +11,7 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.GameManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,8 +28,11 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class LaberintendiGame extends AppCompatActivity {
 
@@ -59,10 +63,14 @@ public class LaberintendiGame extends AppCompatActivity {
     View close_screen;
     CardView cardAnswers;
 
+    User currentUser;
+    DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laberintendi_game);
+        currentUser = (User)getIntent().getSerializableExtra("User");
+        dbHandler = dbHandler.getInstance(getApplicationContext());
         go_screen = findViewById(R.id.GO_super_screen);
         close_screen = findViewById(R.id.close_screen);
         go_back = findViewById(R.id.closeButton);
@@ -494,6 +502,10 @@ public class LaberintendiGame extends AppCompatActivity {
                     ansBoard.getAdapter().notifyDataSetChanged();
                     laberBoard.setVisibility(View.INVISIBLE);
                 }else{
+                    java.util.Date today = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    String gameDate = df.format(today);
+                    dbHandler.addResult(currentUser.getUser_id(), "Laberintendi", laberManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
                     cardAnswers.setVisibility(View.INVISIBLE);
                 }
