@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/pause_background"
-        android:layout_width="411dp"
-        android:layout_height="736dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:alpha="0.85"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
