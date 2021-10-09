@@ -4,29 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#FDFBF7"
+    android:background="#FDFBF7"
     tools:context=".PregameTemplate">
 
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="160dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#FFB703"
-        android:fontFamily="@font/vt323"
-        android:gravity="center|top"
-        android:onClick="startGame"
-        android:text="Jugar"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
+    <LinearLayout
+        android:id="@+id/linearButtons"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintVertical_bias="0.926">
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#FFB703"
+            android:fontFamily="@font/vt323"
+            android:gravity="center|top"
+            android:onClick="startGame"
+            android:text="Jugar"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:cornerRadius="30dp" />
+
+        <Button
+            android:id="@+id/libreButton"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#FFB703"
+            android:fontFamily="@font/vt323"
+            android:gravity="center|top"
+            android:onClick="startGame"
+            android:text="Libre"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            app:cornerRadius="30dp" />
+
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/imageView"

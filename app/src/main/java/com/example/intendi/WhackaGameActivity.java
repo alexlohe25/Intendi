@@ -37,12 +37,18 @@ public class WhackaGameActivity extends AppCompatActivity {
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
 
     FloatingActionButton go_back;
+    FloatingActionButton help;
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
     View go_screen;
     View close_screen;
     View pause_background;
-    Button goBackButton;
+    Button goMenuButton;
+    View help_screen;
+    TextView helpText;
+    View help_background;
+    Button okHelpButton;
+
     User currentUser;
     DBHandler dbHandler;
     @Override
@@ -55,10 +61,16 @@ public class WhackaGameActivity extends AppCompatActivity {
         close_screen = findViewById(R.id.close_screen);
         cardOkPopUp = findViewById(R.id.cardViewOk);
         cardCancelPopUp = findViewById(R.id.cardViewCancel);
-        goBackButton = findViewById(R.id.goMenuButton);
+        goMenuButton = findViewById(R.id.goMenuButton);
         pause_background = findViewById(R.id.pause_background);
         go_back = findViewById(R.id.closeButton);
+        help = findViewById(R.id.helpButton);
 
+        help_screen = findViewById(R.id.help_screen);
+        help = findViewById(R.id.helpButton);
+        helpText = findViewById(R.id.help_text);
+        help_background = findViewById(R.id.help_background);
+        okHelpButton = findViewById(R.id.okHelpButton);
 
 
         GameManager = new WhackaGameManager();
@@ -131,7 +143,7 @@ public class WhackaGameActivity extends AppCompatActivity {
             }
         }.start();
 
-        goBackButton.setOnClickListener(new View.OnClickListener() {
+        goMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -143,6 +155,28 @@ public class WhackaGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+        helpText.setText("Lee el color mostrado por Intendi y da click en las pelotas que coincidan con el signficado de la palabra y no con el color en el que están coloreadas");
+
+        help_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+            }
+        });
+
+        okHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -158,6 +192,7 @@ public class WhackaGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
                 //enableClicks();
             }
         });
@@ -275,6 +310,8 @@ public class WhackaGameActivity extends AppCompatActivity {
                                 String gameDate = df.format(today);
                                 dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
                                 go_screen.setVisibility(View.VISIBLE);
+                                help.setVisibility(View.INVISIBLE);
+                                go_back.setVisibility(View.INVISIBLE);
                             }
                         }.start();
                     }
@@ -301,7 +338,15 @@ public class WhackaGameActivity extends AppCompatActivity {
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
         v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
         //disableClicks();
+    }
+
+    public void showHelpPopUp(View v){
+        help_screen.setVisibility(View.VISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        go_back.setVisibility(View.INVISIBLE);
     }
 }
 

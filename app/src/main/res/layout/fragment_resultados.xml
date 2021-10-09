@@ -10,7 +10,7 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="605dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -67,6 +67,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
                         app:layout_columnWeight="1"
+                        app:cardBackgroundColor="@color/white"
                         app:layout_rowWeight="1">
 
                         <LinearLayout
@@ -97,6 +98,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
                         app:layout_columnWeight="1"
+                        app:cardBackgroundColor="@color/white"
                         app:layout_rowWeight="1">
 
                         <LinearLayout
@@ -127,6 +129,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
                         app:layout_columnWeight="1"
+                        app:cardBackgroundColor="@color/white"
                         app:layout_rowWeight="1">
 
                         <LinearLayout
@@ -157,6 +160,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
                         app:layout_columnWeight="1"
+                        app:cardBackgroundColor="@color/white"
                         app:layout_rowWeight="1">
 
                         <LinearLayout
@@ -187,6 +191,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="3dp"
                         app:layout_columnWeight="1"
+                        app:cardBackgroundColor="@color/white"
                         app:layout_rowWeight="1">
 
                         <LinearLayout
@@ -216,20 +221,23 @@
                     android:layout_width="280dp"
                     android:layout_height="400dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/pop_result"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/topScoreDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="25dp"
                         android:fontFamily="@font/vt323"
                         android:text="Mejor puntaje"
                         android:textAlignment="center"
                         android:textColor="#023047"
-                        android:textSize="42sp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="30sp" />
 
                     <LinearLayout
                         android:id="@+id/topScoreLinear"
@@ -244,26 +252,35 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/vt323"
                             android:text="400"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:includeFontPadding="false"
                             android:textAlignment="center"
                             android:textColor="#023047"
                             android:textSize="70sp" />
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/lastScoreDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vt323"
                         android:text="Último puntaje"
                         android:textAlignment="center"
                         android:textColor="#023047"
-                        android:textSize="30sp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/secondResult"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vt323"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:text="100"
+                        android:includeFontPadding="false"
                         android:textAlignment="center"
                         android:textColor="#023047"
                         android:textSize="40sp" />
@@ -276,7 +293,9 @@
                         android:text="¡Un nuevo record en Whack-A-Ball!"
                         android:textAlignment="center"
                         android:textColor="#023047"
-                        android:textSize="30sp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="25sp" />
 
                 </LinearLayout>
 
@@ -289,6 +308,7 @@
                     android:src="@drawable/delphi" />
 
                 <ImageView
+                    android:id="@+id/objectIntendi"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
