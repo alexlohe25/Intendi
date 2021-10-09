@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         userData = new Properties();
         //loadResults();
         dbHandler = dbHandler.getInstance(getApplicationContext());
-        userLogInFragment.setDbHandler(dbHandler);
-        addUserFragment.setDbHandler(dbHandler);
         setContentView(R.layout.activity_main);
         loadFragment(userLogInFragment);
         //BindingAdapter binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -61,31 +59,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    /*
-    private void loadResults(){
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            userData.loadFromXML(fis);
-            fis.close();
-        }
-        catch (FileNotFoundException fnfe){
-            //results.setProperty("Negro","0");
-            saveResults();
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-    private void saveResults(){
-        try{
-            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            userData.storeToXML(fos, null);
-            fos.close();
-
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-    }*/
 
 }

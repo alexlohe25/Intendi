@@ -64,14 +64,19 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESULTS);
     }
 
-    public void addUser(String name, String dateBirth, int avatar){
+    public User addUser(String name, String dateBirth, int avatar){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_UNAME, name);
         values.put(COLUMN_UDATEBIRTH, dateBirth);
         values.put(COLUMN_UAVATAR, avatar);
         db.insert(TABLE_USERS, null, values);
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToLast();
+        User newUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(3), cursor.getString(2));
         db.close();
+        return newUser;
     }
     public void addResult(int idUser, String game, int score, String date){
         int maxScore, idToDelete;
@@ -136,6 +141,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return users;
     }
+    public int getUsersCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.getCount();
+    }
     public ArrayList<Result> getResultsFromGame(int idUser, String game){
         ArrayList resultsFromGame = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -175,7 +186,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         db.close();
     }
-    public void printAllUsersInfo(){
+    /*public void printAllUsersInfo(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
@@ -198,7 +209,7 @@ public class DBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         db.close();
-    }
+    }*/
     public void updateCurrentUser(User curUser){
         String uid = Integer.toString(curUser.getUser_id());
         SQLiteDatabase db = this.getWritableDatabase();

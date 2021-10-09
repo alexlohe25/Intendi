@@ -113,6 +113,7 @@
 
         <Button
             android:id="@+id/updateButton"
+            android:stateListAnimator="@null"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:backgroundTint="#FFB703"

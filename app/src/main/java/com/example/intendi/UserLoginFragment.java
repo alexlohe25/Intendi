@@ -60,7 +60,7 @@ public class UserLoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //dbHandler = dbHandler.getInstance(getActivity());
+        dbHandler = dbHandler.getInstance(getActivity().getApplicationContext());
         if (getArguments() != null) {
         }
     }

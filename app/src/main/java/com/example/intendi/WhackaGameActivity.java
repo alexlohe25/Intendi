@@ -43,8 +43,6 @@ public class WhackaGameActivity extends AppCompatActivity {
     View close_screen;
     View pause_background;
     Button goBackButton;
-
-    public View go_screen;
     User currentUser;
     DBHandler dbHandler;
     @Override
