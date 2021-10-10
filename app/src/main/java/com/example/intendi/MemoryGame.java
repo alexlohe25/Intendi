@@ -49,7 +49,7 @@ public class MemoryGame extends AppCompatActivity {
     TextView helpText;
     View help_background;
     Button okHelpButton;
-
+    boolean isTimerFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class MemoryGame extends AppCompatActivity {
         timeLbl = findViewById(R.id.timeLbl);
         scoreLbl = findViewById(R.id.scoreLbl);
         cardSound = MediaPlayer.create(this, R.raw.bird);
+        isTimerFinished = true;
         timer = new CountDownTimer(initTime,interval) {
             @Override
             public void onTick(long l) {
@@ -88,14 +89,15 @@ public class MemoryGame extends AppCompatActivity {
                 if(memoryGame.numPairsFound < 40){
                     totalScore += memoryGame.numPairsFound;
                 }
-                java.util.Date today = Calendar.getInstance().getTime();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                String gameDate = df.format(today);
-                dbHandler.addResult(currentUser.getUser_id(), "Memorama", totalScore, gameDate);
-                go_screen.setVisibility(View.VISIBLE);
-                help.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.INVISIBLE);
-                //dbHandler.printGameResults(currentUser.getUser_id(), "Memorama");
+                if(isTimerFinished){
+                    java.util.Date today = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    String gameDate = df.format(today);
+                    dbHandler.addResult(currentUser.getUser_id(), "Memorama", totalScore, gameDate);
+                    go_screen.setVisibility(View.VISIBLE);
+                    help.setVisibility(View.INVISIBLE);
+                    go_back.setVisibility(View.INVISIBLE);
+                }
             }
         }.start();
 
@@ -127,6 +129,8 @@ public class MemoryGame extends AppCompatActivity {
         cardOkPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isTimerFinished = false;
+                timer.onFinish();
                 finish();
             }
         });

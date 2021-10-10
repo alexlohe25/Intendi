@@ -86,9 +86,9 @@ public class ResultadosFragment extends Fragment {
         cardLaber = view.findViewById(R.id.cardLaberintendi);
         cardPiano = view.findViewById(R.id.cardPiano);
         resultDetail = (TextView) view.findViewById(R.id.tendenciaResults);
-        result1DateLabel = (TextView) view.findViewById(R.id.topScoreDate);
+        result1DateLabel = (TextView) view.findViewById(R.id.topDate);
         result1 = (TextView) view.findViewById(R.id.firstResult);
-        result2DateLabel = (TextView) view.findViewById(R.id.lastScoreDate);
+        result2DateLabel = (TextView) view.findViewById(R.id.lastDate);
         result2 = (TextView) view.findViewById(R.id.secondResult);
 
         objectIntendi = view.findViewById(R.id.objectIntendi);
@@ -159,7 +159,9 @@ public class ResultadosFragment extends Fragment {
     public void generaChart(String game, View view){
         ArrayList<Result> resultsFromGame = dbHandler.getResultsFromGame(currentUser.getUser_id(),game);
         if (resultsFromGame.size() == 0){
+            result1DateLabel.setText("Mejor puntaje\n");
             result1.setText("");
+            result2DateLabel.setText("Mejor puntaje\n");
             result2.setText("");
             resultDetail.setText("Parece que aún no has jugado " + game);
         }else if (resultsFromGame.size() == 1){
@@ -167,6 +169,7 @@ public class ResultadosFragment extends Fragment {
             String result1Date = resultsFromGame.get(0).getDateOfGame();
             result1DateLabel.setText("Mejor puntaje "+ result1Date);
             result1.setText(String.valueOf(result1Score));
+            result2DateLabel.setText("Mejor puntaje \n");
             result2.setText("");
             resultDetail.setText("Te falta 1 juego de " + game + " para ver tu avance");
         }else{

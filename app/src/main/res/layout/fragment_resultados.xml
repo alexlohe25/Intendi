@@ -227,7 +227,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/topScoreDate"
+                        android:id="@+id/topDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
@@ -261,7 +261,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/lastScoreDate"
+                        android:id="@+id/lastDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/vt323"

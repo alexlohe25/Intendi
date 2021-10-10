@@ -48,7 +48,7 @@ public class WhackaGameActivity extends AppCompatActivity {
     TextView helpText;
     View help_background;
     Button okHelpButton;
-
+    boolean isTimeFinished;
     User currentUser;
     DBHandler dbHandler;
     @Override
@@ -71,7 +71,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         helpText = findViewById(R.id.help_text);
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
-
+        isTimeFinished = true;
 
         GameManager = new WhackaGameManager();
         timeCurrent = 0;
@@ -135,11 +135,13 @@ public class WhackaGameActivity extends AppCompatActivity {
                 finalScoreText.setText(Integer.toString(GameManager.getScore()));
                 timerText.setText("00 : 00");
                 finishDolphins();
-                java.util.Date today = Calendar.getInstance().getTime();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                String gameDate = df.format(today);
-                dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
-                go_screen.setVisibility(View.VISIBLE);
+                if(isTimeFinished){
+                    java.util.Date today = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    String gameDate = df.format(today);
+                    dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
+                    go_screen.setVisibility(View.VISIBLE);
+                }
             }
         }.start();
 
@@ -183,6 +185,8 @@ public class WhackaGameActivity extends AppCompatActivity {
         cardOkPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isTimeFinished = false;
+                timer.onFinish();
                 finish();
             }
         });
@@ -201,7 +205,6 @@ public class WhackaGameActivity extends AppCompatActivity {
         Update();
         changeTextColor();
     }
-
     private void changeTextColor(){
         String newHex = GameManager.getRandomHex();;
         for(int i = 0; i<myDolphins.length;i++){
@@ -305,13 +308,13 @@ public class WhackaGameActivity extends AppCompatActivity {
                                 finalScoreText.setText(Integer.toString(GameManager.getScore()));
                                 timerText.setText("00 : 00");
                                 finishDolphins();
-                                java.util.Date today = Calendar.getInstance().getTime();
-                                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                                String gameDate = df.format(today);
-                                dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
-                                go_screen.setVisibility(View.VISIBLE);
-                                help.setVisibility(View.INVISIBLE);
-                                go_back.setVisibility(View.INVISIBLE);
+                                if(isTimeFinished){
+                                    java.util.Date today = Calendar.getInstance().getTime();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                                    String gameDate = df.format(today);
+                                    dbHandler.addResult(currentUser.getUser_id(), "Whack-A-Ball", GameManager.getScore(), gameDate);
+                                    go_screen.setVisibility(View.VISIBLE);
+                                }
                             }
                         }.start();
                     }
