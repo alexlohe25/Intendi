@@ -1,6 +1,8 @@
 package com.example.intendi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
@@ -12,7 +14,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 
@@ -22,10 +27,21 @@ public class PianoGame extends AppCompatActivity {
     Button doSh, reSh, faSh, solSh, laSh;
 
     TextView scoreLbl, pianoNote;
+    ImageView corcheaOne, corcheaTwo, corcheaThree;
 
     Button[] notesArray;
 
     PianoManager pianoManager;
+
+    View go_screen;
+    Button go_button;
+    TextView finalScore;
+
+    FloatingActionButton closeButton;
+    CardView cardOkPopUp;
+    CardView cardCancelPopUp;
+    View close_screen;
+    View pause_background;
 
     int answer;
     boolean isPlaying;
@@ -63,6 +79,55 @@ public class PianoGame extends AppCompatActivity {
 
         scoreLbl = findViewById(R.id.scoreLbl);
         pianoNote = findViewById(R.id.pianoNote);
+        corcheaOne = findViewById(R.id.CorcheaOne);
+        corcheaTwo = findViewById(R.id.CorcheaTwo);
+        corcheaThree = findViewById(R.id.CorcheaThree);
+
+        closeButton = findViewById(R.id.closeButton);
+        cardOkPopUp = findViewById(R.id.cardViewOk);
+        cardCancelPopUp= findViewById(R.id.cardViewCancel);
+        close_screen = findViewById(R.id.close_screen);
+        pause_background = findViewById(R.id.pause_background);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.VISIBLE);
+            }
+        });
+
+        cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        pause_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        cardOkPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        go_screen = findViewById(R.id.GO_super_screen);
+        go_button = findViewById(R.id.goMenuButton);
+        finalScore = findViewById(R.id.FinalScoreTxt);
+
+        go_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         isPlaying = false;
 
         doSound = MediaPlayer.create(this, R.raw.don);
@@ -307,7 +372,6 @@ public class PianoGame extends AppCompatActivity {
     }
 
     public void onTap(View v){
-        System.out.println("Compare");
         Button tapButton = (Button)v;
         colorAndPlay(0, tapButton);
 
@@ -337,10 +401,25 @@ public class PianoGame extends AppCompatActivity {
             answer = pianoManager.compare(11);
         }
 
-        System.out.println("Check");
-
-        if(answer == -1){
+        if(answer == -2){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
+            changeTries(pianoManager.getTries());
+            changeKeyState(false);
+            finalScore.setText(String.valueOf(pianoManager.getScore()));
+            go_screen.setVisibility(View.VISIBLE);
+        }else if(answer == -1){
+            scoreLbl.setText(String.valueOf(pianoManager.getScore()));
+            changeTries(pianoManager.getTries());
+            changeKeyState(false);
+
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showInstructions();
+                }
+            }, 1000);
+
         }else if(answer == 1){
             pianoManager.changeScore();
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
@@ -371,6 +450,16 @@ public class PianoGame extends AppCompatActivity {
                 changeKeyState(true);
             }
         }, pianoManager.getRound() + 3 * 1000);
+    }
+
+    public void changeTries(int tries){
+        if(tries == 2){
+            corcheaThree.setImageResource(R.drawable.corchea_g);
+        }else if(tries == 1){
+            corcheaTwo.setImageResource(R.drawable.corchea_g);
+        }else{
+            corcheaOne.setImageResource(R.drawable.corchea_g);
+        }
     }
 
     public void gameStart() {
