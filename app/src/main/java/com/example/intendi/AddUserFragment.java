@@ -15,10 +15,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class AddUserFragment extends Fragment {
 
     ImageView avatar;
-    TextView name, fechaNac, msgAdd;
+    TextView name, dia,mes,anio, msgAdd;
     DBHandler dbHandler;
     Button createUser;
     ImageView changeAvatarButton;
@@ -51,14 +56,17 @@ public class AddUserFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_add_user, container, false);
         avatar = view.findViewById(R.id.userAvatar);
         name = view.findViewById(R.id.miNombre);
-        fechaNac = view.findViewById(R.id.miFechaNac);
+        dia = view.findViewById(R.id.miDiaNac);
+        mes = view.findViewById(R.id.miMesNac);
+        anio = view.findViewById(R.id.miAnioNac);
         createUser = view.findViewById(R.id.playButton);
         msgAdd = view.findViewById(R.id.warningAddUser);
         imageSrc = R.drawable.delphi;
         avatar.setImageResource(imageSrc);
-        name.setText("");
-        fechaNac.setText("");
-
+        name.setHint("Nombre");
+        dia.setHint("Día");
+        mes.setHint("Mes");
+        anio.setHint("Año");
         changeAvatarButton = view.findViewById(R.id.editAvatar);
         changeAvatarMenu = view.findViewById(R.id.avatarMenu);
         backgroundMenu = view.findViewById(R.id.faded_background);
@@ -71,35 +79,44 @@ public class AddUserFragment extends Fragment {
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                User newUser = new User(0,"0", R.drawable.delphi, "00/00/00");
-                boolean flagIsAdded = true;
-                if (dbHandler.getUsersCount() < 6) {
-                    newUser = dbHandler.addUser(name.getText().toString(), fechaNac.getText().toString(), imageSrc);
-                    msgAdd.setText("¡" + name.getText().toString()+" se une al juego!");
-                }else {
-                    msgAdd.setText("Sólo puede haber 6 jugadores en este dispositivo");
-                    flagIsAdded = false;
-                }
-                final User userToSend = newUser;
-                final boolean flagToMenu = flagIsAdded;
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent miIntent;
-                        if (flagToMenu){
-                            miIntent = new Intent(getActivity(), BottomNavigation.class);
-                            miIntent.putExtra("User", userToSend);
-                            startActivity(miIntent);
-                            getActivity().finish();
-                        }else {
-                            miIntent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(miIntent);
-                            getActivity().finish();
-                        }
-                    }
-                }, 2000);
+                boolean isDateValid = isDateValid(dia.getText().toString(), mes.getText().toString(), anio.getText().toString());
+                int lengthName = name.getText().toString().length();
+                if (lengthName > 0){
+                    if (isDateValid){
+                        User newUser = new User(0,"0", R.drawable.delphi, "00/00/00");
+                        boolean flagIsAdded = true;
+                        if (dbHandler.getUsersCount() < 6) {
+                            String dateOfBirth = dia.getText() + "/" + mes.getText() + "/" + mes.getText();
+                            newUser = dbHandler.addUser(name.getText().toString(), dateOfBirth, imageSrc);
+                            msgAdd.setText("¡" + name.getText().toString()+" se une al juego!");
 
+                        }else {
+                            msgAdd.setText("Sólo puede haber 6 jugadores en este dispositivo");
+                            flagIsAdded = false;
+                        }
+                        final User userToSend = newUser;
+                        final boolean flagToMenu = flagIsAdded;
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent miIntent;
+                                if (flagToMenu){
+                                    miIntent = new Intent(getActivity(), BottomNavigation.class);
+                                    miIntent.putExtra("User", userToSend);
+                                    startActivity(miIntent);
+                                    getActivity().finish();
+                                }else {
+                                    miIntent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(miIntent);
+                                    getActivity().finish();
+                                }
+                            }
+                        }, 1500);
+                    }else
+                        msgAdd.setText("Introduce una fecha válida");
+                }else
+                    msgAdd.setText("Introduce un nombre de usuario");
             }
         });
         changeAvatarButton.setOnClickListener(new View.OnClickListener() {
@@ -155,5 +172,58 @@ public class AddUserFragment extends Fragment {
             }
         });
         return view;
+    }
+    public boolean isDateValid(String diaDado, String mesDado, String anioDado){
+        int dayGiven,monthGiven, yearGiven;
+        if(diaDado.length() == 0)
+            dayGiven = 0;
+        else
+            dayGiven = Integer.parseInt(diaDado);
+        if(mesDado.length() == 0)
+            monthGiven = 0;
+        else
+            monthGiven = Integer.parseInt(mesDado);
+        if(anioDado.length() == 0)
+            yearGiven = 0;
+        else
+            yearGiven = Integer.parseInt(anioDado);
+        System.out.println(dayGiven);
+        System.out.println(monthGiven);
+        System.out.println(yearGiven);
+        if (dayGiven <= 0 || dayGiven > 31)
+            return false;
+        if (monthGiven <= 0 || monthGiven > 12)
+            return false;
+        Date thisYear = new Date();
+        SimpleDateFormat yf = new SimpleDateFormat("yyyy");
+        String year = yf.format(thisYear);
+        if (yearGiven >= Integer.parseInt(year))
+            return false;
+        Map<Integer, Integer> mesyFin = new TreeMap<>();
+        mesyFin.put(1,31);
+
+        if ((yearGiven % 100 == 0) && (yearGiven % 400 == 0))
+            mesyFin.put(2,29);
+        else if(yearGiven % 4 == 0)
+            mesyFin.put(2,29);
+        else
+            mesyFin.put(2,28);
+
+        mesyFin.put(3,31);
+        mesyFin.put(4,30);
+        mesyFin.put(5,31);
+        mesyFin.put(6,30);
+        mesyFin.put(7,31);
+        mesyFin.put(8,31);
+        mesyFin.put(9,30);
+        mesyFin.put(10,31);
+        mesyFin.put(11,30);
+        mesyFin.put(12,31);
+        if(mesyFin.containsKey(monthGiven)){
+            int finDeMes = mesyFin.get(monthGiven);
+            if (dayGiven <= finDeMes)
+                return true;
+        }
+        return false;
     }
 }
