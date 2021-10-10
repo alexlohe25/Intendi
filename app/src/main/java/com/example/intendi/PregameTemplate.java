@@ -48,7 +48,8 @@ public class PregameTemplate extends AppCompatActivity {
             libreButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    freePiano();
+                    Intent gameIntent = new Intent(view.getContext(), PianoFree.class);
+                    startActivity(gameIntent);
                 }
             });
         }
@@ -65,14 +66,9 @@ public class PregameTemplate extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                freePiano();
+                finish();
             }
         });
-    }
-
-    public void freePiano() {
-        Intent gameIntent = new Intent(this, PianoFree.class);
-        startActivity(gameIntent);
     }
 
     public void startGame(View v){
@@ -96,14 +92,7 @@ public class PregameTemplate extends AppCompatActivity {
             Intent gameIntent = new Intent(this, PianoGame.class);
             gameIntent.putExtra("User", currentUser);
             startActivity(gameIntent);
-
-            Button btnLibre = new Button(this);
-            btnLibre.setText("Libre");
-            btnLibre.getLayoutParams().width = 160;
-            btnLibre.getLayoutParams().height = 60;
-            btnLibre.getGravity();
         }
         finish();
-
     }
 }

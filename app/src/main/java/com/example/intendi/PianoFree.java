@@ -38,7 +38,7 @@ public class PianoFree extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_piano_free);
 
         doKey = findViewById(R.id.doNote);
         reKey = findViewById(R.id.reNote);

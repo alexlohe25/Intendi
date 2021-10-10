@@ -42,7 +42,6 @@
             android:backgroundTint="#FFB703"
             android:fontFamily="@font/vt323"
             android:gravity="center|top"
-            android:onClick="startGame"
             android:text="Libre"
             android:textAlignment="center"
             android:textAllCaps="false"

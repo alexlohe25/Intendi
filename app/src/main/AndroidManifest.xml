@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Intendi">
         <activity
             android:name=".PianoFree"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".PianoGame"
             android:exported="true"
