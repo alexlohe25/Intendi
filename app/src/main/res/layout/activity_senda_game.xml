@@ -181,8 +181,6 @@
         layout="@layout/close_game_pop_up"
         />
 
-    <include
-        layout="@layout/help_pop_up"
-        />
+    <include layout="@layout/help_pop_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
