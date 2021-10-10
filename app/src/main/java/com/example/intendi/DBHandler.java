@@ -186,30 +186,6 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         db.close();
     }
-    /*public void printAllUsersInfo(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS;
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()) {
-            do {
-                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
-            } while (cursor.moveToNext());
-        }
-        db.close();
-    }
-    public void printGameResults(int userId, String game){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_RESULTS +
-                " WHERE " + COLUMN_RUSER + "= " + Integer.toString(userId)
-                + " AND " + COLUMN_RGAME + " = '" + game + "'";
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()){
-            do{
-                System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3) + " " + cursor.getString(4));
-            } while (cursor.moveToNext());
-        }
-        db.close();
-    }*/
     public void updateCurrentUser(User curUser){
         String uid = Integer.toString(curUser.getUser_id());
         SQLiteDatabase db = this.getWritableDatabase();

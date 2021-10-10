@@ -16,10 +16,11 @@ import android.widget.TextView;
 public class AjustesFragment extends Fragment {
 
     ImageView changeAvatarButton;
-    View changeAvatarMenu;
-    ImageView backgroundMenu;
+    View changeAvatarMenu, popUpDelete;
+    ImageView backgroundMenu, backgroundMenuD;
     ImageView delphi, sharky, iguanee, dogge, barky;
-    Button logOutButton, updateButton;
+    Button logOutButton, updateButton,deleteButton;
+    Button deleteBtn, cancelBtn;
     User currentUser;
     int originalSrc;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +30,7 @@ public class AjustesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView username, msgUpdate;
+    TextView username, msgUpdate, confirmUserEditText, deleteMsg;
     ImageView userAvatar;
     DBHandler dbHandler;
     public AjustesFragment() {
@@ -68,16 +69,21 @@ public class AjustesFragment extends Fragment {
 
          updateButton = view.findViewById(R.id.updateButton);
          logOutButton= view.findViewById(R.id.playButton);
-
+         deleteButton = view.findViewById(R.id.deleteButton);
          changeAvatarButton = view.findViewById(R.id.editAvatar);
          changeAvatarMenu = view.findViewById(R.id.avatarMenu);
+         popUpDelete = view.findViewById(R.id.confirmDelete);
          delphi = view.findViewById(R.id.Intendi);
          sharky = view.findViewById(R.id.Sharky);
          iguanee = view.findViewById(R.id.Iguanee);
          dogge = view.findViewById(R.id.Dogge);
          barky = view.findViewById(R.id.Barky);
-
+         deleteBtn = view.findViewById(R.id.deleteUser);
+         cancelBtn = view.findViewById(R.id.cancelDelete);
+         confirmUserEditText = view.findViewById(R.id.confirmUser);
+         deleteMsg = view.findViewById(R.id.msgDelete);
          backgroundMenu = view.findViewById(R.id.faded_background);
+         backgroundMenuD = view.findViewById(R.id.faded_backgroundD);
 
          username.setText(currentUser.getUsername());
          userAvatar.setImageResource(currentUser.getImageSource());
@@ -90,6 +96,48 @@ public class AjustesFragment extends Fragment {
                     logOut();
                 }
             });
+         deleteButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 popUpDelete.setVisibility(View.VISIBLE);
+             }
+         });
+        backgroundMenuD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpDelete.setVisibility(View.INVISIBLE);
+                confirmUserEditText.setText("");
+                deleteMsg.setText("");
+            }
+        });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userToDelete = confirmUserEditText.getText().toString();
+                if(userToDelete.length() > 0){
+                    if(userToDelete.equals(currentUser.getUsername())){
+                        dbHandler.deleteUser(currentUser.getUser_id());
+                        Intent miIntent = new Intent( getActivity(), MainActivity.class);
+                        startActivity(miIntent);
+                        getActivity().finish();
+                    }else{
+                        confirmUserEditText.setText("");
+                        deleteMsg.setText("No se pudo borrar: El nombre no coincide");
+                    }
+                }else{
+                    confirmUserEditText.setText("");
+                    deleteMsg.setText("Introduzca un nombre");
+                }
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpDelete.setVisibility(View.INVISIBLE);
+                confirmUserEditText.setText("");
+                deleteMsg.setText("");
+            }
+        });
         changeAvatarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +150,7 @@ public class AjustesFragment extends Fragment {
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
+
         delphi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -148,6 +197,7 @@ public class AjustesFragment extends Fragment {
                 updateUser();
             }
         });
+
          return view;
     }
     public void updateUser(){
