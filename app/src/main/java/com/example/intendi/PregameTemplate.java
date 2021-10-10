@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
@@ -19,9 +20,10 @@ public class PregameTemplate extends AppCompatActivity {
     ImageView imageLogo;
     TextView textBubble;
     FloatingActionButton go_back;
-    Button playButton;
+    Button playButton, libreButton;
     String gameType;
     User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +34,25 @@ public class PregameTemplate extends AppCompatActivity {
         textBubble = findViewById(R.id.textBubble);
         playButton = findViewById(R.id.playButton);
 
+        libreButton = findViewById(R.id.libreButton);
+
         Intent myIntent = getIntent();
         String imageBubbleDir = myIntent.getStringExtra("imageBubble");
         String imageLogoDir = myIntent.getStringExtra("imageLogo");
         String textBubbleDir = myIntent.getStringExtra("textBubble");
         gameType = myIntent.getStringExtra("game");
         currentUser = (User)myIntent.getSerializableExtra("User");
+
+        if (gameType.equals("piano")){
+            libreButton.setVisibility(View.VISIBLE);
+            libreButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent gameIntent = new Intent(view.getContext(), PianoFree.class);
+                    startActivity(gameIntent);
+                }
+            });
+        }
 
         int idImageBubble = this.getResources().getIdentifier(imageBubbleDir, "drawable", this.getPackageName());
         int idLogo = this.getResources().getIdentifier(imageLogoDir, "drawable", this.getPackageName());
@@ -79,6 +94,5 @@ public class PregameTemplate extends AppCompatActivity {
             startActivity(gameIntent);
         }
         finish();
-
     }
 }

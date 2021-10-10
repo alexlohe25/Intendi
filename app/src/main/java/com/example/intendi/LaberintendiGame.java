@@ -57,10 +57,17 @@ public class LaberintendiGame extends AppCompatActivity {
 
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
+    Button goMenuButton;
+    Button okHelpButton;
 
     FloatingActionButton go_back;
+    FloatingActionButton help;
     View go_screen;
     View close_screen;
+    View help_screen;
+    TextView helpText;
+    View pause_background;
+    View help_background;
     CardView cardAnswers;
 
     User currentUser;
@@ -73,11 +80,17 @@ public class LaberintendiGame extends AppCompatActivity {
         dbHandler = dbHandler.getInstance(getApplicationContext());
         go_screen = findViewById(R.id.GO_super_screen);
         close_screen = findViewById(R.id.close_screen);
+        help_screen = findViewById(R.id.help_screen);
         go_back = findViewById(R.id.closeButton);
+        help = findViewById(R.id.helpButton);
+        helpText = findViewById(R.id.help_text);
 
         cardOkPopUp = findViewById(R.id.cardViewOk);
         cardCancelPopUp = findViewById(R.id.cardViewCancel);
-
+        pause_background = findViewById(R.id.pause_background);
+        help_background = findViewById(R.id.help_background);
+        goMenuButton = findViewById(R.id.goMenuButton);
+        okHelpButton = findViewById(R.id.okHelpButton);
 
         cardAnswers = findViewById(R.id.cardAnswers);
 
@@ -121,21 +134,75 @@ public class LaberintendiGame extends AppCompatActivity {
             }
         });
 
+        pause_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                close_screen.setVisibility(View.INVISIBLE);
+                cardAnswers.setVisibility(View.VISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
+        helpText.setText("Agrega instrucciones para completar el laberinto dando click en una tarjeta, elimina alguna dando click en tu panel de respuestas, borra todas con el botón rojo o prueba tu solución con el botón verde");
+
+        help_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                cardAnswers.setVisibility(View.VISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
+        okHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                cardAnswers.setVisibility(View.VISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                enableClicks();
+            }
+        });
+
         cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 cardAnswers.setVisibility(View.VISIBLE);
                 go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
                 enableClicks();
             }
         });
+
+        goMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
         cardAnswers.setVisibility(View.INVISIBLE);
         v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        disableClicks();
+    }
+
+    public void showHelpPopUp(View v){
+        help_screen.setVisibility(View.VISIBLE);
+        cardAnswers.setVisibility(View.INVISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        go_back.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
@@ -508,6 +575,8 @@ public class LaberintendiGame extends AppCompatActivity {
                     dbHandler.addResult(currentUser.getUser_id(), "Laberintendi", laberManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
                     cardAnswers.setVisibility(View.INVISIBLE);
+                    help.setVisibility(View.INVISIBLE);
+                    go_back.setVisibility(View.INVISIBLE);
                 }
             }
         }, scoreEnergyDelay + 200);
