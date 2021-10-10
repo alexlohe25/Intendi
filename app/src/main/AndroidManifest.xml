@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Intendi">
-
+        <activity
+            android:name=".PianoFree"
+            android:exported="true" />
         <activity
             android:name=".PianoGame"
             android:exported="true"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".LaberintendiGame"
             android:exported="true" />
