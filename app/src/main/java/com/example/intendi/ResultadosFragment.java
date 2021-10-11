@@ -44,7 +44,7 @@ public class ResultadosFragment extends Fragment {
     Typeface tf;
     CardView cardWhack, cardMem, cardNums, cardLaber, cardPiano;
     TextView resultDetail, result1, result2, result1DateLabel, result2DateLabel;
-    ImageView objectIntendi;
+    ImageView objectIntendi, userAvatar;
     User currentUser;
     DBHandler dbHandler;
     String currentGame;
@@ -92,10 +92,9 @@ public class ResultadosFragment extends Fragment {
         result2 = (TextView) view.findViewById(R.id.secondResult);
 
         objectIntendi = view.findViewById(R.id.objectIntendi);
-
-       // miChart = (LineChart) view.findViewById(R.id.idChart);
+        userAvatar = view.findViewById(R.id.imageAvatar);
+        userAvatar.setImageResource(currentUser.getImageSource());
         tf = ResourcesCompat.getFont(getActivity(), R.font.nunito_semibold);
-        //generaChart("Whack-A-Ball", view);
         currentGame = "Whack-A-Ball";
 
         //Iniciar con Whack

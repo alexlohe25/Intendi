@@ -22,7 +22,7 @@ public class AjustesFragment extends Fragment {
     Button logOutButton, updateButton,deleteButton;
     Button deleteBtn, cancelBtn;
     User currentUser;
-    int originalSrc;
+    int originalSrc, newAvatar;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -88,8 +88,9 @@ public class AjustesFragment extends Fragment {
          username.setText(currentUser.getUsername());
          userAvatar.setImageResource(currentUser.getImageSource());
 
-        originalSrc = currentUser.getImageSource();
-        msgUpdate.setText("");
+         originalSrc = currentUser.getImageSource();
+         newAvatar = currentUser.getImageSource();
+         msgUpdate.setText("");
          logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -154,40 +155,40 @@ public class AjustesFragment extends Fragment {
         delphi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                currentUser.setImageSource(R.drawable.delphi);
-                userAvatar.setImageResource(R.drawable.delphi);
+                newAvatar = R.drawable.delphi;
+                userAvatar.setImageResource(newAvatar);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
         sharky.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                currentUser.setImageSource(R.drawable.sharky);
-                userAvatar.setImageResource(R.drawable.sharky);
+                newAvatar = R.drawable.sharky;
+                userAvatar.setImageResource(newAvatar);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
         iguanee.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                currentUser.setImageSource(R.drawable.iguanee);
-                userAvatar.setImageResource(R.drawable.iguanee);
+                newAvatar = R.drawable.iguanee;
+                userAvatar.setImageResource(newAvatar);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
         dogge.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                currentUser.setImageSource(R.drawable.dogge);
-                userAvatar.setImageResource(R.drawable.dogge);
+                newAvatar = R.drawable.dogge;
+                userAvatar.setImageResource(newAvatar);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
         barky.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                currentUser.setImageSource(R.drawable.barky);
-                userAvatar.setImageResource(R.drawable.barky);
+                newAvatar = R.drawable.barky;
+                userAvatar.setImageResource(newAvatar);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
@@ -206,13 +207,15 @@ public class AjustesFragment extends Fragment {
             String newName = username.getText().toString();
             System.out.println(currentUser.getUsername()+ " " + newName);
             System.out.println(currentUser.getImageSource() + " " + originalSrc);
-            boolean areInputsEqual = (originalSrc == currentUser.getImageSource()) && (newName.equals(currentUser.getUsername()));
+            boolean areInputsEqual = (originalSrc == newAvatar) && (newName.equals(currentUser.getUsername()));
             System.out.println(areInputsEqual);
             if (!areInputsEqual){
                 currentUser.setUsername(newName);
+                currentUser.setImageSource(newAvatar);
                 dbHandler.updateCurrentUser(currentUser);
                 username.setText(currentUser.getUsername());
                 originalSrc = currentUser.getImageSource();
+                newAvatar = currentUser.getImageSource();
                 msgUpdate.setText("¡Usuario actualizado!");
             }else
                 msgUpdate.setText("No hubo nuevos cambios del usuario");
