@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class PianoGame extends AppCompatActivity {
 
@@ -42,7 +45,8 @@ public class PianoGame extends AppCompatActivity {
     CardView cardCancelPopUp;
     View close_screen;
     View pause_background;
-
+    DBHandler dbHandler;
+    User currentUser;
     int answer;
     boolean isPlaying;
 
@@ -64,6 +68,8 @@ public class PianoGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piano_game);
 
+        dbHandler = dbHandler.getInstance(getApplicationContext());
+        currentUser = (User)getIntent().getSerializableExtra("User");
         doKey = findViewById(R.id.doNote);
         reKey = findViewById(R.id.reNote);
         miKey = findViewById(R.id.miNote);
@@ -406,6 +412,10 @@ public class PianoGame extends AppCompatActivity {
             changeTries(pianoManager.getTries());
             changeKeyState(false);
             finalScore.setText(String.valueOf(pianoManager.getScore()));
+            java.util.Date today = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            String gameDate = df.format(today);
+            dbHandler.addResult(currentUser.getUser_id(), "Piano", pianoManager.getScore(), gameDate);
             go_screen.setVisibility(View.VISIBLE);
         }else if(answer == -1){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
