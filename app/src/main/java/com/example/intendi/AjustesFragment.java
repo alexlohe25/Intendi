@@ -216,12 +216,17 @@ public class AjustesFragment extends Fragment {
                 username.setText(currentUser.getUsername());
                 originalSrc = currentUser.getImageSource();
                 newAvatar = currentUser.getImageSource();
+                msgUpdate.setTextColor(getResources().getColor(R.color.marinoIntendi));
                 msgUpdate.setText("¡Usuario actualizado!");
-            }else
+            }else {
                 msgUpdate.setText("No hubo nuevos cambios del usuario");
+                msgUpdate.setTextColor(getResources().getColor(R.color.red_eat));
+            }
 
-        }else
+        }else {
             msgUpdate.setText("Introduce un nombre de usuario");
+            msgUpdate.setTextColor(getResources().getColor(R.color.red_eat));
+        }
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

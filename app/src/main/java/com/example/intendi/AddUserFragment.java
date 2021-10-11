@@ -89,9 +89,11 @@ public class AddUserFragment extends Fragment {
                         if (dbHandler.getUsersCount() < 6) {
                             String dateOfBirth = dia.getText() + "/" + mes.getText() + "/" + mes.getText();
                             newUser = dbHandler.addUser(name.getText().toString(), dateOfBirth, imageSrc);
+                            msgAdd.setTextColor(getResources().getColor(R.color.marinoIntendi));
                             msgAdd.setText("¡" + name.getText().toString()+" se une al juego!");
 
                         }else {
+                            msgAdd.setTextColor(getResources().getColor(R.color.red_eat));
                             msgAdd.setText("Sólo puede haber 6 jugadores en este dispositivo");
                             flagIsAdded = false;
                         }
@@ -115,10 +117,14 @@ public class AddUserFragment extends Fragment {
                                 createUser.setEnabled(true);
                             }
                         }, 500);
-                    }else
+                    }else {
+                        msgAdd.setTextColor(getResources().getColor(R.color.red_eat));
                         msgAdd.setText("Introduce una fecha válida");
-                }else
+                    }
+                }else {
+                    msgAdd.setTextColor(getResources().getColor(R.color.red_eat));
                     msgAdd.setText("Introduce un nombre de usuario");
+                }
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
