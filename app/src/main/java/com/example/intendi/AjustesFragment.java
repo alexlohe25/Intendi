@@ -201,6 +201,7 @@ public class AjustesFragment extends Fragment {
          return view;
     }
     public void updateUser(){
+        updateButton.setEnabled(false);
         if(username.getText().toString().length() > 0){
             String newName = username.getText().toString();
             System.out.println(currentUser.getUsername()+ " " + newName);
@@ -223,6 +224,7 @@ public class AjustesFragment extends Fragment {
             @Override
             public void run() {
                 msgUpdate.setText("");
+                updateButton.setEnabled(true);
             }
         }, 2000);
         //userAvatar.setImageResource(currentUser.getImageSource());

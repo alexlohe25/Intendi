@@ -79,6 +79,7 @@ public class AddUserFragment extends Fragment {
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                createUser.setEnabled(false);
                 boolean isDateValid = isDateValid(dia.getText().toString(), mes.getText().toString(), anio.getText().toString());
                 int lengthName = name.getText().toString().length();
                 if (lengthName > 0){
@@ -111,12 +112,21 @@ public class AddUserFragment extends Fragment {
                                     startActivity(miIntent);
                                     getActivity().finish();
                                 }
+                                createUser.setEnabled(true);
                             }
-                        }, 1500);
+                        }, 500);
                     }else
                         msgAdd.setText("Introduce una fecha válida");
                 }else
                     msgAdd.setText("Introduce un nombre de usuario");
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        msgAdd.setText("");
+                        createUser.setEnabled(true);
+                    }
+                }, 1500);
             }
         });
         changeAvatarButton.setOnClickListener(new View.OnClickListener() {
