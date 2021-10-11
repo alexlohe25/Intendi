@@ -66,6 +66,7 @@
                         android:src="@drawable/question"
                         app:layout_constraintVertical_bias="0.03"
                         app:maxImageSize="25dp"
+                        android:onClick="showHelpPopUp"
                         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
                 </LinearLayout>
 
