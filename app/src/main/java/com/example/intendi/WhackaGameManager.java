@@ -29,10 +29,10 @@ public class WhackaGameManager {
 
     public void checkBall(clickableDolphin D){
         if(currentColor.equals(D.getColor())){
-            int newIndex = rand.nextInt(4);
+            int newIndex = rand.nextInt(5);
             String newColor = allColors[newIndex];
             while(newColor == currentColor){
-                newIndex = rand.nextInt(4);
+                newIndex = rand.nextInt(5);
                 newColor = allColors[newIndex];
             }
             D.setBall(allBalls[newIndex],allColors[newIndex]);
