@@ -63,6 +63,13 @@ public class PianoGame extends AppCompatActivity {
     private MediaPlayer solSharpSound;
     private MediaPlayer laSharpSound;
 
+    View help_screen;
+    TextView helpText;
+    View help_background;
+    Button okHelpButton;
+    FloatingActionButton help;
+    FloatingActionButton go_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +102,13 @@ public class PianoGame extends AppCompatActivity {
         close_screen = findViewById(R.id.close_screen);
         pause_background = findViewById(R.id.pause_background);
 
+        help_screen = findViewById(R.id.help_screen);
+        help = findViewById(R.id.helpButton);
+        helpText = findViewById(R.id.help_text);
+        help_background = findViewById(R.id.help_background);
+        okHelpButton = findViewById(R.id.okHelpButton);
+        go_back = findViewById(R.id.closeButton);
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +127,28 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        helpText.setText("Observa el patrón de teclas iluminadas y da click en aquellas que fueron coloreadas según la melodía entonada");
+
+        help_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                //enableClicks();
+            }
+        });
+
+        okHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                help_screen.setVisibility(View.INVISIBLE);
+                go_back.setVisibility(View.VISIBLE);
+                help.setVisibility(View.VISIBLE);
+                //enableClicks();
             }
         });
 
@@ -189,6 +225,14 @@ public class PianoGame extends AppCompatActivity {
         for (int i = 0; i < notesArray.length; i++) {
             notesArray[i].setEnabled(state);
         }
+    }
+
+    public void showHelpPopUp(View v){
+        help_screen.setVisibility(View.VISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        help.setVisibility(View.INVISIBLE);
+        go_back.setVisibility(View.INVISIBLE);
+        //disableClicks();
     }
 
     private void colorAndPlay(int delay, Button button) {
@@ -417,6 +461,8 @@ public class PianoGame extends AppCompatActivity {
             String gameDate = df.format(today);
             dbHandler.addResult(currentUser.getUser_id(), "Piano", pianoManager.getScore(), gameDate);
             go_screen.setVisibility(View.VISIBLE);
+            help.setVisibility(View.INVISIBLE);
+            go_back.setVisibility(View.INVISIBLE);
         }else if(answer == -1){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
             changeTries(pianoManager.getTries());
