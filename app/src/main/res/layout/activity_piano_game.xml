@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#466777"
+    tools:context=".PianoGame">
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#466777">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="left">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/closeButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:backgroundTint="#FF4040"
+                        app:fabCustomSize="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.045"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.03"
+                        app:maxImageSize="25dp"
+                        app:srcCompat="@drawable/equis" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/helpButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:backgroundTint="#FFEE59"
+                        app:fabCustomSize="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.955"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/question"
+                        app:layout_constraintVertical_bias="0.03"
+                        app:maxImageSize="25dp"
+                        android:onClick="showHelpPopUp"
+                        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textLifes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/vt323"
+                        android:text="Intentos"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        android:includeFontPadding="false"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/CorcheaOne"
+                            android:layout_marginRight="5dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/corchea"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/CorcheaTwo"
+                            android:layout_marginRight="5dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/corchea"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/CorcheaThree"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/corchea"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/white" >
+
+                </View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/puntajeTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/vt323"
+                        android:text="Puntaje"
+                        android:textColor="#FFFFFF"
+                        android:textSize="30sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/scoreLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/vt323"
+                        android:includeFontPadding="false"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="35sp">
+                    </TextView>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/smallbubble"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/pianoNote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dip"
+                            android:layout_marginBottom="12dip"
+                            android:fontFamily="@font/vt323"
+                            android:gravity="center"
+                            android:text="Hola"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="30sp">
+
+                        </TextView>
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/delphi_l" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/doNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/reNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/miNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/faNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/solNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/laNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/siNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:insetBottom="0dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/white"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="120dp"
+                android:layout_weight="0.3">
+
+                <Button
+                    android:id="@+id/doSharp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.4"
+                    android:backgroundTint="@color/black"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/reSharp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.4"
+                    android:backgroundTint="@color/black"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="70dp"
+                android:layout_weight="0.4">
+
+                <Button
+                    android:id="@+id/faSharp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/black"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/solSharp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/black"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/laSharp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/black"
+                    android:onClick="onTap"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/game_over_overlay"
+        />
+
+    <include
+        layout="@layout/close_game_pop_up"
+        />
+
+    <include layout="@layout/help_pop_up" />
+
+</RelativeLayout>

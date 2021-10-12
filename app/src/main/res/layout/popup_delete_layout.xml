@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible">
+
+    <ImageView
+        android:id="@+id/faded_backgroundD"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.85"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/screen_background_dark"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:layout_gravity="center"
+        android:background="@drawable/pop_up_back"
+        android:clickable="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="AVISO"
+            android:textColor="@color/naranjaIntendi"
+            android:textSize="30dp" />
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="¿Estás seguro de borrar este usuario? Se borrarán todos tus resultados para siempre"
+            android:textColor="@color/marinoIntendi"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="Introduce el nombre de usuario para confirmar"
+            android:textColor="@color/marinoIntendi"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/confirmUser"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/users_1"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:fontFamily="@font/nunito"
+            android:maxLength="15"
+            android:hint="Nombre"
+            android:inputType="textPersonName"
+            android:shadowColor="#7A7A7A"
+            android:textColor="#000000"
+            android:textColorHighlight="#7A7A7A"
+            android:textColorHint="#7A7A7A"
+            app:hintTextColor="#000000"
+            android:textSize="15dp"
+            android:theme="@style/EditTextTheme"/>
+        <TextView
+            android:id="@+id/msgDelete"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/red_eat"
+            android:textSize="15dp" />
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/deleteUser"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/naranjaIntendi"
+                android:text="Confirmar"
+                android:textAllCaps="false"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/crema"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+            <Button
+                android:id="@+id/cancelDelete"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azulIntendi"
+                android:text="Cancelar"
+                android:fontFamily="@font/nunito"
+                android:textAllCaps="false"
+                android:textColor="@color/crema"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="30dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
