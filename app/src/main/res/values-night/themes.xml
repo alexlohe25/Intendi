@@ -3,7 +3,7 @@
     <style name="Theme.Intendi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/azulIntendi</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -19,8 +19,5 @@
     <item name="colorControlActivated">#7A7A7A</item>
     <item name="colorControlHighlight">#7A7A7A</item>
     </style>
-    <style name="BottomNavigation">
-        <item name="android:background">@color/marinoIntendi</item>
-        <item name="itemTextColor">@color/crema</item>
-    </style>
+
 </resources>
