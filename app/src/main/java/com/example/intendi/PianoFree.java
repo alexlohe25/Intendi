@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.IOException;
 
 public class PianoFree extends AppCompatActivity {
@@ -21,6 +23,8 @@ public class PianoFree extends AppCompatActivity {
     View doSh, reSh, faSh, solSh, laSh;
 
     TextView pianoNote;
+
+    FloatingActionButton closeButton;
 
     private MediaPlayer doSound;
     private MediaPlayer reSound;
@@ -54,6 +58,14 @@ public class PianoFree extends AppCompatActivity {
         laSh = findViewById(R.id.laSharp);
 
         pianoNote = findViewById(R.id.pianoNote);
+        closeButton = findViewById(R.id.returnButton);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         doSound = MediaPlayer.create(this, R.raw.don);
         reSound = MediaPlayer.create(this, R.raw.re);
