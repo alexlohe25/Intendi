@@ -53,11 +53,10 @@ public class SendaManager {
     public int compareCurrentCell(int cellId){
         if(cellId != this.pattern.get(indexCompared)){ //Error
             this.lifes--;
+            this.indexCompared = 0;
             if(this.lifes == 0){
-                this.indexCompared = 0;
                 return -2; //Game over
             }else{
-                this.indexCompared = 0;
                 return -1; //Player loses 1 life and repeats round
             }
         }else{

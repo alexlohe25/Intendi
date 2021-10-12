@@ -162,7 +162,7 @@ public class LaberManager {
                 candidatesFish.add(curPos - 1);
                 curPos = curPos - 1;
                 j++;
-            }else if(movement == 2 && (curPos + width) < this.labSize && this.labNumbers[curPos + width] == -1){ //Validate go down
+            }else if(movement == 4 && (curPos + width) < this.labSize && this.labNumbers[curPos + width] == -1){ //Validate go down
                 this.labNumbers[curPos + width] = 0;
                 this.pattern.add(curPos + width);
                 candidatesFish.add(curPos + width);
