@@ -46,7 +46,7 @@ public class MemoryGame extends AppCompatActivity {
     FloatingActionButton help;
 
     View help_screen;
-    TextView helpText;
+    TextView helpText,finalScoreText;
     View help_background;
     Button okHelpButton;
     boolean isTimerFinished;
@@ -57,6 +57,7 @@ public class MemoryGame extends AppCompatActivity {
         currentUser = (User)getIntent().getSerializableExtra("User");
         dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_memory_game);
+        finalScoreText = findViewById(R.id.FinalScoreTxt);
         go_screen = findViewById(R.id.GO_super_screen);
         goMenuButton = findViewById(R.id.goMenuButton);
         pause_background = findViewById(R.id.pause_background);
@@ -94,6 +95,7 @@ public class MemoryGame extends AppCompatActivity {
                     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     String gameDate = df.format(today);
                     dbHandler.addResult(currentUser.getUser_id(), "Memorama", totalScore, gameDate);
+                    finalScoreText.setText(Integer.toString(totalScore));
                     go_screen.setVisibility(View.VISIBLE);
                     help.setVisibility(View.INVISIBLE);
                     go_back.setVisibility(View.INVISIBLE);

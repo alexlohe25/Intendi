@@ -163,6 +163,7 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble",imageBub[num_random]);
                 myIntent.putExtra("imageLogo",imageLog[num_random]);
                 myIntent.putExtra("textBubble",textBub[num_random]);
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
             }
         });
