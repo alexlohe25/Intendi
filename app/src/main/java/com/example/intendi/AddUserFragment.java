@@ -29,7 +29,7 @@ public class AddUserFragment extends Fragment {
     ImageView changeAvatarButton;
     View changeAvatarMenu;
     ImageView backgroundMenu;
-    ImageView delphi, sharky, iguanee, dogge, barky;
+    ImageView delphi, sharky, iguanee, dogge, barky, kitee, parret, cheeky;
     int imageSrc;
     public AddUserFragment() {
         // Required empty public constructor
@@ -69,13 +69,16 @@ public class AddUserFragment extends Fragment {
         anio.setHint("Año");
         changeAvatarButton = view.findViewById(R.id.editAvatar);
         changeAvatarMenu = view.findViewById(R.id.avatarMenu);
+        changeAvatarMenu.setVisibility(View.INVISIBLE);
         backgroundMenu = view.findViewById(R.id.faded_background);
         delphi = view.findViewById(R.id.Intendi);
         sharky = view.findViewById(R.id.Sharky);
         iguanee = view.findViewById(R.id.Iguanee);
         dogge = view.findViewById(R.id.Dogge);
         barky = view.findViewById(R.id.Barky);
-
+        kitee = view.findViewById(R.id.Kitee);
+        parret = view.findViewById(R.id.Parret);
+        cheeky = view.findViewById(R.id.Cheeky);
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -183,6 +186,30 @@ public class AddUserFragment extends Fragment {
             @Override
             public void onClick(View v){
                 imageSrc = R.drawable.barky;
+                avatar.setImageResource(imageSrc);
+                changeAvatarMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+        kitee.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                imageSrc = R.drawable.kitee;
+                avatar.setImageResource(imageSrc);
+                changeAvatarMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+        parret.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                imageSrc = R.drawable.parret;
+                avatar.setImageResource(imageSrc);
+                changeAvatarMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+        cheeky.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                imageSrc = R.drawable.cheeky;
                 avatar.setImageResource(imageSrc);
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
