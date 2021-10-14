@@ -232,7 +232,7 @@ public class SendaGame extends AppCompatActivity {
                 close_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -244,7 +244,7 @@ public class SendaGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -254,7 +254,7 @@ public class SendaGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -264,7 +264,7 @@ public class SendaGame extends AppCompatActivity {
                 close_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -286,12 +286,12 @@ public class SendaGame extends AppCompatActivity {
 
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
-        disableClicks();
+        //disableClicks();
     }
 
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
-        disableClicks();
+        //disableClicks();
     }
 
     private void turnOn(int delay, CardView card, TextView text){
@@ -418,10 +418,14 @@ public class SendaGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (close_screen.getVisibility() == View.VISIBLE){
-            close_screen.setVisibility(View.INVISIBLE);
-        }else{
-            close_screen.setVisibility(View.VISIBLE);
+        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
+                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
+                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
+            }else{ //Si no hay pop up mostrado
+                close_screen.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

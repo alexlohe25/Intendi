@@ -251,10 +251,14 @@ public class MemoryGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (close_screen.getVisibility() == View.VISIBLE){
-            close_screen.setVisibility(View.INVISIBLE);
-        }else{
-            close_screen.setVisibility(View.VISIBLE);
+        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
+                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
+                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
+            }else{ //Si no hay pop up mostrado
+                close_screen.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

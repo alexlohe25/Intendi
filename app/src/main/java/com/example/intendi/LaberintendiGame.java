@@ -141,7 +141,7 @@ public class LaberintendiGame extends AppCompatActivity {
                 cardAnswers.setVisibility(View.VISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -154,7 +154,7 @@ public class LaberintendiGame extends AppCompatActivity {
                 cardAnswers.setVisibility(View.VISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -165,7 +165,7 @@ public class LaberintendiGame extends AppCompatActivity {
                 cardAnswers.setVisibility(View.VISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -176,7 +176,7 @@ public class LaberintendiGame extends AppCompatActivity {
                 cardAnswers.setVisibility(View.VISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                enableClicks();
+                //enableClicks();
             }
         });
 
@@ -192,13 +192,13 @@ public class LaberintendiGame extends AppCompatActivity {
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
         cardAnswers.setVisibility(View.INVISIBLE);
-        disableClicks();
+        //disableClicks();
     }
 
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
         cardAnswers.setVisibility(View.INVISIBLE);
-        disableClicks();
+        //disableClicks();
     }
 
     public void clickMove(View v){
@@ -570,8 +570,8 @@ public class LaberintendiGame extends AppCompatActivity {
                     dbHandler.addResult(currentUser.getUser_id(), "Laberintendi", laberManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
                     cardAnswers.setVisibility(View.INVISIBLE);
-                    help.setVisibility(View.INVISIBLE);
-                    go_back.setVisibility(View.INVISIBLE);
+                    //help.setVisibility(View.INVISIBLE);
+                    //go_back.setVisibility(View.INVISIBLE);
                 }
             }
         }, scoreEnergyDelay + 200);
@@ -594,10 +594,14 @@ public class LaberintendiGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (close_screen.getVisibility() == View.VISIBLE){
-            close_screen.setVisibility(View.INVISIBLE);
-        }else{
-            close_screen.setVisibility(View.VISIBLE);
+        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
+                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
+                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
+            }else{ //Si no hay pop up mostrado
+                close_screen.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
