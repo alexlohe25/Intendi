@@ -145,7 +145,7 @@ public class LaberintendiGame extends AppCompatActivity {
             }
         });
 
-        helpText.setText("Agrega instrucciones para completar el laberinto dando click en una tarjeta, elimina alguna dando click en tu panel de respuestas, borra todas con el botón rojo o prueba tu solución con el botón verde");
+        helpText.setText("Agrega instrucciones (verde para avanzar, azul para girar a la izquierda, amarillo para girar a la derecha y rojo para comer) para completar el laberinto dando click en una tarjeta, elimina alguna dando click en tu panel de respuestas, borra todas con el botón rojo o prueba tu solución con el botón verde");
 
         help_background.setOnClickListener(new View.OnClickListener() {
             @Override
