@@ -108,6 +108,7 @@
         app:maxImageSize="25dp"
         app:srcCompat="@drawable/equis"
         android:onClick="showClosePopUp"
+        android:stateListAnimator="@null"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -127,6 +128,7 @@
         app:layout_constraintVertical_bias="0.03"
         app:maxImageSize="25dp"
         android:onClick="showHelpPopUp"
+        android:stateListAnimator="@null"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <include
