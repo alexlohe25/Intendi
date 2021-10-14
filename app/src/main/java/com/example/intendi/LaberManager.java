@@ -95,7 +95,7 @@ public class LaberManager {
     }
 
     public ArrayList<Integer> getAnswerUser() {
-        return answerUser;
+        return this.answerUser;
     }
 
     public int getStart(){ return this.start; }

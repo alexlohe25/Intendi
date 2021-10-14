@@ -79,9 +79,9 @@ public class AnswersBoardAdapter extends RecyclerView.Adapter<AnswersBoardAdapte
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    laberManager.deleteElementAnswer(position);
+                    laberManager.deleteElementAnswer(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-                    notifyItemRangeChanged(getAdapterPosition(),laberManager.getAnswerUser().size());
+                    notifyItemRangeChanged(getAdapterPosition(), laberManager.getAnswerUser().size());
                 }
             });
         }
