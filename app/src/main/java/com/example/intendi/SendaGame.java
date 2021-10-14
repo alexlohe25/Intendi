@@ -286,16 +286,11 @@ public class SendaGame extends AppCompatActivity {
 
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
-        v.setVisibility(View.INVISIBLE);
-        help.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
-        v.setVisibility(View.INVISIBLE);
-        help.setVisibility(View.INVISIBLE);
-        go_back.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
