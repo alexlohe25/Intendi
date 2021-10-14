@@ -80,6 +80,7 @@ public class DBHandler extends SQLiteOpenHelper {
         byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
         String username = new String(curUserDecoded);
         User newUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
+        cursor.close();
         db.close();
         return newUser;
     }
@@ -129,6 +130,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         //en cualquiera de los casos se hace este insert que contaria como el más reciente
         db.insert(TABLE_RESULTS, null, values);
+        cursor.close();
         db.close();
     }
     public ArrayList<User> getAllUsers(){
@@ -145,6 +147,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 // System.out.println(cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
             } while (cursor.moveToNext());
         }
+        cursor.close();
         db.close();
         return users;
     }
@@ -152,7 +155,9 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
-        return cursor.getCount();
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        return cursorCount;
     }
     public ArrayList<Result> getResultsFromGame(int idUser, String game){
         ArrayList resultsFromGame = new ArrayList();
@@ -167,6 +172,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 resultsFromGame.add(cursorResult);
             }while(cursor.moveToNext());
         }
+        cursor.close();
         db.close();
         return resultsFromGame;
     }
@@ -182,6 +188,7 @@ public class DBHandler extends SQLiteOpenHelper {
             curUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
             return curUser;
         }
+        cursor.close();
         db.close();
         return curUser;
     }
@@ -193,6 +200,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
         }
+        cursor.close();
         db.close();
     }
     public void updateCurrentUser(User curUser){
