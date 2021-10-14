@@ -255,4 +255,13 @@ public class MemoryGame extends AppCompatActivity {
         }
         boardAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (close_screen.getVisibility() == View.VISIBLE){
+            close_screen.setVisibility(View.INVISIBLE);
+        }else{
+            close_screen.setVisibility(View.VISIBLE);
+        }
+    }
 }

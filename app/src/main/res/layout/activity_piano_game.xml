@@ -202,7 +202,7 @@
                             android:layout_marginBottom="12dip"
                             android:fontFamily="@font/vt323"
                             android:gravity="center"
-                            android:text="Hola"
+                            android:text="Listo?"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp">

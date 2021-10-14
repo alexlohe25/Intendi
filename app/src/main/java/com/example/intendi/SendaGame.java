@@ -421,4 +421,12 @@ public class SendaGame extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (close_screen.getVisibility() == View.VISIBLE){
+            close_screen.setVisibility(View.INVISIBLE);
+        }else{
+            close_screen.setVisibility(View.VISIBLE);
+        }
+    }
 }

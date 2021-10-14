@@ -12,7 +12,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.renderscript.Sampler;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -201,7 +203,13 @@ public class PianoGame extends AppCompatActivity {
 
         changeKeyState(false);
 
-        gameStart();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gameStart();
+            }
+        }, 1500);
     }
 
     @Override
@@ -232,7 +240,6 @@ public class PianoGame extends AppCompatActivity {
         v.setVisibility(View.INVISIBLE);
         help.setVisibility(View.INVISIBLE);
         go_back.setVisibility(View.INVISIBLE);
-        //disableClicks();
     }
 
     private void colorAndPlay(int delay, Button button) {
@@ -527,6 +534,15 @@ public class PianoGame extends AppCompatActivity {
         }else{
             showInstructions();
             isPlaying = true;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (close_screen.getVisibility() == View.VISIBLE){
+            close_screen.setVisibility(View.INVISIBLE);
+        }else{
+            close_screen.setVisibility(View.VISIBLE);
         }
     }
 }
