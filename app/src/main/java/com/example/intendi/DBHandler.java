@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Base64;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,16 +66,20 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public User addUser(String name, String dateBirth, int avatar){
+        byte[] nameBytes = name.getBytes();
+        String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_UNAME, name);
+        values.put(COLUMN_UNAME, encodedName);
         values.put(COLUMN_UDATEBIRTH, dateBirth);
         values.put(COLUMN_UAVATAR, avatar);
         db.insert(TABLE_USERS, null, values);
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToLast();
-        User newUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(3), cursor.getString(2));
+        byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
+        String username = new String(curUserDecoded);
+        User newUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
         db.close();
         return newUser;
     }
@@ -133,7 +138,9 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
             do {
-                User cursorUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(3), cursor.getString(2));
+                byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
+                String username = new String(curUserDecoded);
+                User cursorUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
                 users.add(cursorUser);
                 // System.out.println(cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
             } while (cursor.moveToNext());
@@ -170,7 +177,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
-            curUser = new User(cursor.getInt(0), cursor.getString(1), cursor.getInt(3), cursor.getString(2));
+            byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
+            String username = new String(curUserDecoded);
+            curUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
             return curUser;
         }
         db.close();
@@ -187,10 +196,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public void updateCurrentUser(User curUser){
+        byte[] nameBytes = curUser.getUsername().getBytes();
+        String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         String uid = Integer.toString(curUser.getUser_id());
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_UNAME, curUser.getUsername());
+        values.put(COLUMN_UNAME, encodedName);
         values.put(COLUMN_UDATEBIRTH, curUser.getDateBirth());
         values.put(COLUMN_UAVATAR, curUser.getImageSource());
         db.update(TABLE_USERS, values, COLUMN_UID + " = ?", new String[]{uid});
