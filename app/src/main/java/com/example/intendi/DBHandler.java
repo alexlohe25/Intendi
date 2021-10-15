@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Base64;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -66,7 +67,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public User addUser(String name, String dateBirth, int avatar){
-        byte[] nameBytes = name.getBytes();
+        byte[] nameBytes = name.getBytes(StandardCharsets.UTF_8);
         String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -140,8 +141,9 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
             do {
-                byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
-                String username = new String(curUserDecoded);
+                String cursorName = cursor.getString(1);
+                byte[] curUserDecoded = Base64.decode(cursorName, Base64.DEFAULT);
+                String username = new String(curUserDecoded, StandardCharsets.UTF_8);
                 User cursorUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
                 users.add(cursorUser);
                 // System.out.println(cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
@@ -184,7 +186,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
-            String username = new String(curUserDecoded);
+            String username = new String(curUserDecoded, StandardCharsets.UTF_8);
             curUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
             return curUser;
         }
@@ -204,7 +206,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
     public void updateCurrentUser(User curUser){
-        byte[] nameBytes = curUser.getUsername().getBytes();
+        byte[] nameBytes = curUser.getUsername().getBytes(StandardCharsets.UTF_8);
         String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         String uid = Integer.toString(curUser.getUser_id());
         SQLiteDatabase db = this.getWritableDatabase();
