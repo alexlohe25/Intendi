@@ -8,6 +8,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -35,6 +37,7 @@ public class PianoGame extends AppCompatActivity {
     ImageView corcheaOne, corcheaTwo, corcheaThree;
 
     Button[] notesArray;
+    MediaPlayer[] noteSoundArray;
 
     PianoManager pianoManager;
 
@@ -140,7 +143,6 @@ public class PianoGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -201,6 +203,20 @@ public class PianoGame extends AppCompatActivity {
         notesArray[10] = solSh;
         notesArray[11] = laSh;
 
+        noteSoundArray = new MediaPlayer[12];
+        noteSoundArray[0] = doSound;
+        noteSoundArray[1] = reSound;
+        noteSoundArray[2] = miSound;
+        noteSoundArray[3] = faSound;
+        noteSoundArray[4] = solSound;
+        noteSoundArray[5] = laSound;
+        noteSoundArray[6] = siSound;
+        noteSoundArray[7] = doSharpSound;
+        noteSoundArray[8] = reSharpSound;
+        noteSoundArray[9] = faSharpSound;
+        noteSoundArray[10] = solSharpSound;
+        noteSoundArray[11] = laSharpSound;
+
         changeKeyState(false);
 
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -215,18 +231,18 @@ public class PianoGame extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        doSound.release();
-        reSound.release();
-        miSound.release();
-        faSound.release();
-        solSound.release();
-        laSound.release();
-        siSound.release();
-        doSharpSound.release();
-        reSharpSound.release();
-        faSharpSound.release();
-        solSharpSound.release();
-        laSharpSound.release();
+        doSound.reset();
+        reSound.reset();
+        miSound.reset();
+        faSound.reset();
+        solSound.reset();
+        laSound.reset();
+        siSound.reset();
+        doSharpSound.reset();
+        reSharpSound.reset();
+        faSharpSound.reset();
+        solSharpSound.reset();
+        laSharpSound.reset();
     }
 
     public void changeKeyState(Boolean state) {
@@ -242,11 +258,12 @@ public class PianoGame extends AppCompatActivity {
     private void colorAndPlay(int delay, Button button) {
 
         final Handler handler = new Handler(Looper.getMainLooper());
+        int indexSound;
 
         ObjectAnimator animator;
         final MediaPlayer player;
         if (button == doKey){
-            player = doSound;
+            indexSound = 0;
             animator = ObjectAnimator.ofObject(doKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -259,7 +276,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         } else if (button == reKey) {
-            player = reSound;
+            indexSound = 1;
             animator = ObjectAnimator.ofObject(reKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -272,7 +289,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == miKey) {
-            player = miSound;
+            indexSound = 2;
             animator = ObjectAnimator.ofObject(miKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -285,7 +302,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == faKey) {
-            player = faSound;
+            indexSound = 3;
             animator = ObjectAnimator.ofObject(faKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -298,7 +315,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == solKey) {
-            player = solSound;
+            indexSound = 4;
             animator = ObjectAnimator.ofObject(solKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -311,7 +328,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == laKey) {
-            player = laSound;
+            indexSound = 5;
             animator = ObjectAnimator.ofObject(laKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -324,7 +341,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == siKey){
-            player = siSound;
+            indexSound = 6;
             animator = ObjectAnimator.ofObject(siKey,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -337,7 +354,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == doSh){
-            player = doSharpSound;
+            indexSound = 7;
             animator = ObjectAnimator.ofObject(doSh,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -350,7 +367,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == reSh){
-            player = reSharpSound;
+            indexSound = 8;
             animator = ObjectAnimator.ofObject(reSh,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -363,7 +380,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == faSh){
-            player = faSharpSound;
+            indexSound = 9;
             animator = ObjectAnimator.ofObject(faSh,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -376,7 +393,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == solSh){
-            player = solSharpSound;
+            indexSound = 10;
             animator = ObjectAnimator.ofObject(solSh,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -389,7 +406,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else{
-            player = laSharpSound;
+            indexSound = 11;
             animator = ObjectAnimator.ofObject(laSh,
                     "backgroundColor",
                     new ArgbEvaluator(),
@@ -411,15 +428,15 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-                if(player.isPlaying()){
-                    player.stop();
+                if(noteSoundArray[indexSound].isPlaying()){
+                    noteSoundArray[indexSound].stop();
                     try {
-                        player.prepare();
+                        noteSoundArray[indexSound].prepare();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                player.start();
+                noteSoundArray[indexSound].start();
             }
         });
         animator.start();
