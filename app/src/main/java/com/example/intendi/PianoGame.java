@@ -229,6 +229,9 @@ public class PianoGame extends AppCompatActivity {
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
     }
+    public void showClosePopUp(View v){
+        close_screen.setVisibility(View.VISIBLE);
+    }
 
     private void colorAndPlay(int delay, CardView button) {
 
