@@ -8,31 +8,37 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.renderscript.Sampler;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class PianoGame extends AppCompatActivity {
 
-    Button doKey, reKey, miKey, faKey, solKey, laKey, siKey;
-    Button doSh, reSh, faSh, solSh, laSh;
+    CardView doKey, reKey, miKey, faKey, solKey, laKey, siKey;
+    CardView doSh, reSh, faSh, solSh, laSh;
 
     TextView scoreLbl, pianoNote;
     ImageView corcheaOne, corcheaTwo, corcheaThree;
 
-    Button[] notesArray;
+    CardView[] notesArray;
+    MediaPlayer[] noteSoundArray;
 
     PianoManager pianoManager;
 
@@ -138,7 +144,6 @@ public class PianoGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -148,7 +153,6 @@ public class PianoGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -185,7 +189,7 @@ public class PianoGame extends AppCompatActivity {
         solSharpSound = MediaPlayer.create(this, R.raw.solb);
         laSharpSound = MediaPlayer.create(this, R.raw.lab);
 
-        notesArray = new Button[12];
+        notesArray = new CardView[12];
         notesArray[0] = doKey;
         notesArray[1] = reKey;
         notesArray[2] = miKey;
@@ -199,26 +203,37 @@ public class PianoGame extends AppCompatActivity {
         notesArray[10] = solSh;
         notesArray[11] = laSh;
 
+        noteSoundArray = new MediaPlayer[12];
+        noteSoundArray[0] = doSound;
+        noteSoundArray[1] = reSound;
+        noteSoundArray[2] = miSound;
+        noteSoundArray[3] = faSound;
+        noteSoundArray[4] = solSound;
+        noteSoundArray[5] = laSound;
+        noteSoundArray[6] = siSound;
+        noteSoundArray[7] = doSharpSound;
+        noteSoundArray[8] = reSharpSound;
+        noteSoundArray[9] = faSharpSound;
+        noteSoundArray[10] = solSharpSound;
+        noteSoundArray[11] = laSharpSound;
+
         changeKeyState(false);
 
-        gameStart();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gameStart();
+            }
+        }, 1500);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        doSound.release();
-        reSound.release();
-        miSound.release();
-        faSound.release();
-        solSound.release();
-        laSound.release();
-        siSound.release();
-        doSharpSound.release();
-        reSharpSound.release();
-        faSharpSound.release();
-        solSharpSound.release();
-        laSharpSound.release();
+        for(int i = 0; i < 12; i++) {
+            noteSoundArray[i].reset();
+        }
     }
 
     public void changeKeyState(Boolean state) {
@@ -229,24 +244,21 @@ public class PianoGame extends AppCompatActivity {
 
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
-        v.setVisibility(View.INVISIBLE);
-        help.setVisibility(View.INVISIBLE);
-        go_back.setVisibility(View.INVISIBLE);
-        //disableClicks();
     }
 
-    private void colorAndPlay(int delay, Button button) {
+    private void colorAndPlay(int delay, CardView button) {
 
         final Handler handler = new Handler(Looper.getMainLooper());
+        int indexSound;
 
         ObjectAnimator animator;
         final MediaPlayer player;
         if (button == doKey){
-            player = doSound;
+            indexSound = 0;
             animator = ObjectAnimator.ofObject(doKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doKey.getBackgroundTintList().getDefaultColor(),
+                    doKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF94144);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -255,11 +267,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         } else if (button == reKey) {
-            player = reSound;
+            indexSound = 1;
             animator = ObjectAnimator.ofObject(reKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reKey.getBackgroundTintList().getDefaultColor(),
+                    reKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF8961E);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -268,11 +280,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == miKey) {
-            player = miSound;
+            indexSound = 2;
             animator = ObjectAnimator.ofObject(miKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    miKey.getBackgroundTintList().getDefaultColor(),
+                    miKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF9C74F);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -281,11 +293,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == faKey) {
-            player = faSound;
+            indexSound = 3;
             animator = ObjectAnimator.ofObject(faKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faKey.getBackgroundTintList().getDefaultColor(),
+                    faKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF90BE6D);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -294,11 +306,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == solKey) {
-            player = solSound;
+            indexSound = 4;
             animator = ObjectAnimator.ofObject(solKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solKey.getBackgroundTintList().getDefaultColor(),
+                    solKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF43AA8B);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -307,11 +319,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == laKey) {
-            player = laSound;
+            indexSound = 5;
             animator = ObjectAnimator.ofObject(laKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laKey.getBackgroundTintList().getDefaultColor(),
+                    laKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF577590);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -320,11 +332,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == siKey){
-            player = siSound;
+            indexSound = 6;
             animator = ObjectAnimator.ofObject(siKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    siKey.getBackgroundTintList().getDefaultColor(),
+                    siKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF603982);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -333,11 +345,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == doSh){
-            player = doSharpSound;
+            indexSound = 7;
             animator = ObjectAnimator.ofObject(doSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doSh.getBackgroundTintList().getDefaultColor(),
+                    doSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFf78f91);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -346,11 +358,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == reSh){
-            player = reSharpSound;
+            indexSound = 8;
             animator = ObjectAnimator.ofObject(reSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reSh.getBackgroundTintList().getDefaultColor(),
+                    reSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFf7db97);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -359,11 +371,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == faSh){
-            player = faSharpSound;
+            indexSound = 9;
             animator = ObjectAnimator.ofObject(faSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faSh.getBackgroundTintList().getDefaultColor(),
+                    faSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFaabd9d);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -372,11 +384,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else if (button == solSh){
-            player = solSharpSound;
+            indexSound = 10;
             animator = ObjectAnimator.ofObject(solSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solSh.getBackgroundTintList().getDefaultColor(),
+                    solSh.getCardBackgroundColor().getDefaultColor(),
                     0xFF7c8791);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -385,11 +397,11 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, delay);
         }else{
-            player = laSharpSound;
+            indexSound = 11;
             animator = ObjectAnimator.ofObject(laSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laSh.getBackgroundTintList().getDefaultColor(),
+                    laSh.getCardBackgroundColor().getDefaultColor(),
                     0xFF806d91);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -407,22 +419,22 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-                if(player.isPlaying()){
-                    player.stop();
+                if(noteSoundArray[indexSound].isPlaying()){
+                    noteSoundArray[indexSound].stop();
                     try {
-                        player.prepare();
+                        noteSoundArray[indexSound].prepare();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                player.start();
+                noteSoundArray[indexSound].start();
             }
         });
         animator.start();
     }
 
     public void onTap(View v){
-        Button tapButton = (Button)v;
+        CardView tapButton = (CardView) v;
         colorAndPlay(0, tapButton);
 
         if(tapButton == doKey) {
@@ -527,6 +539,19 @@ public class PianoGame extends AppCompatActivity {
         }else{
             showInstructions();
             isPlaying = true;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
+                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
+                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
+            }else{ //Si no hay pop up mostrado
+                close_screen.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

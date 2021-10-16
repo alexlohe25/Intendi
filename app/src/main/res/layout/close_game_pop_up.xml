@@ -4,6 +4,7 @@
     android:id="@+id/close_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:translationZ="89dp"
     android:visibility="invisible">
 
     <ImageView

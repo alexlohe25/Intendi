@@ -46,7 +46,7 @@ public class MemoryGame extends AppCompatActivity {
     FloatingActionButton help;
 
     View help_screen;
-    TextView helpText;
+    TextView helpText,finalScoreText;
     View help_background;
     Button okHelpButton;
     boolean isTimerFinished;
@@ -57,6 +57,7 @@ public class MemoryGame extends AppCompatActivity {
         currentUser = (User)getIntent().getSerializableExtra("User");
         dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_memory_game);
+        finalScoreText = findViewById(R.id.FinalScoreTxt);
         go_screen = findViewById(R.id.GO_super_screen);
         goMenuButton = findViewById(R.id.goMenuButton);
         pause_background = findViewById(R.id.pause_background);
@@ -94,9 +95,8 @@ public class MemoryGame extends AppCompatActivity {
                     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     String gameDate = df.format(today);
                     dbHandler.addResult(currentUser.getUser_id(), "Memorama", totalScore, gameDate);
+                    finalScoreText.setText(Integer.toString(totalScore));
                     go_screen.setVisibility(View.VISIBLE);
-                    help.setVisibility(View.INVISIBLE);
-                    go_back.setVisibility(View.INVISIBLE);
                 }
             }
         }.start();
@@ -210,16 +210,11 @@ public class MemoryGame extends AppCompatActivity {
 
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
-        v.setVisibility(View.INVISIBLE);
-        help.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
-        v.setVisibility(View.INVISIBLE);
-        help.setVisibility(View.INVISIBLE);
-        go_back.setVisibility(View.INVISIBLE);
         disableClicks();
     }
 
@@ -252,5 +247,18 @@ public class MemoryGame extends AppCompatActivity {
             }, 500);
         }
         boardAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
+                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
+                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
+            }else{ //Si no hay pop up mostrado
+                close_screen.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

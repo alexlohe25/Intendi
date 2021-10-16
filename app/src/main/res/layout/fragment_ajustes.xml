@@ -6,223 +6,263 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AjustesFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tituloAjustes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:text="Ajustes de usuario"
-            android:textColor="#023047"
-            android:textSize="36sp"
-            android:textStyle="bold"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.058" />
+            app:layout_constraintVertical_bias="0.0">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/tituloAjustes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:text="Ajustes de usuario"
+                    android:layout_gravity="center"
+                    android:textColor="#023047"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.058" />
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/avatarAjustes"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#00FFFFFF"
+                    android:padding="5dp"
+                    android:layout_marginLeft="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tituloAjustes"
+                    app:layout_constraintVertical_bias="0.019"
+                    app:shapeAppearanceOverlay="@style/RoundedSquare"
+                    app:srcCompat="@drawable/dogge"
+                    app:strokeColor="#ACABAB"
+                    app:strokeWidth="5dp" />
+                <ImageView
+                    android:id="@+id/editAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginLeft="-25dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatarAjustes"
+                    app:layout_constraintEnd_toEndOf="@+id/avatarAjustes"
+                    app:layout_constraintHorizontal_bias="0.878"
+                    app:layout_constraintStart_toStartOf="@+id/avatarAjustes"
+                    app:layout_constraintTop_toTopOf="@+id/avatarAjustes"
+                    app:layout_constraintVertical_bias="0.834"
+                    app:srcCompat="@drawable/edit"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </LinearLayout>
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatarAjustes"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="8dp"
-            android:background="#00FFFFFF"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloAjustes"
-            app:layout_constraintVertical_bias="0.019"
-            app:shapeAppearanceOverlay="@style/RoundedSquare"
-            app:srcCompat="@drawable/dogge"
-            app:strokeColor="#ACABAB"
-            app:strokeWidth="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <EditText
+                    android:id="@+id/usernameAjustes"
+                    android:layout_width="257dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:ems="10"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:text="Username"
+                    android:maxLength="15"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarAjustes"
+                    app:layout_constraintVertical_bias="0.104" />
+                <TextView
+                    android:id="@+id/line"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_width="275dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/avatarAjustes"
+                    android:background="#000"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="5dip"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarAjustes"
+                    app:layout_constraintVertical_bias="0.07" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="-35dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/usernameAjustes"
+                    app:layout_constraintEnd_toEndOf="@+id/usernameAjustes"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/usernameAjustes"
+                    app:layout_constraintTop_toTopOf="@+id/usernameAjustes"
+                    app:layout_constraintVertical_bias="0.2"
+                    app:srcCompat="@drawable/edit" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/line"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="275dp"
-            android:layout_height="2dp"
-            android:layout_below="@id/avatarAjustes"
-            android:background="#000"
-            android:gravity="center_horizontal"
-            android:paddingTop="5dip"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatarAjustes"
-            app:layout_constraintVertical_bias="0.07" />
-
-        <EditText
-            android:id="@+id/usernameAjustes"
-            android:layout_width="257dp"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:ems="10"
-            android:fontFamily="@font/nunito"
-            android:inputType="textPersonName"
-            android:singleLine="true"
-            android:text="Username"
-            android:maxLength="15"
-            android:textAlignment="viewStart"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatarAjustes"
-            app:layout_constraintVertical_bias="0.104" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:text="Nombre de usuario"
-            android:textColor="#C6BDBD"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.297"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameAjustes"
-            app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="Nombre de usuario"
+                    android:textColor="#C6BDBD"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.297"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/usernameAjustes"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
-        <TextView
-            android:id="@+id/msgUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:text=""
-            android:textAlignment="center"
-            android:textColor="#023047"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.099" />
+                <TextView
+                    android:id="@+id/msgUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nunito"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="#023047"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="0.099" />
 
-        <ImageView
-            android:id="@+id/editAvatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/avatarAjustes"
-            app:layout_constraintEnd_toEndOf="@+id/avatarAjustes"
-            app:layout_constraintHorizontal_bias="0.878"
-            app:layout_constraintStart_toStartOf="@+id/avatarAjustes"
-            app:layout_constraintTop_toTopOf="@+id/avatarAjustes"
-            app:layout_constraintVertical_bias="0.834"
-            app:srcCompat="@drawable/edit"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/msgUpdate">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="@+id/usernameAjustes"
-            app:layout_constraintEnd_toEndOf="@+id/usernameAjustes"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/usernameAjustes"
-            app:layout_constraintTop_toTopOf="@+id/usernameAjustes"
-            app:layout_constraintVertical_bias="0.2"
-            app:srcCompat="@drawable/edit" />
+                    <Button
+                    android:id="@+id/updateButton"
+                    android:layout_width="250dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#FFB703"
+                    android:fontFamily="@font/nunito"
+                    android:stateListAnimator="@null"
+                    android:text="Actualizar"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/msgUpdate"
+                    app:layout_constraintVertical_bias="0.139" />
 
-        <LinearLayout
-            android:layout_width="260dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/msgUpdate">
+                <Button
+                    android:id="@+id/playButton"
+                    android:layout_width="250dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#FFB703"
+                    android:fontFamily="@font/nunito"
+                    android:stateListAnimator="@null"
+                    android:text="Cerrar sesión"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.521"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/updateButton"
+                    app:layout_constraintVertical_bias="0.147" />
 
-            <Button
-            android:id="@+id/updateButton"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:backgroundTint="#FFB703"
-            android:fontFamily="@font/nunito"
-            android:stateListAnimator="@null"
-            android:text="Actualizar"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/msgUpdate"
-            app:layout_constraintVertical_bias="0.139" />
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="250dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/naranjaIntendi"
+                    android:fontFamily="@font/nunito"
+                    android:stateListAnimator="@null"
+                    android:text="Borrar Usuario"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/playButton"
+                    app:layout_constraintVertical_bias="0.226" />
 
-        <Button
-            android:id="@+id/playButton"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#FFB703"
-            android:fontFamily="@font/nunito"
-            android:stateListAnimator="@null"
-            android:text="Cerrar sesión"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.521"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateButton"
-            app:layout_constraintVertical_bias="0.147" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/naranjaIntendi"
-            android:fontFamily="@font/nunito"
-            android:stateListAnimator="@null"
-            android:text="Borrar Usuario"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playButton"
-            app:layout_constraintVertical_bias="0.226" />
+                <include
+                     android:id="@+id/avatarMenu"
+                     layout="@layout/choose_avatar_layout"
+                    android:visibility="invisible"
+                     />
+                 <include
+                     android:id="@+id/confirmDelete"
+                     layout="@layout/popup_delete_layout"
+                     android:visibility="invisible"
+                     />
 
-        </LinearLayout>
 
-        <include
-             android:id="@+id/avatarMenu"
-             layout="@layout/choose_avatar_layout"
-             />
-         <include
-             android:id="@+id/confirmDelete"
-             layout="@layout/popup_delete_layout"
-             />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

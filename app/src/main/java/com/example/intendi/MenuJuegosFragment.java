@@ -100,6 +100,16 @@ public class MenuJuegosFragment extends Fragment {
             }
         });
 
+        cardWhack.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent gameIntent = new Intent(getActivity(), WhackaGameActivity.class);
+                gameIntent.putExtra("User", currentUser);
+                startActivity(gameIntent);
+                return true;
+            }
+        });
+
         cardMem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +120,16 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("textBubble",textBub[1]);
                 myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
+            }
+        });
+
+        cardMem.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent gameIntent = new Intent(getActivity(), MemoryGame.class);
+                gameIntent.putExtra("User", currentUser);
+                startActivity(gameIntent);
+                return true;
             }
         });
 
@@ -126,6 +146,16 @@ public class MenuJuegosFragment extends Fragment {
             }
         });
 
+        cardNums.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent gameIntent = new Intent(getActivity(), SendaGame.class);
+                gameIntent.putExtra("User", currentUser);
+                startActivity(gameIntent);
+                return true;
+            }
+        });
+
         cardLaber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +166,16 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("textBubble",textBub[3]);
                 myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
+            }
+        });
+
+        cardLaber.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent gameIntent = new Intent(getActivity(), LaberintendiGame.class);
+                gameIntent.putExtra("User", currentUser);
+                startActivity(gameIntent);
+                return true;
             }
         });
 
@@ -152,6 +192,16 @@ public class MenuJuegosFragment extends Fragment {
             }
         });
 
+        cardPiano.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent gameIntent = new Intent(getActivity(), PianoGame.class);
+                gameIntent.putExtra("User", currentUser);
+                startActivity(gameIntent);
+                return true;
+            }
+        });
+
         cardRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +213,40 @@ public class MenuJuegosFragment extends Fragment {
                 myIntent.putExtra("imageBubble",imageBub[num_random]);
                 myIntent.putExtra("imageLogo",imageLog[num_random]);
                 myIntent.putExtra("textBubble",textBub[num_random]);
+                myIntent.putExtra("User", currentUser);
                 startActivity(myIntent);
+            }
+        });
+
+        cardRandom.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Random rand = new Random(); //instance of random class
+                int num_random = rand.nextInt(5);
+
+                if(num_random == 0){
+                    Intent gameIntent = new Intent(getActivity(), MemoryGame.class);
+                    gameIntent.putExtra("User", currentUser);
+                    startActivity(gameIntent);
+                }else if(num_random == 1){
+                    Intent gameIntent = new Intent(getActivity(), SendaGame.class);
+                    gameIntent.putExtra("User", currentUser);
+                    startActivity(gameIntent);
+                }else if(num_random == 2){
+                    Intent gameIntent = new Intent(getActivity(), LaberintendiGame.class);
+                    gameIntent.putExtra("User", currentUser);
+                    startActivity(gameIntent);
+                }else if(num_random == 3){
+                    Intent gameIntent = new Intent(getActivity(), WhackaGameActivity.class);
+                    gameIntent.putExtra("User", currentUser);
+                    startActivity(gameIntent);
+                }else if(num_random == 4){
+                    Intent gameIntent = new Intent(getActivity(), PianoGame.class);
+                    gameIntent.putExtra("User", currentUser);
+                    startActivity(gameIntent);
+                }
+
+                return true;
             }
         });
 

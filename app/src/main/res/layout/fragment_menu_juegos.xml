@@ -311,8 +311,21 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
             </androidx.gridlayout.widget.GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Da un click largo sobre un juego para omitir sus instrucciones"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:layout_gravity="center" />
+
         </LinearLayout>
     </ScrollView>
 
