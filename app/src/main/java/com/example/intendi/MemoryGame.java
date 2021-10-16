@@ -42,8 +42,6 @@ public class MemoryGame extends AppCompatActivity {
     Button goMenuButton;
     View close_screen;
     View pause_background;
-    FloatingActionButton go_back;
-    FloatingActionButton help;
 
     View help_screen;
     TextView helpText,finalScoreText;
@@ -115,12 +113,10 @@ public class MemoryGame extends AppCompatActivity {
         memoBoard.startLayoutAnimation();
 
         close_screen = findViewById(R.id.close_screen);
-        go_back = findViewById(R.id.closeButton);
         cardOkPopUp = findViewById(R.id.cardViewOk);
         cardCancelPopUp = findViewById(R.id.cardViewCancel);
 
         help_screen = findViewById(R.id.help_screen);
-        help = findViewById(R.id.helpButton);
         helpText = findViewById(R.id.help_text);
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
@@ -139,9 +135,6 @@ public class MemoryGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                enableClicks();
             }
         });
 
@@ -151,9 +144,6 @@ public class MemoryGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                enableClicks();
             }
         });
 
@@ -161,9 +151,6 @@ public class MemoryGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                enableClicks();
             }
         });
 
@@ -171,9 +158,6 @@ public class MemoryGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                enableClicks();
             }
         });
 

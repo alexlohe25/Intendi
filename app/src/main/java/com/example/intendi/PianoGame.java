@@ -46,7 +46,6 @@ public class PianoGame extends AppCompatActivity {
     Button go_button;
     TextView finalScore;
 
-    FloatingActionButton closeButton;
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
     View close_screen;
@@ -73,8 +72,7 @@ public class PianoGame extends AppCompatActivity {
     TextView helpText;
     View help_background;
     Button okHelpButton;
-    FloatingActionButton help;
-    FloatingActionButton go_back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,26 +99,15 @@ public class PianoGame extends AppCompatActivity {
         corcheaOne = findViewById(R.id.CorcheaOne);
         corcheaTwo = findViewById(R.id.CorcheaTwo);
         corcheaThree = findViewById(R.id.CorcheaThree);
-
-        closeButton = findViewById(R.id.closeButton);
         cardOkPopUp = findViewById(R.id.cardViewOk);
         cardCancelPopUp= findViewById(R.id.cardViewCancel);
         close_screen = findViewById(R.id.close_screen);
         pause_background = findViewById(R.id.pause_background);
 
         help_screen = findViewById(R.id.help_screen);
-        help = findViewById(R.id.helpButton);
         helpText = findViewById(R.id.help_text);
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
-        go_back = findViewById(R.id.closeButton);
-
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                close_screen.setVisibility(View.VISIBLE);
-            }
-        });
 
         cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,8 +129,6 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -151,8 +136,6 @@ public class PianoGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -166,6 +149,7 @@ public class PianoGame extends AppCompatActivity {
         go_screen = findViewById(R.id.GO_super_screen);
         go_button = findViewById(R.id.goMenuButton);
         finalScore = findViewById(R.id.FinalScoreTxt);
+
 
         go_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,8 +457,7 @@ public class PianoGame extends AppCompatActivity {
             String gameDate = df.format(today);
             dbHandler.addResult(currentUser.getUser_id(), "Piano", pianoManager.getScore(), gameDate);
             go_screen.setVisibility(View.VISIBLE);
-            help.setVisibility(View.INVISIBLE);
-            go_back.setVisibility(View.INVISIBLE);
+
         }else if(answer == -1){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
             changeTries(pianoManager.getTries());
