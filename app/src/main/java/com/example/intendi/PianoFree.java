@@ -1,6 +1,7 @@
 package com.example.intendi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,8 +20,8 @@ import java.io.IOException;
 
 public class PianoFree extends AppCompatActivity {
 
-    View doKey, reKey, miKey, faKey, solKey, laKey, siKey;
-    View doSh, reSh, faSh, solSh, laSh;
+    CardView doKey, reKey, miKey, faKey, solKey, laKey, siKey;
+    CardView doSh, reSh, faSh, solSh, laSh;
 
     TextView pianoNote;
 
@@ -98,104 +99,104 @@ public class PianoFree extends AppCompatActivity {
         laSharpSound.release();
     }
 
-    private void colorAndPlay(int delay, View view) {
+    private void colorAndPlay(int delay, CardView view) {
         ObjectAnimator animator;
         final MediaPlayer player;
         if (view == doKey){
             player = doSound;
             animator = ObjectAnimator.ofObject(doKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doKey.getBackgroundTintList().getDefaultColor(),
-                    0x9400D3);
+                    doKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Do");
         } else if (view == reKey) {
             player = reSound;
             animator = ObjectAnimator.ofObject(reKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reKey.getBackgroundTintList().getDefaultColor(),
-                    0x4B0082);
+                    reKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Re");
         }else if (view == miKey) {
             player = miSound;
             animator = ObjectAnimator.ofObject(miKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    miKey.getBackgroundTintList().getDefaultColor(),
-                    0x0000FF);
+                    miKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Mi");
         }else if (view == faKey) {
             player = faSound;
             animator = ObjectAnimator.ofObject(faKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faKey.getBackgroundTintList().getDefaultColor(),
-                    0x00FF00);
+                    faKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Fa");
         }else if (view == solKey) {
             player = solSound;
             animator = ObjectAnimator.ofObject(solKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solKey.getBackgroundTintList().getDefaultColor(),
-                    0xFFFF00);
+                    solKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Sol");
         }else if (view == laKey) {
             player = laSound;
             animator = ObjectAnimator.ofObject(laKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laKey.getBackgroundTintList().getDefaultColor(),
-                    0xFF7F00);
+                    laKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("La");
         }else if (view == siKey){
             player = siSound;
             animator = ObjectAnimator.ofObject(siKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    siKey.getBackgroundTintList().getDefaultColor(),
-                    0xFF0000);
+                    siKey.getCardBackgroundColor().getDefaultColor(),
+                    0xFFFFFFFF);
             pianoNote.setText("Si");
         }else if (view == doSh){
             player = doSharpSound;
             animator = ObjectAnimator.ofObject(doSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doSh.getBackgroundTintList().getDefaultColor(),
-                    0xFFFFFF);
+                    doSh.getCardBackgroundColor().getDefaultColor(),
+                    0xFF000000);
             pianoNote.setText("Do#");
         }else if (view == reSh){
             player = reSharpSound;
             animator = ObjectAnimator.ofObject(reSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reSh.getBackgroundTintList().getDefaultColor(),
-                    0xFFFFFF);
+                    reSh.getCardBackgroundColor().getDefaultColor(),
+                    0xFF000000);
             pianoNote.setText("Re#");
         }else if (view == faSh){
             player = faSharpSound;
             animator = ObjectAnimator.ofObject(faSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faSh.getBackgroundTintList().getDefaultColor(),
-                    0xFFFFFF);
+                    faSh.getCardBackgroundColor().getDefaultColor(),
+                    0xFF000000);
             pianoNote.setText("Fa#");
         }else if (view == solSh){
             player = solSharpSound;
             animator = ObjectAnimator.ofObject(solSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solSh.getBackgroundTintList().getDefaultColor(),
-                    0xFFFFFF);
+                    solSh.getCardBackgroundColor().getDefaultColor(),
+                    0xFF000000);
             pianoNote.setText("Sol#");
         }else{
             player = laSharpSound;
             animator = ObjectAnimator.ofObject(laSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laSh.getBackgroundTintList().getDefaultColor(),
-                    0xFFFFFF);
+                    laSh.getCardBackgroundColor().getDefaultColor(),
+                    0xFF000000);
             pianoNote.setText("La#");
         }
 
@@ -222,7 +223,7 @@ public class PianoFree extends AppCompatActivity {
     }
 
     public void onTap(View v){
-        View tappedView = (View)v;
+        CardView tappedView = (CardView) v;
         colorAndPlay(0, tappedView);
     }
 }

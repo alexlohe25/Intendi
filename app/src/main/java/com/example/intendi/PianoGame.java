@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -30,13 +31,13 @@ import java.util.Locale;
 
 public class PianoGame extends AppCompatActivity {
 
-    Button doKey, reKey, miKey, faKey, solKey, laKey, siKey;
-    Button doSh, reSh, faSh, solSh, laSh;
+    CardView doKey, reKey, miKey, faKey, solKey, laKey, siKey;
+    CardView doSh, reSh, faSh, solSh, laSh;
 
     TextView scoreLbl, pianoNote;
     ImageView corcheaOne, corcheaTwo, corcheaThree;
 
-    Button[] notesArray;
+    CardView[] notesArray;
     MediaPlayer[] noteSoundArray;
 
     PianoManager pianoManager;
@@ -152,7 +153,6 @@ public class PianoGame extends AppCompatActivity {
                 help_screen.setVisibility(View.INVISIBLE);
                 go_back.setVisibility(View.VISIBLE);
                 help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -189,7 +189,7 @@ public class PianoGame extends AppCompatActivity {
         solSharpSound = MediaPlayer.create(this, R.raw.solb);
         laSharpSound = MediaPlayer.create(this, R.raw.lab);
 
-        notesArray = new Button[12];
+        notesArray = new CardView[12];
         notesArray[0] = doKey;
         notesArray[1] = reKey;
         notesArray[2] = miKey;
@@ -231,18 +231,9 @@ public class PianoGame extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        doSound.reset();
-        reSound.reset();
-        miSound.reset();
-        faSound.reset();
-        solSound.reset();
-        laSound.reset();
-        siSound.reset();
-        doSharpSound.reset();
-        reSharpSound.reset();
-        faSharpSound.reset();
-        solSharpSound.reset();
-        laSharpSound.reset();
+        for(int i = 0; i < 12; i++) {
+            noteSoundArray[i].reset();
+        }
     }
 
     public void changeKeyState(Boolean state) {
@@ -255,7 +246,7 @@ public class PianoGame extends AppCompatActivity {
         help_screen.setVisibility(View.VISIBLE);
     }
 
-    private void colorAndPlay(int delay, Button button) {
+    private void colorAndPlay(int delay, CardView button) {
 
         final Handler handler = new Handler(Looper.getMainLooper());
         int indexSound;
@@ -265,9 +256,9 @@ public class PianoGame extends AppCompatActivity {
         if (button == doKey){
             indexSound = 0;
             animator = ObjectAnimator.ofObject(doKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doKey.getBackgroundTintList().getDefaultColor(),
+                    doKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF94144);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -278,9 +269,9 @@ public class PianoGame extends AppCompatActivity {
         } else if (button == reKey) {
             indexSound = 1;
             animator = ObjectAnimator.ofObject(reKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reKey.getBackgroundTintList().getDefaultColor(),
+                    reKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF8961E);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -291,9 +282,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == miKey) {
             indexSound = 2;
             animator = ObjectAnimator.ofObject(miKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    miKey.getBackgroundTintList().getDefaultColor(),
+                    miKey.getCardBackgroundColor().getDefaultColor(),
                     0xFFF9C74F);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -304,9 +295,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == faKey) {
             indexSound = 3;
             animator = ObjectAnimator.ofObject(faKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faKey.getBackgroundTintList().getDefaultColor(),
+                    faKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF90BE6D);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -317,9 +308,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == solKey) {
             indexSound = 4;
             animator = ObjectAnimator.ofObject(solKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solKey.getBackgroundTintList().getDefaultColor(),
+                    solKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF43AA8B);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -330,9 +321,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == laKey) {
             indexSound = 5;
             animator = ObjectAnimator.ofObject(laKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laKey.getBackgroundTintList().getDefaultColor(),
+                    laKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF577590);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -343,9 +334,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == siKey){
             indexSound = 6;
             animator = ObjectAnimator.ofObject(siKey,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    siKey.getBackgroundTintList().getDefaultColor(),
+                    siKey.getCardBackgroundColor().getDefaultColor(),
                     0xFF603982);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -356,9 +347,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == doSh){
             indexSound = 7;
             animator = ObjectAnimator.ofObject(doSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    doSh.getBackgroundTintList().getDefaultColor(),
+                    doSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFf78f91);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -369,9 +360,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == reSh){
             indexSound = 8;
             animator = ObjectAnimator.ofObject(reSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    reSh.getBackgroundTintList().getDefaultColor(),
+                    reSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFf7db97);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -382,9 +373,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == faSh){
             indexSound = 9;
             animator = ObjectAnimator.ofObject(faSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    faSh.getBackgroundTintList().getDefaultColor(),
+                    faSh.getCardBackgroundColor().getDefaultColor(),
                     0xFFaabd9d);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -395,9 +386,9 @@ public class PianoGame extends AppCompatActivity {
         }else if (button == solSh){
             indexSound = 10;
             animator = ObjectAnimator.ofObject(solSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    solSh.getBackgroundTintList().getDefaultColor(),
+                    solSh.getCardBackgroundColor().getDefaultColor(),
                     0xFF7c8791);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -408,9 +399,9 @@ public class PianoGame extends AppCompatActivity {
         }else{
             indexSound = 11;
             animator = ObjectAnimator.ofObject(laSh,
-                    "backgroundColor",
+                    "cardBackgroundColor",
                     new ArgbEvaluator(),
-                    laSh.getBackgroundTintList().getDefaultColor(),
+                    laSh.getCardBackgroundColor().getDefaultColor(),
                     0xFF806d91);
             handler.postDelayed(new Runnable() {
                 @Override
@@ -443,7 +434,7 @@ public class PianoGame extends AppCompatActivity {
     }
 
     public void onTap(View v){
-        Button tapButton = (Button)v;
+        CardView tapButton = (CardView) v;
         colorAndPlay(0, tapButton);
 
         if(tapButton == doKey) {

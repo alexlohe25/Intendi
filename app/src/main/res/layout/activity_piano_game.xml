@@ -240,79 +240,79 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal">
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/doNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:insetBottom="0dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
+                    android:insetBottom="0dp"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/reNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/miNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/faNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/solNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/laNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/siNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:insetBottom="0dp"
                     android:layout_marginLeft="7dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/white"
+                    app:cardBackgroundColor="@color/white"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -332,23 +332,23 @@
                 android:layout_marginRight="120dp"
                 android:layout_weight="0.3">
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/doSharp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.4"
-                    android:backgroundTint="@color/black"
+                    app:cardBackgroundColor="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/reSharp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.4"
-                    android:backgroundTint="@color/black"
+                    app:cardBackgroundColor="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
@@ -358,38 +358,38 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="70dp"
-                android:layout_weight="0.4">
+                android:layout_weight="0.45">
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/faSharp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/black"
+                    app:cardBackgroundColor="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/solSharp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/black"
+                    app:cardBackgroundColor="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <Button
+                <androidx.cardview.widget.CardView
                     android:id="@+id/laSharp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/black"
+                    app:cardBackgroundColor="@color/black"
                     android:onClick="onTap"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
