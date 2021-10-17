@@ -60,8 +60,6 @@ public class LaberintendiGame extends AppCompatActivity {
     Button goMenuButton;
     Button okHelpButton;
 
-    FloatingActionButton go_back;
-    FloatingActionButton help;
     View go_screen;
     View close_screen;
     View help_screen;
@@ -72,6 +70,9 @@ public class LaberintendiGame extends AppCompatActivity {
 
     User currentUser;
     DBHandler dbHandler;
+
+    TextView finalScoreText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +82,6 @@ public class LaberintendiGame extends AppCompatActivity {
         go_screen = findViewById(R.id.GO_super_screen);
         close_screen = findViewById(R.id.close_screen);
         help_screen = findViewById(R.id.help_screen);
-        go_back = findViewById(R.id.closeButton);
-        help = findViewById(R.id.helpButton);
         helpText = findViewById(R.id.help_text);
 
         cardOkPopUp = findViewById(R.id.cardViewOk);
@@ -92,6 +91,7 @@ public class LaberintendiGame extends AppCompatActivity {
         goMenuButton = findViewById(R.id.goMenuButton);
         okHelpButton = findViewById(R.id.okHelpButton);
 
+        finalScoreText = go_screen.findViewById(R.id.FinalScoreTxt);
         cardAnswers = findViewById(R.id.cardAnswers);
 
         cardMove = findViewById(R.id.cardViewMove);
@@ -139,9 +139,6 @@ public class LaberintendiGame extends AppCompatActivity {
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 cardAnswers.setVisibility(View.VISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -152,9 +149,6 @@ public class LaberintendiGame extends AppCompatActivity {
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
                 cardAnswers.setVisibility(View.VISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -163,9 +157,6 @@ public class LaberintendiGame extends AppCompatActivity {
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
                 cardAnswers.setVisibility(View.VISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -174,9 +165,6 @@ public class LaberintendiGame extends AppCompatActivity {
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
                 cardAnswers.setVisibility(View.VISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -569,9 +557,8 @@ public class LaberintendiGame extends AppCompatActivity {
                     String gameDate = df.format(today);
                     dbHandler.addResult(currentUser.getUser_id(), "Laberintendi", laberManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
+                    finalScoreText.setText(String.valueOf(laberManager.getScore()));
                     cardAnswers.setVisibility(View.INVISIBLE);
-                    //help.setVisibility(View.INVISIBLE);
-                    //go_back.setVisibility(View.INVISIBLE);
                 }
             }
         }, scoreEnergyDelay + 200);

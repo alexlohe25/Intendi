@@ -8,7 +8,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,9 +28,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito"
                     android:text="Ajustes de usuario"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
                     android:textColor="#023047"
-                    android:textSize="36sp"
+                    android:textSize="36dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

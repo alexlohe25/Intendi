@@ -36,8 +36,6 @@ public class WhackaGameActivity extends AppCompatActivity {
     WhackaGameManager GameManager;
     clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
 
-    FloatingActionButton go_back;
-    FloatingActionButton help;
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
     View go_screen;
@@ -63,11 +61,8 @@ public class WhackaGameActivity extends AppCompatActivity {
         cardCancelPopUp = findViewById(R.id.cardViewCancel);
         goMenuButton = findViewById(R.id.goMenuButton);
         pause_background = findViewById(R.id.pause_background);
-        go_back = findViewById(R.id.closeButton);
-        help = findViewById(R.id.helpButton);
 
         help_screen = findViewById(R.id.help_screen);
-        help = findViewById(R.id.helpButton);
         helpText = findViewById(R.id.help_text);
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
@@ -156,8 +151,6 @@ public class WhackaGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -168,8 +161,6 @@ public class WhackaGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -177,8 +168,6 @@ public class WhackaGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
             }
         });
 
@@ -195,9 +184,6 @@ public class WhackaGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 

@@ -14,15 +14,20 @@
         android:background="#CB298F83"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -30,22 +35,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/vt323"
+                android:includeFontPadding="false"
                 android:text="Tiempo"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:includeFontPadding="false"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/timeLbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
+                android:layout_marginTop="0dp"
                 android:fontFamily="@font/vt323"
+                android:includeFontPadding="false"
                 android:text="6:00"
                 android:textAlignment="center"
                 android:textColor="#FDFDFD"
-                android:layout_marginTop="5dp"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -60,9 +65,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -70,22 +75,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/vt323"
+                android:includeFontPadding="false"
                 android:text="Puntos"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:includeFontPadding="false"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/scoreLbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
+                android:layout_marginTop="0dp"
                 android:fontFamily="@font/vt323"
+                android:includeFontPadding="false"
                 android:text="0"
                 android:textAlignment="center"
                 android:textColor="#FDFDFD"
-                android:layout_marginTop="5dp"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -95,43 +100,46 @@
         android:id="@+id/closeButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="#FF4040"
-        app:fabCustomSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03"
-        app:maxImageSize="25dp"
-        app:srcCompat="@drawable/equis"
         android:onClick="showClosePopUp"
         android:stateListAnimator="@null"
+        app:backgroundTint="#FF4040"
+        app:fabCustomSize="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/helpButton"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:maxImageSize="25dp"
+        app:srcCompat="@drawable/equis"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/helpButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="showHelpPopUp"
+        android:src="@drawable/question"
+        android:stateListAnimator="@null"
         app:backgroundTint="#FFEE59"
         app:fabCustomSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/question"
-        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintVertical_bias="0.0"
         app:maxImageSize="25dp"
-        android:onClick="showHelpPopUp"
-        android:stateListAnimator="@null"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="25dp"

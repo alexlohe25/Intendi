@@ -47,8 +47,6 @@ public class SendaGame extends AppCompatActivity {
     View go_screen;
     User currentUser;
     DBHandler dbHandler;
-    FloatingActionButton go_back;
-    FloatingActionButton help;
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
     View close_screen;
@@ -60,6 +58,8 @@ public class SendaGame extends AppCompatActivity {
     View help_background;
     Button okHelpButton;
 
+    TextView finalScoreText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +70,12 @@ public class SendaGame extends AppCompatActivity {
         goMenuButton = findViewById(R.id.goMenuButton);
 
         help_screen = findViewById(R.id.help_screen);
-        help = findViewById(R.id.helpButton);
         helpText = findViewById(R.id.help_text);
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
 
         sendaManager = new SendaManager();
+        finalScoreText = go_screen.findViewById(R.id.FinalScoreTxt);
 
         sendaBoard = findViewById(R.id.sendaBoard);
 
@@ -99,8 +99,7 @@ public class SendaGame extends AppCompatActivity {
                     String gameDate = df.format(today);
                     dbHandler.addResult(currentUser.getUser_id(), "Senda numérica", sendaManager.getScore(), gameDate);
                     go_screen.setVisibility(View.VISIBLE);
-                    help.setVisibility(View.INVISIBLE);
-                    go_back.setVisibility(View.INVISIBLE);
+                    finalScoreText.setText(String.valueOf(sendaManager.getScore()));
 
                 } else if(status == -1){ //Error, player continue on same round
                     disableClicks();
@@ -210,7 +209,6 @@ public class SendaGame extends AppCompatActivity {
 
         sendaBoard.setLayoutManager(new GridLayoutManager(this, sendaManager.getBoardLen()));
 
-        go_back = findViewById(R.id.closeButton);
         go_screen = findViewById(R.id.GO_super_screen);
         close_screen = findViewById(R.id.close_screen);
 
@@ -230,9 +228,6 @@ public class SendaGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -242,9 +237,6 @@ public class SendaGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -252,9 +244,6 @@ public class SendaGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 help_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
@@ -262,9 +251,6 @@ public class SendaGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 close_screen.setVisibility(View.INVISIBLE);
-                go_back.setVisibility(View.VISIBLE);
-                help.setVisibility(View.VISIBLE);
-                //enableClicks();
             }
         });
 
