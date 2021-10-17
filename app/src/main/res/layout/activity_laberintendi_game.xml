@@ -14,7 +14,12 @@
         android:background="#FFA6A6"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,8 +44,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -84,7 +88,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
@@ -104,10 +107,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/vt323"
+                android:includeFontPadding="false"
                 android:text="0"
                 android:textAlignment="center"
                 android:textColor="#FDFDFD"
-                android:layout_marginTop="5dp"
                 android:textSize="30sp" />
         </LinearLayout>
     </LinearLayout>
@@ -118,9 +121,10 @@
         android:layout_height="50dp"
         android:clickable="true"
         android:focusable="true"
+        android:layout_marginTop="20dp"
         app:backgroundTint="#FF4040"
         app:fabCustomSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,9 +142,10 @@
         android:layout_height="50dp"
         android:clickable="true"
         android:focusable="true"
+        android:layout_marginTop="20dp"
         app:backgroundTint="#FFEE59"
         app:fabCustomSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
