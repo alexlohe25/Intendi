@@ -95,12 +95,14 @@ public class AjustesFragment extends Fragment {
          originalSrc = currentUser.getImageSource();
          newAvatar = currentUser.getImageSource();
          msgUpdate.setText("");
+         //log out function in button
          logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     logOut();
                 }
             });
+         //show delete user pop up functions
          deleteButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -115,21 +117,24 @@ public class AjustesFragment extends Fragment {
                 deleteMsg.setText("");
             }
         });
+        //delete current user function
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userToDelete = confirmUserEditText.getText().toString();
+                //if given input is not empty and equals to the current user name
                 if(userToDelete.length() > 0){
                     if(userToDelete.equals(currentUser.getUsername())){
+                        //delete user in database
                         dbHandler.deleteUser(currentUser.getUser_id());
                         Intent miIntent = new Intent( getActivity(), MainActivity.class);
                         startActivity(miIntent);
                         getActivity().finish();
-                    }else{
+                    }else{ //otherwise, a warning message is shown
                         confirmUserEditText.setText("");
                         deleteMsg.setText("No se pudo borrar: El nombre no coincide");
                     }
-                }else{
+                }else{ //otherwise, a warning message is shown
                     confirmUserEditText.setText("");
                     deleteMsg.setText("Introduzca un nombre");
                 }
@@ -143,6 +148,7 @@ public class AjustesFragment extends Fragment {
                 deleteMsg.setText("");
             }
         });
+        //select avatar popup calling functions
         changeAvatarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +161,7 @@ public class AjustesFragment extends Fragment {
                 changeAvatarMenu.setVisibility(View.INVISIBLE);
             }
         });
-
+        //set the new screen ImageView according to the image clicked
         delphi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -230,31 +236,36 @@ public class AjustesFragment extends Fragment {
          return view;
     }
     public void updateUser(){
+        //button setter so it can be clicked while method is running
         updateButton.setEnabled(false);
+        //if screen editText is not empty
         if(username.getText().toString().length() > 0){
             String newName = username.getText().toString();
-            System.out.println(currentUser.getUsername()+ " " + newName);
-            System.out.println(currentUser.getImageSource() + " " + originalSrc);
+            //evaluate if current image user is equal to screen image or user name is equal to screen editText input
             boolean areInputsEqual = (originalSrc == newAvatar) && (newName.equals(currentUser.getUsername()));
-            System.out.println(areInputsEqual);
+            // if at least one of them is different
             if (!areInputsEqual){
+                //change current user object values
                 currentUser.setUsername(newName);
                 currentUser.setImageSource(newAvatar);
+                //update current user in database
                 dbHandler.updateCurrentUser(currentUser);
                 username.setText(currentUser.getUsername());
+                //set new values in screen interface
                 originalSrc = currentUser.getImageSource();
                 newAvatar = currentUser.getImageSource();
                 msgUpdate.setTextColor(getResources().getColor(R.color.marinoIntendi));
                 msgUpdate.setText("¡Usuario actualizado!");
-            }else {
+            }else { //otherwise, a warning message is shown
                 msgUpdate.setText("No hubo nuevos cambios del usuario");
                 msgUpdate.setTextColor(getResources().getColor(R.color.red_eat));
             }
 
-        }else {
+        }else { //otherwise, a warning message is shown
             msgUpdate.setText("Introduce un nombre de usuario");
             msgUpdate.setTextColor(getResources().getColor(R.color.red_eat));
         }
+        //hide the warning message and enable current button again
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -265,7 +276,7 @@ public class AjustesFragment extends Fragment {
         }, 2000);
         //userAvatar.setImageResource(currentUser.getImageSource());
     }
-    public void logOut(){
+    public void logOut(){ //return to login menu
         Intent miIntent = new Intent( getActivity(), MainActivity.class);
         startActivity(miIntent);
         getActivity().finish();

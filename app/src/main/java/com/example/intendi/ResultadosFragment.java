@@ -97,10 +97,10 @@ public class ResultadosFragment extends Fragment {
         tf = ResourcesCompat.getFont(getActivity(), R.font.nunito_semibold);
         currentGame = "Whack-A-Ball";
 
-        //Iniciar con Whack
+        //show Whack-A-Ball results
         generaChart("Whack-A-Ball", view);
         currentGame = "Whack-A-Ball";
-
+        //set avatar's holding icon according to current game results
         cardWhack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,9 +155,11 @@ public class ResultadosFragment extends Fragment {
 
         return view;
     }
-    public void generaChart(String game, View view){
+    public void generaChart(String game, View view){ //show current user results from given game
         ArrayList<Result> resultsFromGame = dbHandler.getResultsFromGame(currentUser.getUser_id(),game);
+        //0 -> no results in current game, 1 -> one result in current game, 2 -> two results in current game
         if (resultsFromGame.size() == 0){
+            //set empty scores
             result1DateLabel.setText("Mejor puntaje");
             result1.setText("");
             result2DateLabel.setText("Último puntaje");
@@ -165,6 +167,7 @@ public class ResultadosFragment extends Fragment {
             resultDetail.setText("Parece que aún no has jugado " + game);
         }else if (resultsFromGame.size() == 1){
             int result1Score = resultsFromGame.get(0).getScore();
+            //set only 1 score
             String result1Date = resultsFromGame.get(0).getDateOfGame();
             result1DateLabel.setText("Mejor puntaje "+ result1Date);
             result1.setText(String.valueOf(result1Score));
@@ -172,6 +175,7 @@ public class ResultadosFragment extends Fragment {
             result2.setText("");
             resultDetail.setText("Te falta 1 juego de " + game + " para ver tu avance");
         }else{
+            //show both results
             int result1Score = resultsFromGame.get(0).getScore();
             String result1Date = resultsFromGame.get(0).getDateOfGame();
             int result2Score = resultsFromGame.get(1).getScore();
@@ -180,7 +184,7 @@ public class ResultadosFragment extends Fragment {
             result1DateLabel.setText("Mejor puntaje "+ result1Date);
             result2.setText(String.valueOf(result2Score));
             result2DateLabel.setText("Último puntaje "+ result2Date);
-
+            //compare results to set tendency message in screen
             String tendencia = "¡Otro récord en " + game + "!";
             if(result2Score < result1Score)
                 tendencia = "¡Buen intento "+ currentUser.getUsername() + "!";

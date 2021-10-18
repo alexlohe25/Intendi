@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Arrays;
 import java.util.List;
-
+//class for 4x2 Board maker in MemoryGame
 public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>{
     Context activityContext;
     private int numPieces;
@@ -74,7 +74,7 @@ public class MemoryBoardAdapter extends RecyclerView.Adapter<MemoryBoardAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
-
+        //set tappedcard design according to its state or its content
         public void bind(int position) {
             MemoryCard curCard = cardImages.get(position);
 
