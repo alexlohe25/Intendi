@@ -31,6 +31,7 @@ import java.util.Locale;
 
 public class PianoGame extends AppCompatActivity {
 
+    //Create variables
     CardView doKey, reKey, miKey, faKey, solKey, laKey, siKey;
     CardView doSh, reSh, faSh, solSh, laSh;
 
@@ -73,7 +74,7 @@ public class PianoGame extends AppCompatActivity {
     View help_background;
     Button okHelpButton;
 
-
+    //Initialize variables
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +110,7 @@ public class PianoGame extends AppCompatActivity {
         help_background = findViewById(R.id.help_background);
         okHelpButton = findViewById(R.id.okHelpButton);
 
+        //OnClicks for every button that creates a pop up
         cardCancelPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -203,6 +205,7 @@ public class PianoGame extends AppCompatActivity {
 
         changeKeyState(false);
 
+        //Start the game
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -212,6 +215,7 @@ public class PianoGame extends AppCompatActivity {
         }, 1500);
     }
 
+    //OnDestroy that resests the MediaPlayer once the suer leaves the activity
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -220,12 +224,14 @@ public class PianoGame extends AppCompatActivity {
         }
     }
 
+    //Changes each button to a different state (True | False)
     public void changeKeyState(Boolean state) {
         for (int i = 0; i < notesArray.length; i++) {
             notesArray[i].setEnabled(state);
         }
     }
 
+    //Help pop up
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
     }
@@ -233,6 +239,7 @@ public class PianoGame extends AppCompatActivity {
         close_screen.setVisibility(View.VISIBLE);
     }
 
+    //Function that changes the color of the piano keys once they are pressed, the ifs depend on the key pressed. At the end the function uses an animator to return the color back to its original one
     private void colorAndPlay(int delay, CardView button) {
 
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -240,6 +247,8 @@ public class PianoGame extends AppCompatActivity {
 
         ObjectAnimator animator;
         final MediaPlayer player;
+
+        //Depending on the key pressed the function changes the key to the colors shown and cahnegs teh piano label to the key being pressed
         if (button == doKey){
             indexSound = 0;
             animator = ObjectAnimator.ofObject(doKey,
@@ -398,6 +407,7 @@ public class PianoGame extends AppCompatActivity {
             }, delay);
         }
 
+        //configuration of the animation and the start of the player once the if is concluded and start the animation and the player
         animator.setDuration(400);
         animator.setRepeatCount(1);
         animator.setRepeatMode(ValueAnimator.REVERSE);
@@ -420,10 +430,12 @@ public class PianoGame extends AppCompatActivity {
         animator.start();
     }
 
+    //Function asign to each cardView representing the piano keys, once played it executes colorAndPlay
     public void onTap(View v){
         CardView tapButton = (CardView) v;
         colorAndPlay(0, tapButton);
 
+        //Depending on the key pressed the function executes the Piano manager function "compare"
         if(tapButton == doKey) {
             answer = pianoManager.compare(0);
         }else if(tapButton == reKey) {
@@ -450,6 +462,7 @@ public class PianoGame extends AppCompatActivity {
             answer = pianoManager.compare(11);
         }
 
+        //If compare returns a -2 the game ends and the user data is updated
         if(answer == -2){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
             changeTries(pianoManager.getTries());
@@ -461,6 +474,7 @@ public class PianoGame extends AppCompatActivity {
             dbHandler.addResult(currentUser.getUser_id(), "Piano", pianoManager.getScore(), gameDate);
             go_screen.setVisibility(View.VISIBLE);
 
+        //If compare returns a -1 the user commited an error and a life is deducted
         }else if(answer == -1){
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
             changeTries(pianoManager.getTries());
@@ -474,6 +488,7 @@ public class PianoGame extends AppCompatActivity {
                 }
             }, 1000);
 
+        //If compare returns a 1 the round has finsihed and showInstruction is shown again, the score is updated
         }else if(answer == 1){
             pianoManager.changeScore();
             scoreLbl.setText(String.valueOf(pianoManager.getScore()));
@@ -489,6 +504,7 @@ public class PianoGame extends AppCompatActivity {
         }
     }
 
+    //Function that shows the user a array of random instrctions and adds one every round, it uses colorAndPlay and locks the keys
     public void showInstructions() {
         changeKeyState(false);
 
@@ -506,6 +522,7 @@ public class PianoGame extends AppCompatActivity {
         }, pianoManager.getRound() + 3 * 1000);
     }
 
+    //Update the tries/lives
     public void changeTries(int tries){
         if(tries == 2){
             corcheaThree.setImageResource(R.drawable.corchea_g);
@@ -516,6 +533,7 @@ public class PianoGame extends AppCompatActivity {
         }
     }
 
+    //Starts the game base on the activity state
     public void gameStart() {
         pianoManager = new PianoManager();
         if(isPlaying){
@@ -528,14 +546,15 @@ public class PianoGame extends AppCompatActivity {
         }
     }
 
+    //Function that redirects the user to the close screen if he presses the back button inside the game
     @Override
     public void onBackPressed() {
-        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
-            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
-                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
-            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
-                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
-            }else{ //Si no hay pop up mostrado
+        if(go_screen.getVisibility() != View.VISIBLE){
+            if (close_screen.getVisibility() == View.VISIBLE ){
+                close_screen.setVisibility(View.INVISIBLE);
+            }else if(help_screen.getVisibility() == View.VISIBLE){
+                help_screen.setVisibility(View.INVISIBLE);
+            }else{
                 close_screen.setVisibility(View.VISIBLE);
             }
         }
