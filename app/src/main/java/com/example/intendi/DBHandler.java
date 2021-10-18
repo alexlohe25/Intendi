@@ -39,8 +39,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private DBHandler(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
+    //create only one instance of current database
     @Override
-    public void onCreate(SQLiteDatabase db){
+    public void onCreate(SQLiteDatabase db){ //create database tables
         String CREATE_USERS_TABLE = "CREATE TABLE " +
                 TABLE_USERS + "(" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -61,25 +62,31 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_RESULTS_TABLE);
     }
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ //drop database tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESULTS);
     }
 
-    public User addUser(String name, String dateBirth, int avatar){
+    public User addUser(String name, String dateBirth, int avatar){//add user method
+        //Base64 encodification
         byte[] nameBytes = name.getBytes(StandardCharsets.UTF_8);
         String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         SQLiteDatabase db = this.getWritableDatabase();
+        //store the values to add in contentvalues
         ContentValues values = new ContentValues();
         values.put(COLUMN_UNAME, encodedName);
         values.put(COLUMN_UDATEBIRTH, dateBirth);
         values.put(COLUMN_UAVATAR, avatar);
+        //insert the new user
         db.insert(TABLE_USERS, null, values);
+        //search the new user into database
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToLast();
+        //decode Base64 stored value
         byte[] curUserDecoded = Base64.decode(cursor.getString(1), Base64.DEFAULT);
         String username = new String(curUserDecoded);
+        //instantiate new user from the database search
         User newUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
         cursor.close();
         db.close();
@@ -93,57 +100,62 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_RSCORE, score);
         values.put(COLUMN_RDATE, date);
         SQLiteDatabase db = this.getWritableDatabase();
+        //search all result from user in current game
         String query = "SELECT * FROM " + TABLE_RESULTS +
                 " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
                 + " AND " + COLUMN_RGAME + " = '" + game + "'";
         Cursor cursor = db.rawQuery(query, null);
-        //un resultado previo
+        //1 -> 1 previous result, 2 -> 2 previous results
         if(cursor.getCount() == 1){
-            //me muevo al primer registro
+            //move to first row
             cursor.moveToFirst();
-            //obtengo el score del registro
+            //get the score
             maxScore = cursor.getInt(3);
             if (maxScore <= score){
-                //borro el registro con el anterior record
+                //new or equal record, so delete record row and insert new result
                 idToDelete = cursor.getInt(0);
                 db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
-                //al estar vacio inserto el nuevo resultado
                 db.insert(TABLE_RESULTS, null, values);
             }
             //dos resultados previos
         }else if (cursor.getCount() == 2) {
-            //me muevo al ultimo registro
+            //move to last row
             cursor.moveToLast();
+            //get the result id
             idToDelete = cursor.getInt(0);
-            //borro ese registro que es el ultimo (mas reciente)
+            //delete row from results searching given result_id
             db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
-            //me muevo al primer registro
+            //move to first row
             cursor.moveToFirst();
-            //obtengo el score del registro
+            //get the score
             maxScore = cursor.getInt(3);
             if (maxScore <= score) {
-                //borro el registro con el anterior record
+                //new or equal record, so delete record row and insert new result
                 idToDelete = cursor.getInt(0);
                 db.execSQL("DELETE FROM " + TABLE_RESULTS + " WHERE " + COLUMN_RID + " = " + idToDelete);
-                //al estar vacio inserto el nuevo resultado
                 db.insert(TABLE_RESULTS, null, values);
             }
         }
-        //en cualquiera de los casos se hace este insert que contaria como el más reciente
+        //insert new result once again despite the above options
         db.insert(TABLE_RESULTS, null, values);
         cursor.close();
         db.close();
     }
-    public ArrayList<User> getAllUsers(){
+    public ArrayList<User> getAllUsers(){ //get all users from database
+        //User class objects array
         ArrayList users = new ArrayList();
+        //search all users
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
+        //fill the User class objects array with each row found
         if(cursor.moveToFirst()) {
             do {
                 String cursorName = cursor.getString(1);
+                //base64 decoder
                 byte[] curUserDecoded = Base64.decode(cursorName, Base64.DEFAULT);
                 String username = new String(curUserDecoded, StandardCharsets.UTF_8);
+                //instantiate a new user and add it to array
                 User cursorUser = new User(cursor.getInt(0), username, cursor.getInt(3), cursor.getString(2));
                 users.add(cursorUser);
                 // System.out.println(cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
@@ -153,7 +165,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return users;
     }
-    public int getUsersCount(){
+    public int getUsersCount(){ //get all user count by selecting all of them and counting the rows
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS;
         Cursor cursor = db.rawQuery(query, null);
@@ -161,13 +173,16 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return cursorCount;
     }
-    public ArrayList<Result> getResultsFromGame(int idUser, String game){
+    public ArrayList<Result> getResultsFromGame(int idUser, String game){ //get all user results from given game
+        //Result class objects array
         ArrayList resultsFromGame = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
+        //seaarch results
         String query = "SELECT * FROM " + TABLE_RESULTS +
                 " WHERE " + COLUMN_RUSER + "=" + Integer.toString(idUser)
                 + " AND " + COLUMN_RGAME + " = '" + game + "'";
         Cursor cursor = db.rawQuery(query, null);
+        //fill the Result class objects array with each row found
         if(cursor.moveToFirst()) {
             do{
                 Result cursorResult = new Result(cursor.getInt(3), cursor.getString(4));
@@ -178,7 +193,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return resultsFromGame;
     }
-    public User getCurrentUser(int curUserId){
+    public User getCurrentUser(int curUserId){ //find the current user in database from given user_id
         User curUser = new User(0,"0", R.drawable.delphi, "00/00/00");
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS
@@ -194,38 +209,26 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return curUser;
     }
-    public void printCurrentUser(int curUserId){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS
-                + " WHERE " + COLUMN_UID + " = " + Integer.toString(curUserId);
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()){
-            System.out.println(Integer.toString(cursor.getInt(0)) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
-        }
-        cursor.close();
-        db.close();
-    }
-    public void updateCurrentUser(User curUser){
+    public void updateCurrentUser(User curUser){ //update current user values in database
+        //Base64 encoder
         byte[] nameBytes = curUser.getUsername().getBytes(StandardCharsets.UTF_8);
         String encodedName = Base64.encodeToString(nameBytes, Base64.DEFAULT);
         String uid = Integer.toString(curUser.getUser_id());
         SQLiteDatabase db = this.getWritableDatabase();
+        //store values in content values
         ContentValues values = new ContentValues();
         values.put(COLUMN_UNAME, encodedName);
         values.put(COLUMN_UDATEBIRTH, curUser.getDateBirth());
         values.put(COLUMN_UAVATAR, curUser.getImageSource());
+        //update user with stored values in content values
         db.update(TABLE_USERS, values, COLUMN_UID + " = ?", new String[]{uid});
         db.close();
     }
-    public void deleteUser(int user_id){
+    public void deleteUser(int user_id){ //given an user id, delete current user from database
         SQLiteDatabase db = this.getWritableDatabase();
+        //delete all user results
         db.execSQL("DELETE FROM "+ TABLE_RESULTS + " WHERE " + COLUMN_RUSER + " = " + Integer.toString(user_id));
         db.execSQL("DELETE FROM "+ TABLE_USERS+ " WHERE " + COLUMN_UID + " = " + Integer.toString(user_id));
-        db.close();
-    }
-    public void deleteAllUsers(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_USERS);
         db.close();
     }
 }

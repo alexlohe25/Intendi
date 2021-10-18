@@ -60,6 +60,7 @@ public class AnswersBoardAdapter extends RecyclerView.Adapter<AnswersBoardAdapte
             super(itemView);
         }
 
+        //Cards with images of instructions and colors
         public void bind(int position) {
             ArrayList<Integer> answers = laberManager.getAnswerUser();
             if(answers.get(position) == 1){ //Move

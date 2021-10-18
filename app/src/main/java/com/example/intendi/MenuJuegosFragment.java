@@ -26,6 +26,7 @@ public class MenuJuegosFragment extends Fragment {
     CardView cardPiano;
     CardView cardRandom;
 
+    //Arrays with arguments for intent extra
     String game[] = new String[]{"whack", "memo", "nums", "laber", "piano"};
     String imageBub[] = new String[]{"inst_whack", "inst_memorama", "inst_nums", "inst_laberintendi", "inst_piano"};
     String imageLog[] = new String[]{"whack_ball", "memorama", "senda_numerica", "laberintendi", "piano"};

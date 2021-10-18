@@ -38,6 +38,8 @@
                         android:layout_marginRight="20dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:onClick="showClosePopUp"
+                        android:stateListAnimator="@null"
                         app:backgroundTint="#FF4040"
                         app:fabCustomSize="50dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,9 +49,8 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.03"
                         app:maxImageSize="25dp"
-                        android:stateListAnimator="@null"
-                        android:onClick="showClosePopUp"
-                        app:srcCompat="@drawable/equis" />
+                        app:srcCompat="@drawable/equis"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/helpButton"
@@ -97,7 +98,7 @@
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:includeFontPadding="false"
-                        android:textSize="30sp" />
+                        android:textSize="30dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -160,7 +161,7 @@
                         android:fontFamily="@font/vt323"
                         android:text="Puntaje"
                         android:textColor="#FFFFFF"
-                        android:textSize="30sp">
+                        android:textSize="30dp">
                     </TextView>
 
                     <TextView
@@ -172,7 +173,7 @@
                         android:includeFontPadding="false"
                         android:text="0"
                         android:textColor="#FFFFFF"
-                        android:textSize="30sp">
+                        android:textSize="30dp">
                     </TextView>
 
                 </LinearLayout>
@@ -208,7 +209,7 @@
                             android:text="Listo?"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="30sp">
+                            android:textSize="30dp">
 
                         </TextView>
                     </RelativeLayout>

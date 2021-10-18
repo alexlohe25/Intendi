@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Timer;
 
+//Activity of the Whack-A-Ball game
+// prepares refs to XML elems, popups, local variables, and a database instance
 public class WhackaGameActivity extends AppCompatActivity {
     clickableDolphin[] myDolphins;
     View[] clickableViews;
@@ -26,15 +28,16 @@ public class WhackaGameActivity extends AppCompatActivity {
     TextView timerText;
     TextView scoreText;
     TextView finalScoreText;
-    long initTime = 30000;
-    long bonus = 1500;
+    long initTime = 30000; //30 second start time
+    long bonus = 1500; //1.5 second start bonus
     long interval = 100;
     long timeCurrent;
     static CountDownTimer timer;
 
     public static int NUMBER_OF_DOLPHINS = 7;
     WhackaGameManager GameManager;
-    clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7;
+
+    clickableDolphin dlp1,dlp2,dlp3,dlp4,dlp5,dlp6,dlp7; //new instance of class per every dolphin present on the screen
 
     CardView cardOkPopUp;
     CardView cardCancelPopUp;
@@ -49,6 +52,8 @@ public class WhackaGameActivity extends AppCompatActivity {
     boolean isTimeFinished;
     User currentUser;
     DBHandler dbHandler;
+
+    //Start instance of database, local variables, and loads content.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +85,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         timerText = findViewById(R.id.timeLbl);
         timerText.setText("00 : 00");
 
+        //Add all xml dolphins to an array
         clickableViews[0] = (ConstraintLayout)findViewById(R.id.D1);
         clickableViews[1] = (ConstraintLayout)findViewById(R.id.D2);
         clickableViews[2] = (ConstraintLayout)findViewById(R.id.D3);
@@ -88,6 +94,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         clickableViews[5] = (ConstraintLayout)findViewById(R.id.D6);
         clickableViews[6] = (ConstraintLayout)findViewById(R.id.D7);
 
+        //Add all clickabledolphins to an array of the same order as the xml dolphins
         myDolphins[0] = dlp1;
         myDolphins[1] = dlp2;
         myDolphins[2] = dlp3;
@@ -96,6 +103,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         myDolphins[5] = dlp6;
         myDolphins[6] = dlp7;
 
+        //add original countdown timer
         timer = new CountDownTimer(initTime, interval) {
             @Override
             public void onTick(long l) {
@@ -104,6 +112,7 @@ public class WhackaGameActivity extends AppCompatActivity {
                 String mS =  Long.toString(minutes);
                 String sS = Long.toString(seconds);
 
+                //Display time in mm:ss format
                 if (minutes<10){
                     mS = "0" + Long.toString(minutes);
                 }
@@ -125,6 +134,7 @@ public class WhackaGameActivity extends AppCompatActivity {
                 }
             }
 
+            //Set the final score on screen and send it to database
             @Override
             public void onFinish() {
                 finalScoreText.setText(Integer.toString(GameManager.getScore()));
@@ -140,6 +150,9 @@ public class WhackaGameActivity extends AppCompatActivity {
             }
         }.start();
 
+
+        // Set click listener for the different pop up options, and display texts
+
         goMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +166,6 @@ public class WhackaGameActivity extends AppCompatActivity {
                 close_screen.setVisibility(View.INVISIBLE);
             }
         });
-
 
         helpText.setText("Lee el color mostrado por Intendi y da click en las pelotas que coincidan con el signficado de la palabra y no con el color en el que están coloreadas");
 
@@ -187,10 +199,18 @@ public class WhackaGameActivity extends AppCompatActivity {
             }
         });
 
+
+        //Start the game
         initDolphins();
+
+        //Update UI and local variables
         Update();
+
+        //change color text color
         changeTextColor();
     }
+
+    //Changes the hex color of the text objective on screen to the first color that is not the color being displayed
     private void changeTextColor(){
         String newHex = GameManager.getRandomHex();;
         for(int i = 0; i<myDolphins.length;i++){
@@ -204,10 +224,10 @@ public class WhackaGameActivity extends AppCompatActivity {
                 }
             }
         }
-        colorText.setTextColor(Color.parseColor(newHex));
+        colorText.setTextColor(Color.parseColor(newHex)); //Default case (all balls are the same color)
     }
 
-
+    //Returns a the string of a random dolphin's ball's color
     private String availableColors(){
         String newColor;
         int newIndex1 = GameManager.getRandomIndex();
@@ -216,6 +236,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         return newColor;
     };
 
+    //Returns the amount of ball present on screen with a certain color
     public int getAmountWithColor(String color){
         int amount = 0;
         for(int i = 0; i<myDolphins.length;i++){
@@ -226,6 +247,9 @@ public class WhackaGameActivity extends AppCompatActivity {
         return amount;
     };
 
+    /*
+       Deactivates all game dolphins by setting their onClickListener() to an empty function.
+    */
     private void finishDolphins(){
         for(int i = 0; i<clickableViews.length;i++){
             int finalI = i;
@@ -237,6 +261,10 @@ public class WhackaGameActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    Initializes the clickabledolphins to their random start values,
+    as well as implanting the first countdown timer with their XML onClicks property
+    */
     private void initDolphins(){
         for(int i = 0; i<myDolphins.length;i++){
             int newIndex = GameManager.getRandomIndex();
@@ -314,6 +342,7 @@ public class WhackaGameActivity extends AppCompatActivity {
         }
     }
 
+    //Updates The game manager variables and the screen UI.
     @SuppressLint("SetTextI18n")
     void Update(){
         String initColor = availableColors();
@@ -324,15 +353,20 @@ public class WhackaGameActivity extends AppCompatActivity {
         changeTextColor();
     }
 
+    //Makes the pause menu pop up visible on screen
     public void showClosePopUp(View v){
         close_screen.setVisibility(View.VISIBLE);
         //disableClicks();
     }
 
+    //Makes the help pop up visible on screen
     public void showHelpPopUp(View v){
         help_screen.setVisibility(View.VISIBLE);
     }
 
+    //Override to prevent uninteded exit of game.
+    //Instead it opens the pause menu.
+    //If any menu, other than the Game Over screen, is open, it closes them.
     @Override
     public void onBackPressed() {
         if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego

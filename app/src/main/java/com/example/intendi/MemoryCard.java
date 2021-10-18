@@ -1,5 +1,5 @@
 package com.example.intendi;
-
+//class for individual card in Memory Game
 public class MemoryCard {
     int identifier;
     int contentIndex;
