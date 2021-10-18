@@ -99,7 +99,6 @@ public class LaberManager {
     }
 
     public int getStart(){ return this.start; }
-    public int getEnd(){ return this.end; }
 
     public void randomizePattern() {
         /*

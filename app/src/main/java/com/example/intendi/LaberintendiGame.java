@@ -214,6 +214,7 @@ public class LaberintendiGame extends AppCompatActivity {
         ansBoard.getAdapter().notifyDataSetChanged();
     }
 
+    //Update UI of energy
     public void updateEnergy(int energy){
         if(energy == 3){
             thunderThree.setImageResource(R.drawable.thunder_yellow);
@@ -234,6 +235,7 @@ public class LaberintendiGame extends AppCompatActivity {
         }
     }
 
+    //Change image of cell when Intendi is moving
     private void animateLaberCellChange(int delay, ImageView image, int state){
 
         int newImage = laberManager.getImageResource(state);
@@ -283,6 +285,8 @@ public class LaberintendiGame extends AppCompatActivity {
         cardDelete.setEnabled(true);
     }
 
+
+    //Get transitions of user instructions, validate solution and animate
     public void runAnswers(View v) {
 
         disableClicks();
@@ -581,12 +585,12 @@ public class LaberintendiGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
-            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
-                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
-            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
-                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
-            }else{ //Si no hay pop up mostrado
+        if(go_screen.getVisibility() != View.VISIBLE){ //Game is not finished
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Close screen is shown
+                close_screen.setVisibility(View.INVISIBLE); //Hide close screen
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Help screen is shown
+                help_screen.setVisibility(View.INVISIBLE); //Hide help screen
+            }else{ //If no screen is shown
                 close_screen.setVisibility(View.VISIBLE);
             }
         }

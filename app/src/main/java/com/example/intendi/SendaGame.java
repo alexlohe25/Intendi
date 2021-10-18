@@ -85,6 +85,7 @@ public class SendaGame extends AppCompatActivity {
 
         scoreLbl = findViewById(R.id.scoreLbl);
 
+        //Listen to clicks on cards in recycler view
         sendaBoard.setAdapter(new SendaBoardAdapter(this, sendaManager, new SendaBoardAdapter.CardClickListener() {
             @Override
             public void onCardClicked(int position) {
@@ -125,7 +126,7 @@ public class SendaGame extends AppCompatActivity {
                         }
                     }, 1000);
 
-                }else if(status == 0){
+                }else if(status == 0){ //Increment round
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnOn(0, card, text);
@@ -148,11 +149,11 @@ public class SendaGame extends AppCompatActivity {
                             showPath();
                         }
                     }, 1000);
-                }else if(status == 1){
+                }else if(status == 1){ //Correct answer, round must continue
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnOn(0, card, text);
-                }else if(status == 2){
+                }else if(status == 2){ //Expand board and increment round
                     CardView card =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.cardView);
                     TextView text =  sendaBoard.getLayoutManager().getChildAt(position).findViewById(R.id.textNumber);
                     turnOn(0, card, text);
@@ -174,7 +175,6 @@ public class SendaGame extends AppCompatActivity {
                             sendaManager.expandBoard();
                             sendaBoard.setVisibility(View.INVISIBLE);
                             ((GridLayoutManager) sendaBoard.getLayoutManager()).setSpanCount(sendaManager.getBoardLen());
-                            //sendaBoard.setLayoutManager(new GridLayoutManager(getApplicationContext(), sendaManager.getBoardLen()));
                         }
                     }, 1000);
 
@@ -280,6 +280,7 @@ public class SendaGame extends AppCompatActivity {
         //disableClicks();
     }
 
+    //Show number and change card to orange
     private void turnOn(int delay, CardView card, TextView text){
         ObjectAnimator animatorColor;
         animatorColor = ObjectAnimator.ofObject(card,
@@ -300,6 +301,7 @@ public class SendaGame extends AppCompatActivity {
         animatorSet.start();
     }
 
+    //Show number and change card to red
     private void turnError(int delay, CardView card, TextView text){
         ObjectAnimator animatorColor;
         animatorColor = ObjectAnimator.ofObject(card,
@@ -320,6 +322,7 @@ public class SendaGame extends AppCompatActivity {
         animatorSet.start();
     }
 
+    //Hide number and change card to gray
     private void turnOff(CardView card, TextView text){
         ObjectAnimator animatorColor;
         animatorColor = ObjectAnimator.ofObject(card,
@@ -352,6 +355,7 @@ public class SendaGame extends AppCompatActivity {
         }
     }
 
+    //Show instructions of current round
     public void showPath(){
         disableClicks();
         ArrayList<Integer> pattern =  sendaManager.getPattern();
@@ -373,6 +377,7 @@ public class SendaGame extends AppCompatActivity {
         }, del+1000);
     }
 
+    //Change all cells to gray
     public void turnOffAll(){
         for(int i=0; i < sendaManager.getBoardSize(); i++){
             CardView card =  sendaBoard.getLayoutManager().getChildAt(i).findViewById(R.id.cardView);
@@ -381,6 +386,7 @@ public class SendaGame extends AppCompatActivity {
         }
     }
 
+    //Change order inside cards
     public void updateNumsBoard(){
         int[] pattern = sendaManager.getBoardNumbers();
         for(int i=0; i < sendaManager.getBoardSize(); i++){
@@ -404,12 +410,12 @@ public class SendaGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(go_screen.getVisibility() != View.VISIBLE){ //Si aún no se ha terminado el juego
-            if (close_screen.getVisibility() == View.VISIBLE ){ //Pantalla de pausa mostrada
-                close_screen.setVisibility(View.INVISIBLE); //Pantalla de pausa
-            }else if(help_screen.getVisibility() == View.VISIBLE){ //Pop up help presionado
-                help_screen.setVisibility(View.INVISIBLE); //Pantalla ayuda
-            }else{ //Si no hay pop up mostrado
+        if(go_screen.getVisibility() != View.VISIBLE){ //Game is not finished
+            if (close_screen.getVisibility() == View.VISIBLE ){ //Close screen is shown
+                close_screen.setVisibility(View.INVISIBLE); //Hide close screen
+            }else if(help_screen.getVisibility() == View.VISIBLE){ //Help screen is shown
+                help_screen.setVisibility(View.INVISIBLE); //Hide help screen
+            }else{ //If no screen is shown
                 close_screen.setVisibility(View.VISIBLE);
             }
         }

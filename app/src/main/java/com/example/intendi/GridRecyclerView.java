@@ -9,6 +9,7 @@ import android.view.animation.GridLayoutAnimationController;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+//Custom recycler view that adds animation
 public class GridRecyclerView extends RecyclerView {
 
     /** @see View#View(Context) */

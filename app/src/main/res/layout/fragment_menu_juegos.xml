@@ -30,7 +30,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="¡Juguemos!"
                 android:textColor="#023047"
-                android:textSize="48sp"
+                android:textSize="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.201"
@@ -47,7 +47,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="Elige una actividad"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.164"
@@ -102,7 +102,7 @@
                             android:text="Whack-A-Ball"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -143,7 +143,7 @@
                             android:text="Memorama"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -184,7 +184,7 @@
                             android:text="Senda numérica"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -225,7 +225,7 @@
                             android:text="Piano"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -266,7 +266,7 @@
                             android:text="Laberintendi"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -307,7 +307,7 @@
                             android:text="Random"
                             android:textAlignment="center"
                             android:textColor="#023047"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -323,7 +323,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="Da un click largo sobre un juego para omitir sus instrucciones"
                 android:textColor="#000000"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:layout_gravity="center" />
 
         </LinearLayout>
