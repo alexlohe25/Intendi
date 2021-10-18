@@ -39,7 +39,7 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:includeFontPadding="false"
-                android:textSize="30sp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/timeLbl"
@@ -51,7 +51,7 @@
                 android:textAlignment="center"
                 android:textColor="#FDFDFD"
                 android:layout_marginTop="0dp"
-                android:textSize="30sp" />
+                android:textSize="30dp" />
         </LinearLayout>
 
         <View
@@ -78,7 +78,7 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:includeFontPadding="false"
-                android:textSize="30sp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/scoreLbl"
@@ -90,7 +90,7 @@
                 android:textAlignment="center"
                 android:textColor="#FDFDFD"
                 android:layout_marginTop="0dp"
-                android:textSize="30sp"  />
+                android:textSize="30dp"  />
         </LinearLayout>
 
     </LinearLayout>

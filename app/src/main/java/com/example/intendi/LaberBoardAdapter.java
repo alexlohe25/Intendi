@@ -59,6 +59,7 @@ public class LaberBoardAdapter extends RecyclerView.Adapter<LaberBoardAdapter.Vi
             super(itemView);
         }
 
+        //Cards with images of states and colors
         public void bind(int position) {
             int[] board = laberManager.getLabNumbers();
             image.setImageResource(laberManager.getImageResource(board[position]));

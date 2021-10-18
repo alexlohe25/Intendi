@@ -40,9 +40,12 @@ public class PregameTemplate extends AppCompatActivity {
         String imageBubbleDir = myIntent.getStringExtra("imageBubble");
         String imageLogoDir = myIntent.getStringExtra("imageLogo");
         String textBubbleDir = myIntent.getStringExtra("textBubble");
+
+        //Change texts and images to match selected game
         gameType = myIntent.getStringExtra("game");
         currentUser = (User)myIntent.getSerializableExtra("User");
 
+        //Piano has extra option, extra button is shown
         if (gameType.equals("piano")){
             libreButton.setVisibility(View.VISIBLE);
             libreButton.setOnClickListener(new View.OnClickListener() {
