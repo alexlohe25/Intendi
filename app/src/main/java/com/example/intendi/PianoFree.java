@@ -81,7 +81,7 @@ public class PianoFree extends AppCompatActivity {
         solSharpSound = MediaPlayer.create(this, R.raw.solb);
         laSharpSound = MediaPlayer.create(this, R.raw.lab);
     }
-
+    //OnDestroy to release de MediaPlayers after the user leaves the activity
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -99,9 +99,11 @@ public class PianoFree extends AppCompatActivity {
         laSharpSound.release();
     }
 
+    //Function that changes the color of the piano keys once they are pressed, the ifs depend on the key pressed. At the end the function uses an animator to return the color back to its original one
     private void colorAndPlay(int delay, CardView view) {
         ObjectAnimator animator;
         final MediaPlayer player;
+        //Depending on the key pressed the function changes the key to the colors shown and cahnegs teh piano label to the key being pressed
         if (view == doKey){
             player = doSound;
             animator = ObjectAnimator.ofObject(doKey,
@@ -200,6 +202,7 @@ public class PianoFree extends AppCompatActivity {
             pianoNote.setText("La#");
         }
 
+        //configuration of the animation and the start of the player
         animator.setDuration(400);
         animator.setRepeatCount(1);
         animator.setRepeatMode(ValueAnimator.REVERSE);
@@ -222,6 +225,7 @@ public class PianoFree extends AppCompatActivity {
         animator.start();
     }
 
+    //Function asign to each cardView representing the piano keys, once played it executes colorAndPlay
     public void onTap(View v){
         CardView tappedView = (CardView) v;
         colorAndPlay(0, tappedView);
