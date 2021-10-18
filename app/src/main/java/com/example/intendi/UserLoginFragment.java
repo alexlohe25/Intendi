@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
+//Login screen as Fragment of the main screen
 public class UserLoginFragment extends Fragment {
     DBHandler dbHandler;
     TableLayout usersGrid;
@@ -33,13 +34,17 @@ public class UserLoginFragment extends Fragment {
     TextView name;
     ImageView profilePic;
     ArrayList<User> users;
+
     public UserLoginFragment() {
         // Required empty public constructor
     }
+
+    //Set instance of local database
     public void setDbHandler(DBHandler handler){
         dbHandler = handler;
     }
 
+    //Default new instance function
     public static UserLoginFragment newInstance() {
         UserLoginFragment fragment = new UserLoginFragment();
         Bundle args = new Bundle();
@@ -47,16 +52,19 @@ public class UserLoginFragment extends Fragment {
         return fragment;
     }
 
+    //Default override onCreateView function
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user_login, container, false);
-        usersGrid = (TableLayout) v.findViewById(R.id.usersGrid);
-        fillUsers(inflater);
+        usersGrid = (TableLayout) v.findViewById(R.id.usersGrid); //Inflates the grid of users to display for multiple users
+        fillUsers(inflater); //fill the grid of users with users
         return v;
 
     }
 
+    //Default override onCreate function
+    //Assigns instance of local database
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +72,9 @@ public class UserLoginFragment extends Fragment {
         if (getArguments() != null) {
         }
     }
+
+    //Fills grid of users so that no more than two (2) users can occupy one (1) row
+    //Implicit six (6) user limit.
     public void fillUsers(LayoutInflater inflater){
         users = new ArrayList<>();
         users = dbHandler.getAllUsers();

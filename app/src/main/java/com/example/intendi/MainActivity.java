@@ -20,36 +20,32 @@ import java.util.Properties;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String FILENAME = "user_data.xml";
-    private Properties userData;
     DBHandler dbHandler;
     UserLoginFragment userLogInFragment = new UserLoginFragment();
     AddUserFragment addUserFragment = new AddUserFragment();
 
     @Override
+    //Start instance of database and load content.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userData = new Properties();
-        //loadResults();
         dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_main);
         loadFragment(userLogInFragment);
-        //BindingAdapter binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
+
+    //Function to load any fragment through replacement.
     public void loadFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.login_frame_container, fragment);
         transaction.commit();
     }
+    //Function to load the user creation screen fragment.
     public void registro(View v){
         loadFragment(addUserFragment);
     }
-    public void menu(View v){
-        Intent miIntent = new Intent(this, BottomNavigation.class);
-        startActivity(miIntent);
 
-    }
-
+    //Override to prevent exiting the app through the user creation screen, and instead
+    //returns to the login screen.
     @Override
     public void onBackPressed() {
         if (addUserFragment.isAdded()) {
