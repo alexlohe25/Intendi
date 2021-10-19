@@ -32,7 +32,7 @@ public class MemoryGame extends AppCompatActivity {
     MemoryBoardAdapter boardAdapter;
     CountDownTimer timer;
     MediaPlayer cardSound;
-    long initTime = 180000, interval = 100;
+    long initTime = 90000, interval = 100;
     LayoutAnimationController layoutAnimationController;
     User currentUser;
     public View go_screen;
