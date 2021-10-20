@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     DBHandler dbHandler;
     UserLoginFragment userLogInFragment = new UserLoginFragment();
     AddUserFragment addUserFragment = new AddUserFragment();
+    Button okInfoButton;
+    View info_screen;
 
     @Override
     //Start instance of database and load content.
@@ -31,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = dbHandler.getInstance(getApplicationContext());
         setContentView(R.layout.activity_main);
         loadFragment(userLogInFragment);
+        okInfoButton = findViewById(R.id.okInfoButton);
+        info_screen = findViewById(R.id.info_screen);
+
+        okInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_screen.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     //Function to load any fragment through replacement.
@@ -42,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     //Function to load the user creation screen fragment.
     public void registro(View v){
         loadFragment(addUserFragment);
+    }
+
+    public void info(View v){
+        info_screen.setVisibility(View.VISIBLE);
     }
 
     //Override to prevent exiting the app through the user creation screen, and instead
